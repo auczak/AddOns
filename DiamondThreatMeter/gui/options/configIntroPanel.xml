@@ -1,0 +1,208 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configIntroPanel.lua" /> 
+
+	<!--    *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<!--
+		The root category of DTM config is the one that gives you access to the other config categories and provides the AddOn's URL.
+	-->
+
+	<Frame name="DTM_ConfigurationFrame_IntroPanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configIntroTitle"/>
+			<Attribute name="subTitleKey" type="string" value="configIntroSubTitle"/>
+		</Attributes>
+
+		<Frames>
+			<Button name="DTM_ConfigurationFrame_IntroPanel_SystemPartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-92"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_SystemPanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="DTM_ConfigurationFrame_IntroPanel_EnginePartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-124"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_EnginePanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="DTM_ConfigurationFrame_IntroPanel_GUIPartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-156"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_GUIPanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="DTM_ConfigurationFrame_IntroPanel_WarningPartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-188"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_WarningPanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="DTM_ConfigurationFrame_IntroPanel_NameplatePartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-220"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_NameplatePanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="DTM_ConfigurationFrame_IntroPanel_VersionPartButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-252"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_VersionPanel_Open();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Frame name="DTM_RingButton_HoldFrame">
+				<Size>
+					<AbsDimension x="352" y="80"/>
+				</Size>
+
+				<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="8"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="8"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="3" right="3" top="6" bottom="6"/>
+					</BackgroundInsets>
+				</Backdrop>
+
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="DTM_RingButton_HoldFrame_ExplainText" inherits="GameFontHighlightSmall">
+							<Size>
+								<AbsDimension x="320" y="40"/>
+							</Size>
+
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="-4"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+
+				<Frames>
+					<Button name="DTM_RingButton_HoldFrame_ResetButton" inherits="OptionsButtonTemplate" text="RESET">
+						<Size>
+							<AbsDimension x="128" y="24"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT">
+								<Offset>
+									<AbsDimension x="-8" y="8"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								DTM_RingButton:Reset();
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+
+				<Scripts>
+					<OnLoad>
+						self:SetBackdropBorderColor(0.7, 0.7, 0.7);
+						self:SetBackdropColor(0.5, 0.5, 0.5);
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_IntroPanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_IntroPanel_OnUpdate, "MINOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

@@ -1,0 +1,26 @@
+Raid Invite Broadcaster is a lightweight addon for automating raid invites.
+
+It does a few simple things:
+
+  1. Broadcasts to the guild chat that invites for the given raid have started.
+  2. Invites people whispering a keyword to you.
+  3. Converts your group to a raid.
+  4. Sets you as the master looter.
+  5. Sets the loot threshold to rare.
+  6. Promotes main tanks and officers at or above a set level to raid assistant. 
+
+Broadcasting can be done by typing /ib start <instance>, for example:
+/ib start ICC25 sends "Invites for ICC25 have started. For an invite, please whisper me the word 'invite'." to guild chat. To re-announce, use /ib announce. I suggest making a macro for it and assigning it to a key.
+
+Once activated, invites occur when people whisper you anything containing the keyword text. The inviter saves its state over sessions. To stop taking invites, type /ib stop.
+In addition, auto-promotions to raid assistant may occur. /ib stop also stops auto-promotions, or they can be disabled separately by /ib rank -1.
+
+Full command list (/ib or /rib)
+/ib start <instance>: Starts the auto-invites and broadcasts to the guild if an instance is specified.
+/ib stop: Stops the auto-invites and auto-promotions.
+/ib announce: Announces the previously started instance invite.
+/ib rank number: Sets auto-promotion to Assistant for all main tanks and guild ranks less than or equal to number. Set number to -1 to disable auto-promotion.
+/ib keyword word: Sets the keyword which must be whispered to you for an invite. It must be a single word, not a phrase. The default keyword is 'invite'.
+/ib version: Displays the version of Raid Invite Broadcaster you are using.
+
+This is a continuation of the addon formerly known as Amnith's Invite Broadcaster (amnib) by Amnith. Continued with the original author's permission.

@@ -1,0 +1,67 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="RingButton.lua" /> 
+
+	<!--
+		This XML file defines the ring button. It's a button one will probably want to drag out of its original "box" and put close to the minimap.
+	-->
+
+	<Button name="DTM_RingButton" movable="true" enableMouse="true" hidden="false">
+		<Size>
+			<AbsDimension x="32" y="32"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture name="$parentIcon" file="Interface\AddOns\DiamondThreatMeter\gfx\RingButtonDiamond">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				DTM_RingButton_OnLoad(self);
+			</OnLoad>
+			<OnShow>
+				DTM_ProtectedCall(DTM_RingButton_OnUpdate, "MINOR", self, 0.00);
+			</OnShow>
+			<OnClick>
+				DTM_RingButton_OnClick(self, button);
+			</OnClick>
+			<OnEnter>
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
+				end
+				if ( self.tooltipRequirement ) then
+					GameTooltip:AddLine(self.tooltipRequirement, "", 1.0, 1.0, 1.0);
+					GameTooltip:Show();
+				end
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnDragStart>
+				self:StartDrag();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopDrag();
+			</OnDragStop>
+		</Scripts>
+		<HighlightTexture file="Interface\AddOns\DiamondThreatMeter\gfx\RingButtonDiamondClick"/>
+	</Button>
+	<Button name="DTM_RingButtonTimer" hidden="false">
+		<Scripts>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_RingButton_OnUpdate, "MINOR", DTM_RingButton, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Button>
+</UI>

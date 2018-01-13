@@ -1,0 +1,31 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="rowGhost.lua" /> 
+
+	<!--
+		This XML file defines the ghost row (woooooo!). It's a way for the user to position the warning row visually.
+	-->
+
+	<Frame name="DTM_GhostRowTemplate" parent="UIParent" frameStrata="DIALOG" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="256" y="16"/>
+		</Size>
+
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentTexture" file="Interface\AddOns\DiamondThreatMeter\gfx\RowGhost" setAllPoints="true"/>
+			</Layer>
+		</Layers>
+
+		<Scripts>	
+			<OnLoad>
+				DTM_GhostRow_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_GhostRow_OnUpdate, "MINOR", self, elapsed);
+			</OnUpdate>
+			<OnShow>
+				DTM_ProtectedCall(DTM_GhostRow_OnUpdate, "MINOR", self, 0.00);
+			</OnShow>
+		</Scripts>
+	</Frame>
+</UI>

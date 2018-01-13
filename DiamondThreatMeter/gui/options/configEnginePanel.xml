@@ -1,0 +1,205 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configEnginePanel.lua" />
+
+	<!--    *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<!-- A little template -->
+
+	<Frame name="DTM_ConfigurationFrame_EmulationRowTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="336" y="32"/>
+		</Size>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentText" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="212" y="32"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<CheckButton name="$parentEnableCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonSmallTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="220" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<CheckButton name="$parentSpoofCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonSmallTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parentEnableCheckButton">
+						<Offset>
+							<AbsDimension x="0" y="-16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+		</Frames>
+	</Frame>
+
+	<!-- The engine config panel itself -->
+
+	<Frame name="DTM_ConfigurationFrame_EnginePanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configEngineTitle"/>
+			<Attribute name="subTitleKey" type="string" value="configEngineSubTitle"/>
+		</Attributes>
+
+		<Frames>
+			<!-- Toggle engine ON/OFF button -->
+
+			<Button name="DTM_ConfigurationFrame_EnginePanel_ToggleButton" inherits="DTM_ConfigurationFrame_ToggleButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-64"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Scripts>
+					<OnClick>
+ 						-- Toggle the engine state.
+						if ( DTM_IsEngineRunning() ) then
+							DTM_StopEngine();
+						else
+							DTM_StartEngine();
+						end
+					</OnClick>
+				</Scripts>
+       		</Button>
+
+			<!-- Aggro validation delay slider -->
+
+			<Slider name="DTM_ConfigurationFrame_EnginePanel_AggroDelaySlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-112"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       		</Slider>
+
+			<!-- Zone-wide checks interval slider -->
+
+			<Slider name="DTM_ConfigurationFrame_EnginePanel_ZoneWideCheckRateSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-144"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       		</Slider>
+
+			<!-- TPS update interval slider -->
+
+			<Slider name="DTM_ConfigurationFrame_EnginePanel_TPSUpdateRateSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-176"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       		</Slider>
+
+			<!-- Detect reset checkbutton -->
+
+			<CheckButton name="DTM_ConfigurationFrame_EnginePanel_DetectResetCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonNormalTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-208"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<!-- Work method dropdown -->
+
+			<Frame name="DTM_ConfigurationFrame_EnginePanel_WorkMethodDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-248"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<!-- Emulation status frame -->
+
+			<Frame name="DTM_ConfigurationFrame_EnginePanel_EmulationPanel">
+				<Size>
+					<AbsDimension x="352" y="196"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="BOTTOM">
+						<Offset>
+							<AbsDimension x="0" y="16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+					<EdgeSize>
+						<AbsValue val="8"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="8"/>
+					</TileSize>
+					<BackgroundInsets>
+						<AbsInset left="3" right="3" top="6" bottom="6"/>
+					</BackgroundInsets>
+				</Backdrop>
+
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="DTM_ConfigurationFrame_EnginePanel_EmulationPanelTitle" inherits="GameFontNormal">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset>
+										<AbsDimension x="0" y="16"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+
+				<OnLoad>
+					self:SetBackdropBorderColor(0.5, 0.5, 0.5);
+					self:SetBackdropColor(0.3, 0.3, 0.3);
+				</OnLoad>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_EnginePanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_EnginePanel_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

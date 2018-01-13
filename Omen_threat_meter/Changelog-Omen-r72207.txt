@@ -1,0 +1,1039 @@
+------------------------------------------------------------------------
+r72207 | xinhuan | 2008-04-30 14:21:15 -0400 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Register for callbacks on profile changing, copying or resetting. This actually makes profiles in Omen work, zomg! Add profile change callback function to reset optionStubs memoizations, update anchors, layout and display.
+------------------------------------------------------------------------
+r72206 | xinhuan | 2008-04-30 14:19:12 -0400 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Resize the bars when changing the configuration of whether to show self and title.
+------------------------------------------------------------------------
+r72205 | xinhuan | 2008-04-30 14:18:33 -0400 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: Don't hide Omen.BarList or Omen.Anchor when resizing (due to your options). Hiding either will cause Omen.Grip to disappear and potentially hang the game client, cause mouse unresponsiveness, or Omen being stickied to your mouse cursor forever.
+------------------------------------------------------------------------
+r72204 | xinhuan | 2008-04-30 14:16:59 -0400 (Wed, 30 Apr 2008) | 5 lines
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen:
+- Revert last commit back to using OnSizeChanged instead of OnUpdate. Infinite loop fault lies with ModuleBase.lua
+- Save Omen window width and height into the profiles instead of relying on layout-cache.txt
+- Set the scale in Omen:SetAnchors() too, otherwise position could be wrong.
+- Resize the bars after updating module layout in Omen:UpdateDisplay(). This fixes labels extending out of the Omen window sometimes.
+------------------------------------------------------------------------
+r72202 | xinhuan | 2008-04-30 14:14:24 -0400 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+
+Omen: Fix border/background colors not updating until reloadUI when changing them in the configuration. This is a result of not resetting memoizations for the optionStubs.
+------------------------------------------------------------------------
+r72201 | xinhuan | 2008-04-30 14:14:02 -0400 (Wed, 30 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Bar.lua
+
+Omen: Fix for not seeing the threat of some people in your raid when the rest of your raid sees them. This is a result of not setting .isTitle to false when releasing a bar, and the code skipped displaying reused title bars for these players.
+------------------------------------------------------------------------
+r72000 | scorpio0920 | 2008-04-28 17:56:25 -0400 (Mon, 28 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Omen.toc
+
+Omen:
+- Remove 'only compatible with 2.4' from Notes-zhTW.
+------------------------------------------------------------------------
+r71990 | xinhuan | 2008-04-28 16:49:33 -0400 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Update the column offsets of each bar after overall layout, not before. This fixes column label positioning problems where they would extend out of the Omen frame.
+------------------------------------------------------------------------
+r71933 | xinhuan | 2008-04-28 08:27:13 -0400 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Change OnSizeChanged script handler to OnUpdate for the resizing, so infinite loops/hangs can't occur on resize.
+------------------------------------------------------------------------
+r71903 | xinhuan | 2008-04-28 03:08:43 -0400 (Mon, 28 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Add additional checks to prevent an infinite loop when resizing. Also change the execution order of the sizing flags.
+------------------------------------------------------------------------
+r71844 | xinhuan | 2008-04-27 18:35:23 -0400 (Sun, 27 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Single Target Mode - Don't show a gap at the bottom wide enough for a bar if the player isn't on the list of threat bars to be shown.
+------------------------------------------------------------------------
+r71841 | xinhuan | 2008-04-27 18:19:43 -0400 (Sun, 27 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix all FuBar related errors and config.
+------------------------------------------------------------------------
+r71628 | xinhuan | 2008-04-26 08:53:07 -0400 (Sat, 26 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/Overview/Overview.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Add the player as some of the test bars when in "Show Test Bars" mode. This gets rid of the "extra bar space" in Single Target mode that some people are reporting, since that space is to always show the player.
+------------------------------------------------------------------------
+r71619 | charon | 2008-04-26 07:41:51 -0400 (Sat, 26 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: jump on the locals bandwagon
+
+------------------------------------------------------------------------
+r71610 | xinhuan | 2008-04-26 05:58:56 -0400 (Sat, 26 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix taint from using UIFrameFlash() by using a custom solution. Previously, it will cause players using built in wow voice chat to see errors.
+------------------------------------------------------------------------
+r71088 | funkydude | 2008-04-23 12:36:27 -0400 (Wed, 23 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.toc
+
+Omen: remove 'only compatible with 2.4' from notes
+------------------------------------------------------------------------
+r71071 | xinhuan | 2008-04-23 08:32:37 -0400 (Wed, 23 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: - Resizing Omen will now save anchors properly (fixes grow up/down).
+- Resizing Omen with "AutoCollapse" and "Collapse hides bar list" options both on will no longer cause Omen to be stuck to your mouse cursor (permanently in resizing mode) until you ReloadUI().
+------------------------------------------------------------------------
+r70687 | cwdg | 2008-04-21 00:56:06 -0400 (Mon, 21 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+
+Omen: Update zhCN locale
+------------------------------------------------------------------------
+r70686 | kunda | 2008-04-21 00:39:07 -0400 (Mon, 21 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+
+Omen: deDE update
+------------------------------------------------------------------------
+r70682 | ananhaid | 2008-04-21 00:04:08 -0400 (Mon, 21 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+
+Omen: 
+- zhCN update.
+------------------------------------------------------------------------
+r70624 | pettigrow | 2008-04-20 15:09:31 -0400 (Sun, 20 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/frFR.lua
+
+Omen: frFR Update
+------------------------------------------------------------------------
+r70623 | xinhuan | 2008-04-20 15:07:53 -0400 (Sun, 20 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Delay anchoring code to PLAYER_LOGIN event instead of VARIABLES_LOADED. Should fix remainder anchoring issues.
+------------------------------------------------------------------------
+r70622 | charon | 2008-04-20 15:04:50 -0400 (Sun, 20 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: fix AOE tank mode threat ceiling initialization
+
+------------------------------------------------------------------------
+r70614 | whyv | 2008-04-20 13:38:59 -0400 (Sun, 20 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen: update zhTW
+------------------------------------------------------------------------
+r70612 | 7destiny | 2008-04-20 13:35:13 -0400 (Sun, 20 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+
+Omen: koKR Update
+------------------------------------------------------------------------
+r70607 | charon | 2008-04-20 12:29:29 -0400 (Sun, 20 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: more paranoid fix for early SML events
+
+------------------------------------------------------------------------
+r70598 | charon | 2008-04-20 11:27:30 -0400 (Sun, 20 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Options.lua
+
+Omen: Add an option to enable in dungeons (patch by omeow)
+
+------------------------------------------------------------------------
+r70578 | charon | 2008-04-20 06:03:10 -0400 (Sun, 20 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Don't let SML confuse us with early registration events
+
+------------------------------------------------------------------------
+r70523 | 7destiny | 2008-04-19 18:09:06 -0400 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Modules/AOE/Localization/koKR.lua
+
+Omen: koKR Update
+------------------------------------------------------------------------
+r70487 | zhucc | 2008-04-19 12:53:31 -0400 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen: zhTW update
+------------------------------------------------------------------------
+r70473 | charon | 2008-04-19 11:46:34 -0400 (Sat, 19 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: make MaybeAutoHide check very defensively for uninitialized columns
+
+------------------------------------------------------------------------
+r70471 | charon | 2008-04-19 11:33:41 -0400 (Sat, 19 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: Reinitialize columns when changing layout
+_Might_ fix errors in Healer mode.
+
+------------------------------------------------------------------------
+r70451 | pettigrow | 2008-04-19 08:29:26 -0400 (Sat, 19 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/frFR.lua
+   M /trunk/Omen/Modules/AOE/Localization/frFR.lua
+
+Omen: frFR Update
+------------------------------------------------------------------------
+r70442 | charon | 2008-04-19 06:52:24 -0400 (Sat, 19 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Modules/AOE/Localization/deDE.lua
+
+Omen: deDE update
+
+------------------------------------------------------------------------
+r70415 | ananhaid | 2008-04-19 02:39:47 -0400 (Sat, 19 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+
+Omen: 
+- zhCN update.
+------------------------------------------------------------------------
+r70414 | ananhaid | 2008-04-19 02:28:25 -0400 (Sat, 19 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+   M /trunk/Omen/Modules/AOE/Localization/zhCN.lua
+
+Omen: 
+- zhCN update.
+------------------------------------------------------------------------
+r70411 | scorpio0920 | 2008-04-19 01:39:42 -0400 (Sat, 19 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/Localization/zhTW.lua
+   M /trunk/Omen/Modules/Healer/Localization/zhTW.lua
+   M /trunk/Omen/Modules/Overview/Localization/zhTW.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen:
+- Update zhTW localization. (Need to decorate)
+------------------------------------------------------------------------
+r70383 | charon | 2008-04-18 18:35:24 -0400 (Fri, 18 Apr 2008) | 5 lines
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Localization/frFR.lua
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Localization/zhCN.lua
+   M /trunk/Omen/Localization/zhTW.lua
+   M /trunk/Omen/ModuleBase.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/AOE/Localization/deDE.lua
+   M /trunk/Omen/Modules/AOE/Localization/enUS.lua
+   M /trunk/Omen/Modules/AOE/Localization/frFR.lua
+   M /trunk/Omen/Modules/AOE/Localization/koKR.lua
+   M /trunk/Omen/Modules/AOE/Localization/zhCN.lua
+   M /trunk/Omen/Modules/AOE/Localization/zhTW.lua
+   M /trunk/Omen/Skins.lua
+
+Omen: merge my branch
+- shuffle AOE logic a bit to color even raid-marked target blue
+- make tank mode threat ceiling configurable
+- add auto-hide feature to go along with autocollapse
+
+------------------------------------------------------------------------
+r70346 | xinhuan | 2008-04-18 14:08:44 -0400 (Fri, 18 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/Overview/Overview.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Fix error "SingleTarget.lua:390: attempt to compare number with string" and in other modes of display as well. The error is caused by Omen's "Show Test Bars", which passed in integers instead of GUID strings.
+------------------------------------------------------------------------
+r70339 | xinhuan | 2008-04-18 13:24:40 -0400 (Fri, 18 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+
+Omen: Fix Omen label colors. It was not saving the green component, being mistyped as the blue one.
+------------------------------------------------------------------------
+r70244 | charon | 2008-04-17 17:11:44 -0400 (Thu, 17 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/Bar.lua
+
+Omen: AOE module: reset texture coordinates when switching from raid to target symbol
+
+
+------------------------------------------------------------------------
+r70123 | xinhuan | 2008-04-16 19:03:48 -0400 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix Omen frame anchoring issue. Should fix bars grow up/down/updown issues as well as Omen's position on login issues.
+------------------------------------------------------------------------
+r70104 | charon | 2008-04-16 15:38:27 -0400 (Wed, 16 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: finally nail the AOE mode sorting bug
+
+------------------------------------------------------------------------
+r70038 | whyv | 2008-04-16 07:24:25 -0400 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen: zhTW update
+------------------------------------------------------------------------
+r69927 | charon | 2008-04-15 18:11:28 -0400 (Tue, 15 Apr 2008) | 5 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: fix AOE tank mode to actually do something useful
+
+Don't tell anyone, but I must have been quite drunk or tired when I
+wrote the original version of this code.
+
+------------------------------------------------------------------------
+r69880 | charon | 2008-04-15 13:14:50 -0400 (Tue, 15 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/embeds.xml
+
+Omen: <include> the xml, not the lua
+
+------------------------------------------------------------------------
+r69870 | silviu | 2008-04-15 11:06:57 -0400 (Tue, 15 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.toc
+   A /trunk/Omen/embeds.xml
+
+Omen: Added embeds.xml, with permision from Antiarc
+------------------------------------------------------------------------
+r69856 | whyv | 2008-04-15 06:05:13 -0400 (Tue, 15 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/AOE/Localization/zhTW.lua
+
+Omen: update zhTW
+------------------------------------------------------------------------
+r69765 | charon | 2008-04-14 15:59:58 -0400 (Mon, 14 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: fix for AOE mode not showing anything before first /reloadui
+
+------------------------------------------------------------------------
+r69701 | kunda | 2008-04-14 05:56:46 -0400 (Mon, 14 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Localization/frFR.lua
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Localization/zhCN.lua
+   M /trunk/Omen/Localization/zhTW.lua
+   M /trunk/Omen/Modules/AOE/Localization/deDE.lua
+
+Omen: deDE update and removed a duplicated locale string
+------------------------------------------------------------------------
+r69665 | ananhaid | 2008-04-13 22:43:32 -0400 (Sun, 13 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/Localization/zhCN.lua
+
+Omen: 
+- zhCN update.
+------------------------------------------------------------------------
+r69641 | sayclub | 2008-04-13 19:21:20 -0400 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Modules/AOE/Localization/koKR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/koKR.lua
+
+Omen: koKR Update
+------------------------------------------------------------------------
+r69623 | charon | 2008-04-13 18:09:48 -0400 (Sun, 13 Apr 2008) | 5 lines
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/AOE/Localization/enUS.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/Overview/Overview.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: merge changes from my branch
+- AOE mode bugfix (69619)
+- AOE tank mode added (69187, 69613, 69618)
+- warn and enable if manually toggled but on standby (69381)
+
+------------------------------------------------------------------------
+r69518 | ottokang | 2008-04-13 07:14:33 -0400 (Sun, 13 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.toc
+
+Omen: Notes-zhTW update
+------------------------------------------------------------------------
+r69307 | scorpio0920 | 2008-04-12 11:17:29 -0400 (Sat, 12 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Omen.toc
+
+Omen:
+- Added Notes-zhTW to toc.
+------------------------------------------------------------------------
+r69204 | antiarc | 2008-04-11 22:00:04 -0400 (Fri, 11 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Fix frame backdrop stupidity. Looks like we can just use one table.
+------------------------------------------------------------------------
+r69188 | charon | 2008-04-11 18:52:10 -0400 (Fri, 11 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: fix AOE mode raid target symbols
+
+
+------------------------------------------------------------------------
+r69081 | antiarc | 2008-04-11 06:31:55 -0400 (Fri, 11 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Fix a problem that was creating potentially thousands of new tables. Recycling isn't just for treehuggers, kids!
+------------------------------------------------------------------------
+r68976 | antiarc | 2008-04-10 15:59:57 -0400 (Thu, 10 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: Only register OnSizeChanged when the user is resizing the frame. Should produce a performance increase for users with autocollapse on.
+------------------------------------------------------------------------
+r68769 | scorpio0920 | 2008-04-09 11:29:57 -0400 (Wed, 09 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen:
+- zhTW localization recheck.
+------------------------------------------------------------------------
+r68561 | antiarc | 2008-04-08 03:38:09 -0400 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: ArrangeBars after showing threat for a new target. Should fix a few display issues.
+------------------------------------------------------------------------
+r68553 | antiarc | 2008-04-08 02:21:33 -0400 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix default profile crap. Default profile string needs to be third parameter, not second.
+------------------------------------------------------------------------
+r68524 | antiarc | 2008-04-07 19:45:52 -0400 (Mon, 07 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+   M /trunk/Omen/Omen.toc
+
+Omen: Add a new SavedVar named Omen2DefaultProfile. This addresses OMEN-43, by allowing UI packagers to set the the name of the profile they want to use as the default if there is no existing profile. This maintains Ace3's ability to provide Char - Server by default, while allowing UI packages to load their own pre-set profile by default on first load.
+------------------------------------------------------------------------
+r68518 | antiarc | 2008-04-07 19:11:42 -0400 (Mon, 07 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+
+Omen: Unset mark icon for old targets in AOE mode.
+------------------------------------------------------------------------
+r68512 | antiarc | 2008-04-07 18:14:15 -0400 (Mon, 07 Apr 2008) | 5 lines
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen:
+- Enable custom icons for bars
+- Set Hunter's Mark (rather than [T]) for your target in AOE mode
+- Attempt to stabilize AOE mode sort
+- Fix a bug that caused color options to not persist across sessions.
+------------------------------------------------------------------------
+r68250 | nevcairiel | 2008-04-06 04:07:25 -0400 (Sun, 06 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget_Compact.lua
+
+Omen: remove some unused LibGUIDRegistry references (still used by some of the modules)
+------------------------------------------------------------------------
+r68206 | pettigrow | 2008-04-05 22:37:59 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/frFR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/frFR.lua
+
+Omen: frFR Update
+------------------------------------------------------------------------
+r68202 | whyv | 2008-04-05 21:23:44 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen: zhTW typo
+------------------------------------------------------------------------
+r68179 | nevcairiel | 2008-04-05 18:37:40 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: remove the needNameUpdate checks and code from SingleTarget, should be redundant with the changes in Threat-2.0 to scan the raid roster for GUIDs
+------------------------------------------------------------------------
+r68171 | antiarc | 2008-04-05 15:49:16 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Cancel an errant timer
+------------------------------------------------------------------------
+r68156 | nevcairiel | 2008-04-05 13:22:03 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: more tweaks and comments!
+------------------------------------------------------------------------
+r68153 | nevcairiel | 2008-04-05 12:53:46 -0400 (Sat, 05 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: more tweaks to the SingleTarget module
+- store config options in upvalues, no need for table keys
+- removed crazy zhCN hack, wow lua supports %1$s format syntax if you need a different argument order for your output
+------------------------------------------------------------------------
+r68152 | nevcairiel | 2008-04-05 12:35:16 -0400 (Sat, 05 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: SingleTarget
+- inline docs for SingleTarget ArrangeBars and rewrite alot of the bar handling in it
+------------------------------------------------------------------------
+r68144 | nevcairiel | 2008-04-05 09:40:53 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: tweak timer code for TPS updates
+------------------------------------------------------------------------
+r68111 | antiarc | 2008-04-05 00:40:08 -0400 (Sat, 05 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: Only autocollapse if, uh, autocollapse is on.
+------------------------------------------------------------------------
+r68098 | antiarc | 2008-04-04 22:29:30 -0400 (Fri, 04 Apr 2008) | 4 lines
+Changed paths:
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/ModuleBase.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: 
+- Store position in DB for the benefit of pre-wrapped UIs
+- Fix Autocollapse
+- Not a critical update, don't bitch at me for committing in the middle of your raid, ScytheBlade1. :P
+------------------------------------------------------------------------
+r68082 | nevcairiel | 2008-04-04 17:11:58 -0400 (Fri, 04 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: clear all timers references in OnDisable
+------------------------------------------------------------------------
+r68081 | antiarc | 2008-04-04 17:10:08 -0400 (Fri, 04 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Make sure we silently cancel SingleTarget timers.
+------------------------------------------------------------------------
+r68051 | nevcairiel | 2008-04-04 10:02:26 -0400 (Fri, 04 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+
+Omen: use the new incompatible flag in the OutOfDate callback
+------------------------------------------------------------------------
+r67952 | antiarc | 2008-04-03 19:46:32 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Don't try to toggle if init hasn't been run yet.
+------------------------------------------------------------------------
+r67943 | nevcairiel | 2008-04-03 17:47:59 -0400 (Thu, 03 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Libs
+   M /trunk/Omen/Libs/LibFuBarPlugin-3.0
+   M /trunk/Omen/Localization
+   M /trunk/Omen/Media
+   M /trunk/Omen/Media/Sounds
+   M /trunk/Omen/Modules
+   M /trunk/Omen/Modules/AOE
+   M /trunk/Omen/Modules/AOE/Localization
+   M /trunk/Omen/Modules/Healer
+   M /trunk/Omen/Modules/Healer/Localization
+   M /trunk/Omen/Modules/Overview
+   M /trunk/Omen/Modules/Overview/Localization
+   M /trunk/Omen/Modules/SingleTarget
+   M /trunk/Omen/Modules/SingleTarget/Localization
+
+Omen: 
+- fix display of the new revision in the out of date notice
+- svn property stuff
+------------------------------------------------------------------------
+r67939 | nevcairiel | 2008-04-03 17:38:46 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: small tweak
+------------------------------------------------------------------------
+r67934 | nevcairiel | 2008-04-03 17:15:33 -0400 (Thu, 03 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: SingleTarget:
+- if we get a name reported as <unknown>, try to update the name the next update run
+------------------------------------------------------------------------
+r67880 | kunda | 2008-04-03 09:30:21 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/deDE.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/enUS.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/koKR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhCN.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen: deDE update and removed a duplicated locale string
+------------------------------------------------------------------------
+r67853 | whyv | 2008-04-03 06:17:12 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+   M /trunk/Omen/Modules/Healer/Localization/zhTW.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen : update zhTW
+------------------------------------------------------------------------
+r67847 | antiarc | 2008-04-03 05:33:40 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Minor performance optimizations
+------------------------------------------------------------------------
+r67845 | kurax | 2008-04-03 05:12:03 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhCN.lua
+
+Omen: Update zhCN locale
+------------------------------------------------------------------------
+r67842 | sayclub | 2008-04-03 05:04:27 -0400 (Thu, 03 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/koKR.lua
+
+Omen:
+- Update koKR local
+------------------------------------------------------------------------
+r67830 | rabbit | 2008-04-03 04:11:54 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/enUS.lua
+
+Omen: Add 2 missing translations.
+------------------------------------------------------------------------
+r67829 | antiarc | 2008-04-03 03:55:42 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Add a toggle to enable/disable warnings while tanking.
+------------------------------------------------------------------------
+r67815 | antiarc | 2008-04-03 03:06:04 -0400 (Thu, 03 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Add an isTanking check for warnings. Add a 2.5-second target switch buffer before any warnings will be fired.
+------------------------------------------------------------------------
+r67752 | nevcairiel | 2008-04-02 18:34:50 -0400 (Wed, 02 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/ModuleBase.lua
+
+Omen: fix spaceLeft calculation for bar display ( should fix showSelf option)
+------------------------------------------------------------------------
+r67732 | antiarc | 2008-04-02 15:51:10 -0400 (Wed, 02 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Bump version checks to 40 people. Addresses OMEN-25
+------------------------------------------------------------------------
+r67730 | nevcairiel | 2008-04-02 15:31:13 -0400 (Wed, 02 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: fix slight bug when showSelf is turned off
+------------------------------------------------------------------------
+r67727 | nevcairiel | 2008-04-02 15:06:31 -0400 (Wed, 02 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: SingleTarget:
+- whacky updates for targettarget mode
+- fix "Show Self"
+------------------------------------------------------------------------
+r67711 | nevcairiel | 2008-04-02 12:55:47 -0400 (Wed, 02 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: fix the title bar in SingleTarget mode
+------------------------------------------------------------------------
+r67669 | kunda | 2008-04-02 06:00:11 -0400 (Wed, 02 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/deDE.lua
+
+Omen: deDE update
+------------------------------------------------------------------------
+r67612 | ananhaid | 2008-04-02 00:28:52 -0400 (Wed, 02 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhCN.lua
+
+Omen:
+- zhCN update.
+------------------------------------------------------------------------
+r67609 | whyv | 2008-04-01 23:31:33 -0400 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+   M /trunk/Omen/Modules/AOE/Localization/zhTW.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen - updated zhTW local
+------------------------------------------------------------------------
+r67592 | sayclub | 2008-04-01 21:56:36 -0400 (Tue, 01 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/koKR.lua
+
+Omen : 
+- Update locale koKR
+------------------------------------------------------------------------
+r67585 | antiarc | 2008-04-01 21:11:14 -0400 (Tue, 01 Apr 2008) | 6 lines
+Changed paths:
+   M /trunk/Omen/Bar.lua
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Libs/LibFuBarPlugin-3.0/LibFuBarPlugin-Mod-3.0.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/ModuleBase.lua
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/Overview/Overview.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/enUS.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+   M /trunk/Omen/Omen.lua
+   M /trunk/Omen/Options.lua
+
+Omen:
+- Optimize options calls with a metatable
+- New FuBar plugin library version
+- Add title bar to single target mode (optional)
+- Optimize ArrangeBars a bit
+- Heavily reduce string garbage generation
+------------------------------------------------------------------------
+r67499 | kunda | 2008-04-01 09:07:52 -0400 (Tue, 01 Apr 2008) | 3 lines
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+
+Omen:
+- deDE update
+- Healer.lua: GetRaidRosterInfo vars are local now
+------------------------------------------------------------------------
+r67491 | kurax | 2008-04-01 08:04:51 -0400 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen: zhTW unfinished string bug fix
+------------------------------------------------------------------------
+r67487 | whyv | 2008-04-01 07:31:52 -0400 (Tue, 01 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen - checked zhTW again
+
+------------------------------------------------------------------------
+r67476 | whyv | 2008-04-01 06:30:24 -0400 (Tue, 01 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen
+- Updated zhTW
+------------------------------------------------------------------------
+r67469 | scorpion | 2008-04-01 06:09:24 -0400 (Tue, 01 Apr 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen: 
+- updated zhTW
+------------------------------------------------------------------------
+r67464 | nevcairiel | 2008-04-01 05:46:57 -0400 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: improve target change logic in SingleTarget mode (a healer targeting a tank) - still needs some work for the hostileUnit changing its target since no event will ever catch that (might need polling or syncing)
+------------------------------------------------------------------------
+r67459 | nevcairiel | 2008-04-01 04:58:00 -0400 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: simplify version check logic
+------------------------------------------------------------------------
+r67399 | sayclub | 2008-03-31 21:19:32 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+
+Omen : 
+- Update locale koKR
+------------------------------------------------------------------------
+r67391 | pettigrow | 2008-03-31 20:36:16 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/frFR.lua
+
+Omen: frFR Update
+------------------------------------------------------------------------
+r67388 | kurax | 2008-03-31 20:15:58 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+
+Omen: Update zhCN locale
+------------------------------------------------------------------------
+r67385 | antiarc | 2008-03-31 20:02:44 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/enUS.lua
+
+Omen: Add missing localization string
+------------------------------------------------------------------------
+r67384 | antiarc | 2008-03-31 19:57:21 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: Add a command to whisper out-of-date clients with update information. /omen versioncheck whisper. Requires group leader/assistant.
+------------------------------------------------------------------------
+r67380 | 7destiny | 2008-03-31 19:44:57 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+
+Omen: koKR Update
+------------------------------------------------------------------------
+r67366 | antiarc | 2008-03-31 17:33:44 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Localization/enUS.lua
+
+Omen: Add a threat clear menu command. "/omen clear" now issues a group threat clear request if you are group leader/group assistant.
+------------------------------------------------------------------------
+r67357 | nevcairiel | 2008-03-31 16:19:27 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: use the correct unit for SwitchTarget
+------------------------------------------------------------------------
+r67341 | 7destiny | 2008-03-31 14:43:52 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/koKR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/koKR.lua
+
+Omen: koKR Update
+------------------------------------------------------------------------
+r67321 | kunda | 2008-03-31 12:58:09 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/deDE.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/deDE.lua
+
+Omen: deDE update
+------------------------------------------------------------------------
+r67305 | cwdg | 2008-03-31 10:42:50 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhCN.lua
+
+Omen:
+Update zhCN locale
+------------------------------------------------------------------------
+r67304 | ananhaid | 2008-03-31 10:28:50 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+   M /trunk/Omen/Modules/Healer/Localization/zhCN.lua
+
+Omen:
+- zhCN updated.
+------------------------------------------------------------------------
+r67296 | whyv | 2008-03-31 09:10:34 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen
+- updated zhTW
+------------------------------------------------------------------------
+r67290 | antiarc | 2008-03-31 08:38:15 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Clean up the version check code a bit.
+------------------------------------------------------------------------
+r67289 | antiarc | 2008-03-31 08:33:46 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: Add an incompatiblity check to the version check.
+------------------------------------------------------------------------
+r67286 | nevcairiel | 2008-03-31 08:22:55 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: fix typo in versioncheck
+------------------------------------------------------------------------
+r67285 | antiarc | 2008-03-31 08:21:22 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix a problem with Standby and relogs.
+------------------------------------------------------------------------
+r67284 | antiarc | 2008-03-31 08:15:18 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Fix a completely retarded version check bug. Yes, let's compare the user's Omen revision to remote users' ThreatLib revision. That's an AWESOME IDEA.
+------------------------------------------------------------------------
+r67283 | whyv | 2008-03-31 08:12:57 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhTW.lua
+
+Omen
+- Updated zhTW
+------------------------------------------------------------------------
+r67282 | antiarc | 2008-03-31 08:10:43 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Omen.lua
+
+Omen: Disable modules when Omen is toggled off. Not a whole lot of sense in continuing to run UI update code for a hidden UI.
+------------------------------------------------------------------------
+r67281 | pettigrow | 2008-03-31 08:00:34 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Localization/frFR.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/frFR.lua
+
+Omen: frFR Update
+------------------------------------------------------------------------
+r67279 | whyv | 2008-03-31 07:58:00 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhTW.lua
+
+Omen 
+- Update zhTW
+------------------------------------------------------------------------
+r67278 | antiarc | 2008-03-31 07:47:09 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+
+Omen: Disable FuBar-related plugin options if the library isn't present.
+------------------------------------------------------------------------
+r67273 | kurax | 2008-03-31 07:18:18 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/AOE/Localization/zhCN.lua
+   M /trunk/Omen/Modules/Healer/Localization/zhCN.lua
+   M /trunk/Omen/Modules/Overview/Localization/zhCN.lua
+   M /trunk/Omen/Modules/SingleTarget/Localization/zhCN.lua
+
+Omen: Update zhCN locale
+------------------------------------------------------------------------
+r67270 | antiarc | 2008-03-31 07:02:47 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Bindings.xml
+
+Omen: Fixed a problem with duplicate binding headers.
+------------------------------------------------------------------------
+r67269 | antiarc | 2008-03-31 06:59:29 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/Localization/enUS.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Add "color your bar something else" functionality. This is just a stand-in hack until the full "customize any bar you want" functionality is in.
+------------------------------------------------------------------------
+r67268 | ananhaid | 2008-03-31 06:56:28 -0400 (Mon, 31 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/Omen/Localization/zhCN.lua
+
+Omen:
+- zhCN update.
+------------------------------------------------------------------------
+r67265 | antiarc | 2008-03-31 06:37:01 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/AOE/AOE.lua
+   M /trunk/Omen/Modules/Healer/Healer.lua
+   M /trunk/Omen/Modules/Overview/Overview.lua
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Switch GUID lookups to Threat core. Deprecates LibGUIDRegistry for name lookups.
+------------------------------------------------------------------------
+r67262 | antiarc | 2008-03-31 06:25:37 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Omen.lua
+
+Omen: Improved version checks. Now shows threat agent and users without any threat agent.
+------------------------------------------------------------------------
+r67259 | antiarc | 2008-03-31 06:10:48 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Config.lua
+   M /trunk/Omen/Frame.lua
+   M /trunk/Omen/Localization/enUS.lua
+   M /trunk/Omen/Omen.lua
+   M /trunk/Omen/Options.lua
+
+Omen: Add more fine-grained controls regarding when to show/hide Omen (solo, with pet, in party, in raid, resting, in battleground/arena). Should be lots less annoying now!
+------------------------------------------------------------------------
+r67237 | antiarc | 2008-03-31 05:31:59 -0400 (Mon, 31 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: Fix for changes in unit hostility not allowing targets to become valid threat targets. Should only invalidate player-controlled units now until I can track down the event that fires when a hostility switch occurs.
+------------------------------------------------------------------------
+r67166 | nevcairiel | 2008-03-30 17:54:24 -0400 (Sun, 30 Mar 2008) | 1 line
+Changed paths:
+   M /trunk/Omen/Modules/SingleTarget/SingleTarget.lua
+
+Omen: fix threat query in PLAYER_TARGET_CHANGED
+------------------------------------------------------------------------

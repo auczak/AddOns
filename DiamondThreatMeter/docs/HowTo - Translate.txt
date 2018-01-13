@@ -1,0 +1,119 @@
+***********************************************************
+This file explains how to provide new translations for DTM.
+
+***********************************************************
+
+In order to provide a full translation for a given language, you have to edit 6 files that contain translatable stuff:
+1 > DiamondThreatMeter.toc
+2 > common\localisation.lua
+3 > common\internals.lua
+4 > engine\emulation.lua
+5 > common\npcAbilities.lua
+6 > common\console.lua
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+1/ DiamondThreatMeter.toc   -   This files describes the whole AddOn to the WoW client so it can handle it correctly.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    You can provide the description of the AddOn for your language, by adding the line:
+
+## Notes-XXXX: blablablablah...
+where XXXX is the locale code of your client. (See appendix for a list)
+
+So for exemple if you want to add a description for German language, you simply have to add this line in the .toc file:
+## Notes-deDE: Guten Tag!...
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+2/ common\localisation.lua   -   This file contains localisation of the AddOn config panels, threat lists etc.
+                                 If you do not provide localisation for your language, those elements will be
+                                 in English. :)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Explaining what's what in this file would take quite a long time. So why not take a look to the "enUS" entries and
+translating following this exemple ?
+Except that the first entry you add in the localisation tree should have the locale code of the language you wish to
+provide a translation from ;)
+
+So start of for exemple by doing:
+
+["deDE"] = {
+    ["foo"] = {
+        ["bar"] = "Guten Tag!",
+    },
+},
+
+However, I have to warn you about one particular point:
+
+The AddOn is case sensitive. So, if you type out:
+
+   ["My Spell"] = "SOMETHING",
+
+IT'S NOT CONSIDERED THE SAME as:
+
+   ["my spell"] = "SOMETHING"      !!
+
+So be careful :)
+Good luck if you want to provide a full translation for this file and thank you. 8)
+
+You needn't translate "DTM_Locale" table to make the AddOn work. If you do not provide a translation for this table,
+the "default" translation (English) will be used.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+3/ common\internals.lua   -   This file is THE file you'll probably want to edit, because it contains everything
+                              that HAS to be modified in order to make DTM work for your language.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Translate this file the same way as localisation.lua one.
+
+"DTM_Internals" table HAS to be translated. Without it, DTM will be crippled to find internal
+names of abilities and so won't be able to do a lot of stuff.
+
+Again, remember the Addon is case sensitive ! This is very, very important for this file !
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+4/ engine\emulation.lua   -   A rather minor file, but you have to translate it to be able to say proudly you
+                              translated the whole AddOn ! Still, this one should take you 2 minutes to do so :)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+In this file, search about parts that look like this:
+
+description = {
+    ["default"] = "foo",
+    ["enUS"] = "bar",
+    etc.
+}
+
+And simply add an entry for your own locale code, such as:
+
+    ["deDE"] = "Guten Tag!",
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+5/ common\npcAbilities.lua   -  This file contains localised data about NPC/Bosses names and their abilities/yells.
+                                As such, it is also an important file to translate, especially for raiding guilds.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+It's the "DTM_DefaultNPCAbilities" table that should get your interest.
+
+I think translating will again be straightforward, if you follow the way the built-in translations were done. ;)
+
+Once again, the AddOn is case sensitive, beware!
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+6/ common\console.lua   -   This file contains localisations and syntaxes for command slashes.
+                            A major file indeed, it allows DTM to communicate with the player without using a GUI.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Translating will again be straightforward, if you follow the way the built-in translations were done. ;)
+
+****************************
+Appendix - Locale codes list
+****************************
+
+- enUS   ( American English - GB clients should also use this code )
+- deDE   ( German )
+- frFR   ( French )
+- koKR   ( Korean )
+- zhCN   ( Simplified Chinese )
+- zhTW   ( Traditional Chinese )
+- esES   ( Spanish )
+- ruRU   ( Russian )

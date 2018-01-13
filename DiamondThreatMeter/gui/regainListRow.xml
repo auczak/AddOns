@@ -1,0 +1,74 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="regainListRow.lua" /> 
+
+	<!--
+		This XML file defines the regain list row. It is a controllable widget by the regain list, using special methods.
+	-->
+
+	<StatusBar name="DTM_RegainListFrame_RowTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="256" y="16"/>
+		</Size>
+
+		<Frames>
+			<Frame name="$parent_BackgroundBar" setAllPoints="true">
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentTexture" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Frame name="$parent_ClassFrame">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentTexture" file="Interface\WorldStateFrame\Icons-Classes" hidden="true">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="8" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<!-- Names length are highly volatile, we have to set a text size limit for them. -->
+				<FontString name="$parent_Name" inherits="GameFontNormalSmall" text="Name">
+					<Size>
+						<AbsDimension x="64" y="16"/>
+					</Size>
+				</FontString>
+				<FontString name="$parent_Threat" inherits="GameFontNormal" text="Threat"/>
+				<FontString name="$parent_Relative" inherits="GameFontNormalSmall" text="Relative">
+					<Size>
+						<AbsDimension x="64" y="16"/>
+					</Size>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Scripts>	
+			<OnLoad>
+				DTM_RegainListRow_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_RegainListRow_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+			<OnShow>
+				DTM_ProtectedCall(DTM_RegainListRow_OnUpdate, "MAJOR", self, 0.00);
+			</OnShow>
+		</Scripts>
+
+		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+		<BarColor r="1.0" g="0.2" b="0.3"/>
+	</StatusBar>
+</UI>

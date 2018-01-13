@@ -1,0 +1,55 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configNameplatePanel.lua" /> 
+
+	<!--  *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<Frame name="DTM_ConfigurationFrame_NameplatePanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configNameplateTitle"/>
+			<Attribute name="subTitleKey" type="string" value="configNameplateSubTitle"/>
+		</Attributes>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="DTM_ConfigurationFrame_NameplatePanel_Explain" justifyH="LEFT" justifyV="TOP" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="344" />
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="16" y="-120"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<!-- Use nameplate checkbutton -->
+
+			<CheckButton name="DTM_ConfigurationFrame_NameplatePanel_UseNameplateCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonNormalTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_NameplatePanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_NameplatePanel_OnUpdate, "MINOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

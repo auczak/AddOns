@@ -1,0 +1,145 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="simpleGUI.lua" /> 
+
+	<!--
+		This XML file defines a very simple GUI, used for
+		earlier engine versions, to check threat computation,
+		before starting writing a more complex GUI.
+	-->
+
+	<StatusBar name="DTM_SimpleGUI_RowTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="248" y="16"/>
+		</Size>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Class" file="Interface\WorldStateFrame\Icons-Classes" hidden="true">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="0" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+
+				<FontString name="$parent_Name" inherits="GameFontNormal" text="Name">
+					<Size>
+						<AbsDimension x="80" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="24" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="$parent_Threat" inherits="GameFontNormal" text="Threat">
+					<Size>
+						<AbsDimension x="80" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="112" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="$parent_ThreatPercent" inherits="GameFontNormal" text="%">
+					<Size>
+						<AbsDimension x="38" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="210" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Scripts>	
+			<OnLoad>
+				self.class = getglobal(self:GetName().."_Class");
+				self.name = getglobal(self:GetName().."_Name");
+				self.threat = getglobal(self:GetName().."_Threat");
+				self.threatPercent = getglobal(self:GetName().."_ThreatPercent");
+			</OnLoad> 
+		</Scripts>
+
+		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+		<BarColor r="1.0" g="1.0" b="1.0"/>
+	</StatusBar>
+
+	<Frame name="DTM_SimpleGUI_Frame" movable="true" enableMouse="true" frameStrata="HIGH" hidden="true">
+		<Size>
+			<AbsDimension x="256" y="32"/>
+		</Size>
+
+		<Anchors>
+			<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT">
+				<Offset>
+					<AbsDimension x="-96" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+
+		<Frames>
+			<StatusBar name="DTM_SimpleGUI_HeaderRow" inherits="DTM_SimpleGUI_RowTemplate"/>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton");
+				self:SetClampedToScreen( 1 );
+				self:SetBackdropBorderColor(0.5, 0.5, 0.5);
+				self:SetBackdropColor(0.3, 0.3, 0.3);
+				DTM_SimpleGUI_OnLoad(self);
+			</OnLoad>
+			<OnEvent>
+				DTM_ProtectedCall(DTM_SimpleGUI_OnEvent, "CRITICAL", self, event, ...);
+			</OnEvent>
+			<OnShow>
+				self.updateTimer = 0.000;
+				DTM_ProtectedCall(DTM_SimpleGUI_OnUpdate, "CRITICAL", self, 0.000);
+			</OnShow>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_SimpleGUI_OnUpdate, "CRITICAL", self, elapsed);
+			</OnUpdate>
+			<OnDragStart>
+				self:StartMoving();
+				self.isMoving = true;
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+				self.isMoving = false;
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+</UI>

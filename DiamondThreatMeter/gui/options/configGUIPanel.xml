@@ -1,0 +1,110 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configGUIPanel.lua" /> 
+
+	<!--  *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<Frame name="DTM_ConfigurationFrame_GUIPanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configGUITitle"/>
+			<Attribute name="subTitleKey" type="string" value="configGUISubTitle"/>
+		</Attributes>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTitle" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="256" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="BOTTOM">
+							<Offset>
+								<AbsDimension x="0" y="104"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<!-- Toggle GUI ON/OFF button -->
+
+			<Button name="DTM_ConfigurationFrame_GUIPanel_ToggleButton" inherits="DTM_ConfigurationFrame_ToggleButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-64"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Scripts>
+					<OnClick>
+ 						-- Toggle the GUI state.
+						if ( DTM_IsGUIRunning() ) then
+							DTM_StopGUI();
+						else
+							DTM_StartGUI();
+						end
+					</OnClick>
+				</Scripts>
+       		</Button>
+
+			<!-- The skin manager will be placed there -->
+
+			<!-- Auto-display rules -->
+
+			<Frame name="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTargetDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTitle" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="-96" y="-56"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<Frame name="DTM_ConfigurationFrame_GUIPanel_AutoDisplayFocusDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTitle" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="96" y="-56"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<Frame name="DTM_ConfigurationFrame_GUIPanel_AutoDisplayOverviewDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTitle" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="-96" y="-16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<Frame name="DTM_ConfigurationFrame_GUIPanel_AutoDisplayRegainDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="DTM_ConfigurationFrame_GUIPanel_AutoDisplayTitle" relativePoint="BOTTOM">
+						<Offset>
+							<AbsDimension x="96" y="-16"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_GUIPanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_GUIPanel_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

@@ -1,0 +1,35 @@
+*****
+Intro
+*****
+
+As of 1.1.0, DTM features 3 display modes:
+
+- The standard THREAT LIST display, of either your target or your focus.
+- The OVERVIEW LIST, which shows your relative threat/percentage on all the NPCs that have you on their threat list.
+- The REGAIN LIST, which works like the overview list but shows the margin you have before gaining OR losing aggro.
+
+***********
+Threat List
+***********
+
+The classic display, it shows the entities that a NPC doesn't like, sorted by their threat value.
+The warning system is functionnal in this display mode, unlike the others.
+
+*************
+Overview List
+*************
+
+The overview list shows all NPCs that do not like you, along with your threat percentage relative to the threat of the guy who has the aggro of a given NPC in this list.
+No warning is given in this display mode.
+Good for healers and guys that do AoE spells.
+
+***********
+Regain List
+***********
+
+The regain list shows all NPCS that do not like you, in the same way as the overview list, but there are a few differences :
+- the regain list does not tell your absolute threat and threat percentage.
+Instead:
+- if you have aggro of a given NPC, the bar will be full red and the row will tell you the threat
+the 2nd most threatening person has to score before pulling the aggro from you and his/her name.
+- If you do not have aggro, the row will tell you how much threat you have to score before pulling aggro.

@@ -1,0 +1,50 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="nameplates.lua" /> 
+
+	<!--
+		This XML file defines the nameplates' threat bar.
+	-->
+
+	<StatusBar name="DTM_NameplateBarTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="128" y="6"/>
+		</Size>
+
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture setAllPoints="true">
+					<Color r="0" g="0" b="0" a="0.7"/>
+				</Texture>		
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Threat" inherits="GameFontHighlightSmall" justifyH="LEFT" text="Threat">
+					<Size> <AbsDimension x="88" y="12"/> </Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_ThreatPercent" inherits="GameFontHighlightSmall" justifyH="RIGHT" text="%">
+					<Size> <AbsDimension x="40" y="12"/> </Size>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Scripts>	
+			<OnLoad>
+				DTM_NameplateBar_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_NameplateBar_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+			<OnShow>
+				DTM_ProtectedCall(DTM_NameplateBar_OnUpdate, "MAJOR", self, 0.00);
+			</OnShow>
+		</Scripts>
+
+		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+		<BarColor r="0.2" g="1.0" b="0.3"/>
+	</StatusBar>
+</UI>

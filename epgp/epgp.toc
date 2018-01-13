@@ -1,0 +1,31 @@
+## Interface: 20400
+## Title: EPGP
+## Notes: Effort Points/Gear Points Loot System
+## Author: Alkis Evlogimenos
+## Version: 3.3.9
+## OptionalDeps: Ace2
+## SavedVariables: EPGP_Core_DB
+## SavedVariablesPerCharacter: EPGP_Core_PerCharDB
+## X-Category: Guild
+## X-Website: http://code.google.com/p/epgp/
+
+embeds.xml
+
+Localization.enUS.lua
+Localization.frFR.lua
+Localization.deDE.lua
+Localization.esES.lua
+Localization.koKR.lua
+Localization.ruRU.lua
+Localization.zhCN.lua
+Localization.zhTW.lua
+
+Core.lua
+Cache.lua
+Backend.lua
+GPTooltip.lua
+MLPopup.lua
+OfficerNoteWarning.lua
+
+ATemplates.xml
+UI.xml

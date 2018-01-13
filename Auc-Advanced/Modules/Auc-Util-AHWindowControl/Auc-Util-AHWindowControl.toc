@@ -1,0 +1,13 @@
+## Title: Auc:Util:AHWindowControl
+## Notes: Add general utilitys to the Auction House Frame - protects from closing, allows repositioning, and limited scaling.
+##
+## Interface: 20400
+## LoadOnDemand: 0
+## Disabled: 0
+## Dependencies: Auc-Advanced
+##
+## Version: 5.0.0 (BillyGoat)
+## Revision: $Id: Auc-Util-AHWindowControl.toc
+## URL: http://auctioneeraddon.com/
+##
+Embed.xml

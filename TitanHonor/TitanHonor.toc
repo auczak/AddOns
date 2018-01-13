@@ -1,0 +1,11 @@
+## Interface: 20400
+## Title: Titan Panel [|cffeda55fHonor|r] |cff00aa003.2.6.20400|r
+## Notes: Counts estimated honor gained from HKs and BGs.
+## Notes-esES: Calcula el honor estimado ganado en Campos de Batalla y de Muertes con Honor.
+## Author: Ithrill @ Jaedenar EU
+## SavedVariables: TITAN_HONOR_CFG, TITAN_HONOR_KILLSTODAY, TITAN_HONOR_USERS
+## OptionalDeps: 
+## Dependencies: Titan
+## Version: 3.2.6.20400 (1.13)
+Localization.xml
+TitanHonor.xml

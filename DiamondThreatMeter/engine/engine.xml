@@ -1,0 +1,17 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="engine.lua" /> 
+
+	<Frame name="DTM_Engine_Frame" hidden="true">
+		<Scripts>	
+			<OnLoad>
+				DTM_Engine_OnLoad(self);
+			</OnLoad>   
+			<OnEvent>
+				DTM_ProtectedCall(DTM_Engine_OnEvent, "CRITICAL", self, event, ...);
+			</OnEvent>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_Engine_TimeElapsed, "CRITICAL", elapsed);
+			</OnUpdate> 
+		</Scripts>
+	</Frame>
+</UI>

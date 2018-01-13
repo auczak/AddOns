@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="VF_RealmPlayersTBC.lua"/>
+	<Frame name="VF_RealmPlayersFrame" parent="UIParent" hidden="false">
+		<Scripts>
+			<OnLoad>
+				VF_RealmPlayersTBC_OnLoad();
+			</OnLoad>
+			<OnEvent>
+				VF_RealmPlayersTBC_OnEvent();
+			</OnEvent>
+			<OnUpdate>
+				VF_RealmPlayersTBC_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

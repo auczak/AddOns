@@ -1,0 +1,9 @@
+## Interface: 20400
+## Title: Titan Panel [|cffeda55fRepair|r] |cff00aa003.2.6.20400|r
+## Notes: Adds the ability to auto repair items and inventory at vendors
+## Author: Adsertor
+## SavedVariables: 
+## OptionalDeps: 
+## Dependencies: Titan
+## Version: 3.2.6.20400
+TitanRepair.xml

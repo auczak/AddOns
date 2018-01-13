@@ -1,0 +1,23 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="TitanAmmo.lua"/>
+	<Frame parent="UIParent">
+		<Frames>
+			<Button name="TitanPanelAmmoButton" inherits="TitanPanelComboTemplate" frameStrata="FULLSCREEN" toplevel="true">
+				<Scripts>
+					<OnLoad>
+						TitanPanelAmmoButton_OnLoad();
+						TitanPanelButton_OnLoad();
+					</OnLoad>
+					<OnEvent>
+						TitanPanelAmmoButton_OnEvent();
+					</OnEvent>
+					<OnUpdate>
+						TitanPanelAmmoButton_OnUpdate(arg1);
+					</OnUpdate>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+	<GameTooltip name="TitanAmmoTooltip" frameStrata="TOOLTIP" hidden="true" parent="UIParent" inherits="GameTooltipTemplate"/>		
+</Ui>

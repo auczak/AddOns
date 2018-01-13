@@ -1,0 +1,26 @@
+****************
+DTM Known Issues
+****************
+
+1. General Issues
+
+- Only English, French and German langages are provided. The German language uses the English language for most DTM elements.
+- Threat of entities that aren't in your group won't be as smoothly computed as they would if they were.
+
+2. Threat Determination Known Issues
+
+GENERAL
+
+DRUID
+
+HUNTER
+
+SHAMAN
+
+MAGES
+
+PRIESTS
+
+ROGUE
+
+> Issues have been completely wiped out due to the fact that Blizzard will allow us in WotLK to directly get threat data from units.

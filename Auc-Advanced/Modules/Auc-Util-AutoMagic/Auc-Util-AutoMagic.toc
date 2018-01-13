@@ -1,0 +1,7 @@
+## Title: Auc:Util:AutoMagic
+## Interface: 20400
+## Dependancies: Auc-Advanced
+## OptionalDependencies: Auc-Util-Appraiser Enchantrix BtmScan Auc-Util-ItemSuggest
+##
+## Version: 5.0.0 (BillyGoat)
+Embed.xml

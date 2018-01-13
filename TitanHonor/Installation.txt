@@ -1,0 +1,12 @@
+IMPORTANT: 
+It is recommended that you delete the old plugin before installing this new version. If you have a very old version installed (up to 1.11) you will have to delete two folders.
+In order to do so you need to:
+
+1) Go to ../Interface/Addons/
+2) Delete folder 'TitanHonor'
+3) Go to ../Interface/Addons/Titan/ 
+4) Inside this folder delete 'TitanHonor' as well.
+
+For users with version 1.12 and later its enough to delete TitanHonor in WoWFolder/Interface/Addons/.
+
+To install plugin simply unpack the mod you downloaded to yours ../Interface/Addons/ directory.

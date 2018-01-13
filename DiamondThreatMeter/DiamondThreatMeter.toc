@@ -1,0 +1,112 @@
+﻿## Interface: 20400
+## Title: DiamondThreatMeter
+## Authors: MrCool
+## Notes: A ThreatMeter, written to support the new additions to the combat log of the 2.4 patch. |cff00ff00This version works for both TBC and WotLK Beta clients.|r
+## Notes-frFR: Un AddOn de détermination des listes de menace, écrit pour profiter pleinement des nouveautés du journal de combat du patch 2.4. |cff00ff00Cette version fonctionne à la fois sur les clients TBC et la Bêta WotLK.|r
+## SavedVariables: DTM_SavedVariables, DTM_NPCAbilities, DTM_Skins
+## Dependencies:
+## OptionalDeps: CoolLib
+
+Bindings.xml
+
+DiamondThreatMeter.xml
+
+common\ChatThrottleLib.lua
+common\MD5Lib.lua
+common\NameplateLib.lua
+
+common\errors.lua
+common\feedback.lua
+common\version.lua
+common\localisation.lua
+common\internals.lua
+common\savedvariables.lua
+common\resources.lua
+common\abilities.lua
+common\npcAbilities.lua
+common\talents.lua
+common\effects.lua
+common\stances.lua
+common\items.lua
+common\sets.lua
+common\setsEffects.lua
+common\enchants.lua
+common\powertypes.lua
+common\spellId.lua
+common\ignoreTable.lua
+common\sounds.lua
+common\console.lua
+common\performance.lua
+common\string.lua
+common\combatParse.lua
+
+common\wotlkOveride\abilities.lua
+common\wotlkOveride\talents.lua
+common\wotlkOveride\effects.lua
+common\wotlkOveride\stances.lua
+common\wotlkOveride\combatParse.lua
+
+engine\combat.lua
+engine\combatEvents.lua
+engine\time.lua
+engine\network.lua
+engine\entityData.lua
+engine\threatList.lua
+engine\stanceBuffer.lua
+engine\inspectAccess.lua
+engine\talentsBuffer.lua
+engine\statsBuffer.lua
+engine\itemsBuffer.lua
+engine\setsBuffer.lua
+engine\symbolsBuffer.lua
+engine\self.lua
+engine\selfAbility.lua
+engine\party.lua
+engine\aggro.lua
+engine\threatModifiers.lua
+engine\creatureMessage.lua
+engine\test.lua
+engine\maintenance.lua
+engine\units.lua
+engine\api.lua
+engine\emuFunctions.lua
+engine\emulation.lua
+engine\version.lua
+engine\zoneWide.lua
+engine\crowdControl.lua
+engine\tps.lua
+engine\native_WotLK.lua
+## Caution1: The engine XML file **HAS** to be loaded last.
+engine\engine.xml
+
+gui\GUI.lua
+
+gui\errorConsole.xml
+gui\simpleGUI.xml
+gui\rowGhost.xml
+gui\threatListRow.xml
+gui\regainListRow.xml
+gui\commonList.xml
+gui\threatList.xml
+gui\overviewList.xml
+gui\regainList.xml
+gui\nameplates.xml
+gui\skin.lua
+gui\skinSchema.lua
+gui\attributes.lua
+
+gui\options\skinManager.xml
+gui\options\skinEditor.xml
+gui\options\ringButton.xml
+gui\options\configPanelTemplates.xml
+## Caution2: the load order from here determinates the order the panels will be displayed in the interface menu. First loaded but intro panel will be displayed first.
+gui\options\configIntroPanel.xml
+gui\options\configSystemPanel.xml
+gui\options\configEnginePanel.xml
+gui\options\configGUIPanel.xml
+gui\options\configWarningPanel.xml
+gui\options\configNameplatePanel.xml
+gui\options\configVersionPanel.xml
+
+## Caution3: The GUI XML file **HAS** to be loaded last.
+gui\GUI.xml

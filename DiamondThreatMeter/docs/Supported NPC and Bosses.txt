@@ -1,0 +1,94 @@
+****************************
+DTM Supported NPC and Bosses
+****************************
+
+I list here all NPC and bosses that have special
+threat mechanics that are taken in account by DTM:
+
+-------------------------------------------------
+1. NPCs (mostly trash mobs from raid instances) :
+-------------------------------------------------
+
+KARAZHAN
+- Arcane anomaly         [not sure for English/German clients]
+
+GRUUL'S LAIR
+- Lair's brute
+
+MAGTHERIDON'S LAIR
+- Hellfire warder        [German missing]
+
+SERPENT SHRINE CAVERN
+- Greyheart Nether-Mage
+
+THE EYE
+- Ember of Al'ar
+
+----------
+2. Bosses:
+----------
+
+WORLD
+- Doomwalker             [untested]
+
+THE MECHANAR
+- Nethermancer Sepethrea [untested]
+
+SETHEKK HALLS
+- Talon King Ikiss       [untested]
+
+SHADOW LAB
+- Blackheart
+- Murmur
+
+SHATTERED HALLS
+- Warbringer O'mrogg     [untested, might be partial]
+
+KARAZHAN
+- Midnight & Attumen
+- Dorothee (Opera event)
+- Shade of Aran
+- Netherspite
+- Nightbane
+
+ZUL'AMAN
+- Zul'jin                [English/French only]
+
+GRUUL'S LAIR
+- Kiggler the Crazed
+- Gruul the Dragonkiller
+
+SERPENT SHRINE CAVERN
+- Hydross the Unstable
+- The Lurker Below
+- Leotheras the Blind
+- Lady Vashj             [untested, English/French only]
+
+THE EYE
+- Al'ar
+- Void Reaver
+- Solarian               [English/French only]
+
+BLACK TEMPLE
+- Supremus               [untested, ?partial?] (can't tell it, I've never ever done this boss >.>)
+- Gurtogg Bloodboil      [untested]
+- Illidan Stormrage      [untested, partial]
+
+SUNWELL PLATEAU
+- Kalecgos               [untested]
+- Lady Sacrolash         [untested, German missing]
+
+-----------------------------------------------------------------------------------------------------
+
+N.B: it's not because a npc/boss is not listed here that DTM will mess up with it:
+not all bosses have special threat mechanics !
+
+If you have feedback about [untested] NPC/bosses, such as "Yes it works" or "Well, the mob didn't behave the way you described it in your AddOn..."
+I'd greatly appreciate. :)
+
+[partial] can mean 2 things:
+
+- The boss abilities are explained to DTM, but the system does not provide enough features yet to be able to describe them perfectly.
+This often occurs if the mob does threat changes without shouting something or using some ability.
+
+- OR I've got not enough info on the encounter to finish its description.

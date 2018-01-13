@@ -1,0 +1,741 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="UI.lua"/>
+	<!--
+		Listing Row
+	-->
+	<Button name="EPGPListingRowTemplate" inherits="ATemplatesRowButton" virtual="true">
+		<Size>
+			<AbsDimension x="298" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="BORDER">
+				<FontString name="$parentName" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="92" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<OffSet>
+								<AbsDimension x="10" y="-3"/>
+							</OffSet>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentEP" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="64" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentGP" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="64" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentEP" relativePoint="RIGHT"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentPR" inherits="GameFontHighlightSmall" justifyH="RIGHT">
+					<Size>
+						<AbsDimension x="64" y="8"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentGP" relativePoint="RIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("RightButtonUp")
+			</OnLoad>
+			<OnClick>
+				if arg1 == "RightButton" and EPGP:GetModule("EPGP_Backend"):CanLogRaids() then
+					EPGP_UI.ListingDropDown(this.member_name)
+				end
+				PlaySound("igMainMenuOptionCheckBoxOn")
+			</OnClick>
+		</Scripts>
+		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD">
+			<Size>
+				<AbsDimension x="298" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="TOP">
+					<OffSet>
+						<AbsDimension x="5" y="-2"/>
+					</OffSet>
+				</Anchor>
+			</Anchors>
+		</HighlightTexture>
+	</Button>
+
+	<!--
+		Listing Page
+	-->
+	<Frame name="ListingPageTemplate" inherits="ATemplatesTabPage" virtual="true">
+		<Frames>
+			<Frame name="ListingDropDown" inherits="UIDropDownMenuTemplate"/>
+			<CheckButton name="EPGPFrameShowAltsCheckButton" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOPLEFT">
+						<OffSet>
+							<AbsDimension x="85" y="-55"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = EPGPGlobalStrings
+						getglobal(this:GetName().."Text"):SetText(L["Show Alts"])
+					</OnLoad>
+					<OnShow>
+						this:SetChecked(EPGP.db.profile[EPGP.db.profile.current_listing].show_alts)
+					</OnShow>
+					<OnClick>
+						EPGP.db.profile[EPGP.db.profile.current_listing].show_alts = this:GetChecked() and true or false
+						EPGP_UI.UpdateListing()
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Frame name="$parentListDropDown" inherits="UIDropDownMenuTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<OffSet>
+							<AbsDimension x="-24" y="-40"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_SetWidth(60, this)
+						UIDropDownMenu_JustifyText("RIGHT", this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_Initialize(this, EPGP_UI.ListingList_Initialize)
+						UIDropDownMenu_SetSelectedValue(this, EPGP.db.profile.current_listing)
+					</OnShow>
+				</Scripts>
+			</Frame>
+			<EditBox name="EPGPListingSearchBox" inherits="InputBoxTemplate" autoFocus="false">
+				<Size>
+					<AbsDimension x="80" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentListDropDown" relativePoint="LEFT">
+						<OffSet>
+							<AbsDimension x="5" y="2"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetText("Search")
+					</OnShow>
+					<OnEditFocusGained>
+						this:SetText("")
+					</OnEditFocusGained>
+					<OnEditFocusLost>
+						this:SetText("Search")
+					</OnEditFocusLost>
+					<OnTextChanged>
+						EPGP_UI.UpdateListing()
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<!-- Table headers -->
+			<Button name="EPGPListingNameColumnHeader" inherits="ATemplatesColumnHeaderTemplate" text="NAME">
+				<Size>
+					<AbsDimension x="111" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<OffSet>
+							<AbsDimension x="19" y="-70"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EPGP.db.profile.comparator_name = "NAME"
+						EPGP_UI.UpdateListing()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EPGPListingEPColumnHeader" inherits="ATemplatesColumnHeaderTemplate" text="EP">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingNameColumnHeader" relativePoint="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EPGP.db.profile.comparator_name = "EP"
+						EPGP_UI.UpdateListing()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EPGPListingGPColumnHeader" inherits="ATemplatesColumnHeaderTemplate" text="GP">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEPColumnHeader" relativePoint="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EPGP.db.profile.comparator_name = "GP"
+						EPGP_UI.UpdateListing()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="EPGPListingPRColumnHeader" inherits="ATemplatesColumnHeaderTemplate" text="PR">
+				<Size>
+					<AbsDimension x="64" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingGPColumnHeader" relativePoint="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EPGP.db.profile.comparator_name = "PR"
+						EPGP_UI.UpdateListing()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<ScrollFrame name="EPGPScrollFrame" inherits="FauxScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="296" y="256"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentNameColumnHeader" relativePoint="BOTTOMLEFT"/>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentHorizontalBarRight" relativePoint="TOPRIGHT">
+						<OffSet>
+							<AbsDimension x="-30" y="0"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(16, EPGP_UI.UpdateListing)
+					</OnVerticalScroll>
+					<OnShow>
+						EPGP_UI.UpdateListing()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Button name="EPGPListingEntry1" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingNameColumnHeader" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry2" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry1" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry3" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry2" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry4" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry3" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry5" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry4" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry6" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry5" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry7" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry6" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry8" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry7" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry9" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry8" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry10" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry9" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry11" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry10" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry12" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry11" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry13" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry12" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry14" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry13" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<Button name="EPGPListingEntry15" inherits="EPGPListingRowTemplate"> 
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EPGPListingEntry14" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+			</Button>
+			<EditBox name="$parentInputBox" inherits="InputBoxTemplate" autoFocus="false">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentInputBoxLabel" relativePoint="RIGHT">
+						<OffSet>
+							<AbsDimension x="10" y="0"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnTextChanged>
+						EPGP_UI:SetEPButtonStatus(getglobal(this:GetName().."AddButton"))
+						EPGP_UI:SetEPButtonStatus(getglobal(this:GetName().."DistributeButton"))
+						EPGP_UI:SetEPButtonStatus(getglobal(this:GetName().."RecurringButton"))
+					</OnTextChanged>
+				</Scripts>
+				<Frames>
+					<Button name="$parentAddButton" inherits="ATemplatesButton" text="EPGP_TEXT_ADD">
+						<Size>
+							<AbsDimension x="48" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+								<OffSet>
+									<AbsDimension x="-20" y="5"/>
+								</OffSet>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EPGP_UI:SetEPButtonStatus(this)
+							</OnShow>
+							<OnClick>
+								EPGP_UI:AddEP2List(this:GetParent():GetNumber())
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentDistributeButton" inherits="ATemplatesButton" text="EPGP_TEXT_DISTRIBUTE">
+						<Size>
+							<AbsDimension x="48" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentAddButton" relativePoint="TOPRIGHT"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EPGP_UI:SetEPButtonStatus(this)
+							</OnShow>
+							<OnClick>
+								EPGP_UI:DistributeEP2List(this:GetParent():GetNumber())
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentRecurringButton" inherits="ATemplatesButton" text="EPGP_TEXT_RECURRING">
+						<Size>
+							<AbsDimension x="48" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentDistributeButton" relativePoint="TOPRIGHT"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EPGP_UI:SetEPButtonStatus(this)
+							</OnShow>
+							<OnClick>
+								EPGP_UI:RecurringEP2List(this:GetParent():GetNumber())
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="$parentPenaltyConsumables" inherits="ATemplatesButton" text="EPGP_TEXT_PENALTY_CONSUMABLES">
+						<Size>
+							<AbsDimension x="48" y="32"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parentRecurringButton" relativePoint="TOPRIGHT"/>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								BigBrother:EPGPConsumableCheck(false)
+							</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</EditBox>
+			<Button name="$parentExportToHTMLButton" inherits="ATemplatesButton" text="EPGP_TEXT_EXPORT_HTML">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentInputBoxAddButton" relativePoint="BOTTOMLEFT" >
+						<OffSet>
+							<AbsDimension x="0" y="5"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("EPGP_HTML_EXPORT")
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentExportToTextButton" inherits="ATemplatesButton" text="EPGP_TEXT_EXPORT_TEXT">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentExportToHTMLButton" relativePoint="TOPRIGHT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("EPGP_TEXT_EXPORT")
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentWarnConsumablesButton" inherits="ATemplatesButton" text="EPGP_TEXT_WARN_CONSUMABLES">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentExportToTextButton" relativePoint="TOPRIGHT" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						BigBrother:EPGPConsumableCheck(true)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<StatusBar name="$parentInputBoxRecurringBar" inherits="ATemplatesBar" minValue="0" maxValue="1" defaultValue="0">
+				<Size>
+					<AbsDimension x="200" y="16"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentInputBox" relativePoint="RIGHT">
+						<OffSet>
+							<AbsDimension x="16" y="0"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = EPGPGlobalStrings
+						local button = getglobal(this:GetName().."Button")
+						button:SetScript("OnClick", function()
+							if EPGP:IsEventScheduled("RECURRING_EP") then
+								EPGP:TriggerEvent("EPGP_STOP_RECURRING_EP_AWARDS")
+							else
+								StaticPopup_Show("EPGP_SET_RECURRING_PERIOD")
+							end
+						end)
+						button:SetScript("OnEnter", function()
+							GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
+							if EPGP:IsEventScheduled("RECURRING_EP") then
+								GameTooltip:SetText(L["Click to stop recurring award."], 1, 1, 1)
+							else
+								GameTooltip:SetText(L["Click to set recurring award period."], 1, 1, 1)
+							end
+						end)
+						button:SetScript("OnLeave", function()
+							GameTooltip:Hide()
+						end)
+					</OnLoad>
+					<OnUpdate>
+						this:SetMinMaxValues(0, EPGP.db.profile.recurring_ep_period)
+						local id, time_left = EPGP:IsEventScheduled("RECURRING_EP")
+						if id then
+							this:SetValue(EPGP.db.profile.recurring_ep_period - time_left)
+							getglobal(this:GetName().."Text"):SetText(SecondsToTime(time_left))
+						else
+							this:SetValue(0)
+							local L = EPGPGlobalStrings
+							getglobal(this:GetName().."Text"):SetText(string.format(L["Recurring period %s"], SecondsToTime(EPGP.db.profile.recurring_ep_period)))
+						end
+					</OnUpdate>
+				</Scripts>
+			</StatusBar>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentHorizontalBarLeft" file="Interface\ClassTrainerFrame\UI-ClassTrainer-HorizontalBar">
+					<Size>
+						<AbsDimension x="256" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<OffSet>
+								<AbsDimension x="15" y="-334"/>
+							</OffSet>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="1.0" top="0" bottom="0.25"/>
+				</Texture>
+				<Texture name="$parentHorizontalBarRight" file="Interface\ClassTrainerFrame\UI-ClassTrainer-HorizontalBar">
+					<Size>
+						<AbsDimension x="75" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentHorizontalBarLeft" relativePoint="RIGHT">
+							<OffSet>
+								<AbsDimension x="0" y="0"/>
+							</OffSet>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.29296875" top="0.25" bottom="0.5"/>
+				</Texture>
+				<FontString name="$parentInputBoxLabel" inherits="GameFontNormal" text="EP">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parentHorizontalBarLeft" relativePoint="BOTTOMLEFT">
+							<OffSet>
+								<AbsDimension x="10" y="-1"/>
+							</OffSet>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<!--
+		Config page
+	-->
+	<Frame name="ConfigPageTemplate" inherits="ATemplatesTabPage" virtual="true">
+		<Frames>
+			<Button name="$parentDecayButton" inherits="ATemplatesButton" text="EPGP_TEXT_DECAY">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<OffSet>
+							<AbsDimension x="24" y="-70"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("EPGP_DECAY_EPGP", EPGP.db.profile.decay_percent)
+					</OnClick>
+				</Scripts>
+			</Button>
+			<CheckButton name="$parentMasterLootPopupCheckButton" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentDecayButton" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = EPGPGlobalStrings
+						getglobal(this:GetName().."Text"):SetText(L["Master loot popup"])
+					</OnLoad>
+					<OnShow>
+						this:SetChecked(EPGP.db.profile.master_loot_popup)
+					</OnShow>
+					<OnClick>
+						EPGP.db.profile.master_loot_popup = this:GetChecked() and true or false
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Frame name="$parentMasterLootPopupQualityThreshold" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentMasterLootPopupCheckButton" relativePoint="BOTTOMLEFT">
+						<OffSet>
+							<AbsDimension x="-16" y="-16"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_SetWidth(100, this)
+						UIDropDownMenu_JustifyText("LEFT", this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_Initialize(this, EPGP_UI.MasterLootQualityThreshold_Initialize)
+						UIDropDownMenu_SetSelectedValue(this, EPGP.db.profile.master_loot_popup_quality_threshold)
+					</OnShow>
+				</Scripts>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentReportChannelLabel" inherits="GameFontNormalSmall" text="EPGP_TEXT_MASTER_LOOT_QUALITY_THRESHOLD">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+									<OffSet>
+										<AbsDimension x="20" y="0"/>
+									</OffSet>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<CheckButton name="$parentGPInTooltipsCheckButton" inherits="UICheckButtonTemplate">
+				<Size>
+					<AbsDimension x="20" y="20"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentMasterLootPopupQualityThreshold" relativePoint="BOTTOMLEFT">
+						<OffSet>
+							<AbsDimension x="16" y="0"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						local L = EPGPGlobalStrings
+						getglobal(this:GetName().."Text"):SetText(L["GP in tooltips"])
+					</OnLoad>
+					<OnShow>
+						this:SetChecked(EPGP.db.profile.gp_in_tooltips)
+					</OnShow>
+					<OnClick>
+						EPGP.db.profile.gp_in_tooltips = this:GetChecked() and true or false
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Frame name="$parentReportChannelDropDown" inherits="UIDropDownMenuTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentGPInTooltipsCheckButton" relativePoint="BOTTOMLEFT">
+						<OffSet>
+							<AbsDimension x="-16" y="-16"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_SetWidth(100, this)
+						UIDropDownMenu_JustifyText("LEFT", this)
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_Initialize(this, EPGP_UI.ReportChannelList_Initialize)
+						UIDropDownMenu_SetSelectedValue(this, EPGP.db.profile.report_channel)
+					</OnShow>
+				</Scripts>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentReportChannelLabel" inherits="GameFontNormalSmall" text="EPGP_TEXT_REPORT_CHANNEL">
+							<Anchors>
+								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+									<OffSet>
+										<AbsDimension x="20" y="0"/>
+									</OffSet>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parentBackupButton" inherits="ATemplatesButton" text="EPGP_TEXT_BACKUP">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<OffSet>
+							<AbsDimension x="24" y="84"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EPGP:GetModule("EPGP_Backend"):BackupNotes()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentRestoreButton" inherits="ATemplatesButton" text="EPGP_TEXT_RESTORE">
+				<Size>
+					<AbsDimension x="48" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentBackupButton" relativePoint="TOPRIGHT"/>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						EPGP_UI:SetRestoreButtonStatus(this)
+					</OnShow>
+					<OnClick>
+						StaticPopup_Show("EPGP_RESTORE_NOTES")
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+
+	<!--
+		Main UI
+	-->
+	<Frame name="EPGPFrame" inherits="ATemplatesPaperDoll">
+		<Anchors>
+			<Anchor point="TOP">
+				<OffSet>
+					<AbsDimension x="0" y="-104"/>
+				</OffSet>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentPage1" inherits="ListingPageTemplate" id="1"/>
+			<Button name="$parentTab1" inherits="ATemplatesTabButton" id="1" text="EPGP_TEXT_STANDINGS">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
+						<OffSet>
+							<AbsDimension x="60" y="62"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<Frame name="$parentPage2" inherits="ConfigPageTemplate" id="2"/>
+			<Button name="$parentTab2" inherits="ATemplatesTabButton" id="2" text="OPTIONS_MENU">
+				<Anchors>
+				   <Anchor point="LEFT" relativeTo="$parentTab1" relativePoint="RIGHT">
+						<OffSet>
+							<AbsDimension x="-16" y="0"/>
+						</OffSet>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				PanelTemplates_SetNumTabs(this, 2)
+			</OnLoad>
+		   <OnShow>
+				PlaySound("UChatScrollButton")
+				ATemplates_SetTab(this, 1)
+		   </OnShow>
+		   <OnHide>
+				PlaySound("UChatScrollButton")
+		   </OnHide>
+		</Scripts>
+	</Frame>
+</Ui>

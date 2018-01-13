@@ -1,0 +1,143 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="threatList.lua" /> 
+
+	<!--
+		This XML file defines the standard threat list. It is a controllable widget, using special methods & attributes.
+	-->
+
+	<Button name="DTM_ThreatListFrameTemplate" inherits="DTM_CommonListFrameTemplate" virtual="true">
+		<!--
+			You can display the standby frame *OR* the header row + rows. Not both of them at the same time.
+		-->
+
+		<Frames>
+			<Frame name="$parent_StandbyFrame" hidden="true">
+				<Size>
+					<AbsDimension x="256" y="48"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_StandbyText" inherits="GameFontNormal">
+							<Size>
+								<AbsDimension x="256" y="48"/>
+							</Size>
+
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+
+				<Scripts>	
+					<OnLoad>
+						self.standbyText = getglobal(self:GetName().."_StandbyText");
+					</OnLoad> 
+				</Scripts>
+			</Frame>
+
+			<Frame name="$parent_HeaderRow" hidden="true">
+				<Size>
+					<AbsDimension x="256" y="40"/>
+				</Size>
+
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parent_UnitInfo" inherits="GameFontHighlightSmall">
+							<Size>
+								<AbsDimension x="256" y="16"/>
+							</Size>
+						</FontString>
+
+						<FontString name="$parent_Name" inherits="GameFontNormal" text="Name"/>
+						<FontString name="$parent_Threat" inherits="GameFontNormal" text="Threat"/>
+						<FontString name="$parent_TPS" inherits="GameFontNormal" text="TPS"/>
+						<FontString name="$parent_ThreatPercent" inherits="GameFontNormal" text="%"/>
+					</Layer>
+				</Layers>
+
+				<Frames>
+					<StatusBar name="$parent_HealthBar" hidden="true" virtual="true">
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture setAllPoints="true">
+									<Color r="0.0" g="0.0" b="0.0" a="1.0"/>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Frames>
+							<StatusBar name="$parentVariation">
+								<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+							</StatusBar>
+						</Frames>
+						<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+						<BarColor r="0.0" g="1.0" b="0.0"/>
+					</StatusBar>
+				</Frames>
+
+				<Scripts>
+					<OnLoad>
+						self.unitInfo = getglobal(self:GetName().."_UnitInfo");
+						self.name = getglobal(self:GetName().."_Name");
+						self.threat = getglobal(self:GetName().."_Threat");
+						self.tps = getglobal(self:GetName().."_TPS");
+						self.threatPercent = getglobal(self:GetName().."_ThreatPercent");
+
+						self.name:SetText( DTM_Localise("Name") );
+						self.threat:SetText( DTM_Localise("Threat") );
+						self.tps:SetText( DTM_Localise("TPS") );
+					</OnLoad> 
+				</Scripts>
+			</Frame>
+
+			<Frame name="$parent_CrystalFrame" hidden="true">
+				<Size>
+					<AbsDimension x="16" y="8"/>
+				</Size>
+
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parent_Texture" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton");
+				self:SetClampedToScreen( 1 );
+			      self:SetBackdropBorderColor(1.0, 1.0, 1.0, 1.0);
+				self:SetBackdropColor(0.2, 0.2, 0.2, 0.5);
+				DTM_ThreatListFrame_OnLoad(self);
+			</OnLoad>
+			<OnShow>
+				DTM_ProtectedCall(DTM_ThreatListFrame_OnUpdate, "MAJOR", self, 0.000);
+			</OnShow>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ThreatListFrame_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Button>
+</UI>

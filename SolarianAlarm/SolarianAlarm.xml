@@ -1,0 +1,54 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<Script file="Localization.lua"/>
+	<Script file="SolarianAlarm.lua"/>
+
+	<Frame name="SolarianAlarmMain" toplevel="true" hidden="true" parent="UIParent">
+		<Size>
+			<AbsDimension x="2000" y="2000"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" setAllPoints="true">
+					<Color r="0" g="0" b="1" a="0.4"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="SolarianAlarmTimer" toplevel="true" hidden="false" parent="UIParent">
+		<Size>
+			<AbsDimension x="1" y="1"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" setAllPoints="true">
+					<Color r="0" g="0" b="0" a="0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				SolarianAlarm_Init()
+				this:RegisterEvent("CHAT_MSG_ADDON")
+			</OnLoad>
+			<OnUpdate>
+				SolarianAlarm_Update(arg1)
+			</OnUpdate>
+			<OnEvent>
+				if (event=="CHAT_MSG_ADDON") then
+					if (arg1=="SolarianAlarm") then
+						SolarianAlarm_Msg(arg2,arg4)
+					end
+				end
+			</OnEvent>
+		</Scripts>
+	</Frame>
+
+</Ui>

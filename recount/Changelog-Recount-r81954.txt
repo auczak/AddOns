@@ -1,0 +1,136 @@
+------------------------------------------------------------------------
+r81954 | 7destiny | 2008-09-22 12:02:17 -0400 (Mon, 22 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-koKR.lua
+
+Recount:
+- koKR Update
+------------------------------------------------------------------------
+r81681 | ananhaid | 2008-09-13 09:08:12 -0400 (Sat, 13 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-zhCN.lua
+
+Recount:
+- zhCN update.(Is not obvious for current version)
+------------------------------------------------------------------------
+r81640 | elsia | 2008-09-12 06:08:35 -0400 (Fri, 12 Sep 2008) | 5 lines
+Changed paths:
+   M /trunk/Recount/Recount.lua
+   M /trunk/Recount/Recount_Modes.lua
+   M /trunk/Recount/Tracker.lua
+
+Recount:
+- Removed old commented out debug code
+- Added WotLK Runic Power support as data mode.
+- Temorarily removed overkill removal from killing blows to allow damage cycle tests on small target dummies in Dalaran to work as expected on WotLK beta.
+
+------------------------------------------------------------------------
+r81639 | elsia | 2008-09-12 06:07:30 -0400 (Fri, 12 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-enUS.lua
+
+Recount:
+- Added locales and fised inconsistent EOL style.
+------------------------------------------------------------------------
+r81569 | ananhaid | 2008-09-09 08:06:32 -0400 (Tue, 09 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-zhCN.lua
+   M /trunk/Recount/locales/Recount-zhTW.lua
+
+Recount: 
+- zhCN/zhTW update.
+------------------------------------------------------------------------
+r81548 | 7destiny | 2008-09-08 13:55:17 -0400 (Mon, 08 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/Tracker.lua
+   M /trunk/Recount/locales/Recount-enUS.lua
+   M /trunk/Recount/locales/Recount-koKR.lua
+
+Recount:
+- Added missing locale
+------------------------------------------------------------------------
+r81545 | elsia | 2008-09-08 13:21:44 -0400 (Mon, 08 Sep 2008) | 5 lines
+Changed paths:
+   M /trunk/Recount/GUI_Detail.lua
+   M /trunk/Recount/Recount_Modes.lua
+   M /trunk/Recount/Tracker.lua
+
+Recount:
+- Set up new overkill and missAmount fields for WotLK combat log
+- Fixed bug when reporting summary details when no damage was taken.
+- Fixed a bug in Activity mode when data is empty
+
+------------------------------------------------------------------------
+r81353 | elsia | 2008-09-04 10:50:27 -0400 (Thu, 04 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/GUI_Config.lua
+   M /trunk/Recount/GUI_Realtime.lua
+
+Recount:
+- Some fixes relating to WotLK support
+------------------------------------------------------------------------
+r81350 | elsia | 2008-09-04 09:42:28 -0400 (Thu, 04 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/GUI_Config.lua
+   M /trunk/Recount/GUI_Detail.lua
+   M /trunk/Recount/GUI_Graph.lua
+   M /trunk/Recount/GUI_Main.lua
+   M /trunk/Recount/GUI_Realtime.lua
+   M /trunk/Recount/WindowOrder.lua
+
+Recount:
+- Fixed scrollbars code for WotLK.
+------------------------------------------------------------------------
+r81309 | scorpion | 2008-09-03 06:18:59 -0400 (Wed, 03 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-zhTW.lua
+
+Recount:
+- Update zhTW
+------------------------------------------------------------------------
+r81272 | ananhaid | 2008-09-02 10:52:10 -0400 (Tue, 02 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-zhCN.lua
+   M /trunk/Recount/locales/Recount-zhTW.lua
+
+Recount: 
+- zhCN/zhTW update.
+
+
+------------------------------------------------------------------------
+r81252 | 7destiny | 2008-09-01 20:59:14 -0400 (Mon, 01 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/Recount/locales/Recount-koKR.lua
+
+Recount:
+- koKR Update
+------------------------------------------------------------------------
+r81247 | elsia | 2008-09-01 18:42:58 -0400 (Mon, 01 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/Recount/Tracker.lua
+   M /trunk/Recount/deletion.lua
+
+Recount:
+- Fixed bug which prevented the deletion code for instance entry to work (thanks to Bonta-kun)
+- Added safeguard when for some reason CCs are removed from non-existing victims.
+------------------------------------------------------------------------
+r81237 | elsia | 2008-09-01 14:27:48 -0400 (Mon, 01 Sep 2008) | 8 lines
+Changed paths:
+   M /trunk/Recount/Bindings.xml
+   M /trunk/Recount/Fights.lua
+   M /trunk/Recount/GUI_Config.lua
+   M /trunk/Recount/GUI_Main.lua
+   M /trunk/Recount/GUI_Realtime.lua
+   M /trunk/Recount/Recount.lua
+   M /trunk/Recount/Tracker.lua
+   M /trunk/Recount/locales/Recount-enUS.lua
+
+Recount:
+-  Fixed main window display bug when an old fight was selected.
+- Added "/recount pause" to toggle global data collection, plus added a keybinding for it.
+- Preparation for death track support.
+- Fixed bug where death log entries were attributed to wrong name or time.
+- Fixed WotLK support for mouse scripts, bar dropdown works now.
+- Added WotLK combat log event SPELL_BUILDING_DAMAGE.
+
+------------------------------------------------------------------------

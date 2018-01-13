@@ -1,0 +1,2678 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<!-- Virtual raid history frame -->
+	<Frame name="HeadCountFrameRaidHistoryContentTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentId" justifyH="LEFT" inherits="GameFontNormalSmall" hidden="true">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentNumber" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentTime" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="124" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="38" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentZone" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="156" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="162" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>				
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Tooltips\UI-Tooltip-Background" name="$parentMouseOver" hidden="false" alphaMode="BLEND">
+					<Size>
+						<AbsDimension x="350" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\Tooltips\UI-Tooltip-Background" name="$parentMouseSelect" hidden="true">
+					<Size>
+						<AbsDimension x="350" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentHitArea">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Size>
+					<AbsDimension x="310" y="18"/>
+				</Size>
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateHitArea_Click()
+					</OnClick>	
+					<OnEnter>
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateHitArea_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateHitArea_Leave()
+					</OnLeave>				
+				</Scripts>
+			</Button>
+			<Button name="$parentExportButton">
+				<Size>
+					<AbsDimension x="16" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="322" y="-1" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateExportButton_Click()
+					</OnClick>				
+					<OnEnter>						
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateExportButton_Enter() 
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateExportButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-RotationRight-Button-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+				<PushedTexture file="Interface\Buttons\UI-RotationRight-Button-Down"/>
+			</Button>
+			<Button name="$parentDeleteButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="334" y="2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>						
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateDeleteButton_Click()
+					</OnClick>
+					<OnEnter>						
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateDeleteButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameRaidHistoryContentTemplateDeleteButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\CancelButton-Up"/>
+				<PushedTexture file="Interface\Buttons\CancelButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD"/>
+			</Button>			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameRaidHistoryContentTemplate_Load()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	
+	<!-- *****************
+	VIRTUAL RAID BOSSES CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentBossTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentNumber" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentTime" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="120" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="38" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>	
+				<FontString name="$parentMembers" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="112" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>	
+				<FontString name="$parentName" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="160" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="176" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>	
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Tooltips\UI-Tooltip-Background" name="$parentMouseOver" hidden="false">
+					<Size>
+						<AbsDimension x="350" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentHitArea">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Size>
+					<AbsDimension x="330" y="18"/>
+				</Size>
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentBossTemplateHitArea_Click()
+					</OnClick>					
+					<OnEnter>
+						HeadCount:HeadCountFrameContentBossTemplateHitArea_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentBossTemplateHitArea_Leave()
+					</OnLeave>
+				</Scripts>
+			</Button>	
+			<Button name="$parentDeleteButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="334" y="2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameContentBossTemplateDeleteButton_Click()
+					</OnClick>
+					<OnEnter>	
+						HeadCount:HeadCountFrameContentBossTemplateDeleteButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentBossTemplateDeleteButton_Leave()
+					</OnLeave>
+				</Scripts>								
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\CancelButton-Up"/>
+				<PushedTexture file="Interface\Buttons\CancelButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD"/>
+			</Button>				
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentBossTemplate_Load()
+			</OnLoad>
+		</Scripts>
+	</Frame>	
+	
+	<!-- *****************
+	VIRTUAL RAID MEMBERS CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentMembersTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentNumber" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentName" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="80" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="38" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentBeginTime" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="120" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="120" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>				
+				<FontString name="$parentEndTime" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="100" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="190" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>								
+				<FontString name="$parentTotalTime" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="100" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="260" y="0"/>
+							</Offset></Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>				
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Tooltips\UI-Tooltip-Background" name="$parentMouseOver" hidden="false">
+					<Size>
+						<AbsDimension x="350" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="6" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentHitArea">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+				</Anchors>
+				<Size>
+					<AbsDimension x="330" y="18"/>
+				</Size>
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentMembersTemplateHitArea_Click()
+					</OnClick>					
+					<OnEnter>
+						HeadCount:HeadCountFrameContentMembersTemplateHitArea_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentMembersTemplateHitArea_Leave()
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentDeleteButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="334" y="2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameContentMembersTemplateDeleteButton_Click()
+					</OnClick>
+					<OnEnter>	
+						HeadCount:HeadCountFrameContentMembersTemplateDeleteButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentMembersTemplateDeleteButton_Leave()
+					</OnLeave>
+				</Scripts>								
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\CancelButton-Up"/>
+				<PushedTexture file="Interface\Buttons\CancelButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD"/>
+			</Button>			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentMembersTemplate_Load()
+			</OnLoad>
+		</Scripts>
+	</Frame>	
+	
+	<!-- *****************
+	VIRTUAL RAID PLAYER CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentPlayerTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentInformation" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="408" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>	
+
+	<!-- *****************
+	VIRTUAL BOSS/SNAPSHOT CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentSnapshotTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="18"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentNumber" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<FontString name="$parentName" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="120" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="38" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>	
+	
+	<!-- *****************
+	VIRTUAL RAID LOOT CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentLootTemplate" hidden="false" enableMouse="true" virtual="true">
+		<Size>
+			<AbsDimension x="400" y="42"/>
+		</Size>
+		<Layers>
+			<Layer level="ARTWORK">	
+				<FontString name="$parentId" justifyH="LEFT" inherits="GameFontNormalSmall" hidden="true">
+					<Size>
+						<AbsDimension x="28" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>			
+				<FontString name="$parentNumber" justifyH="LEFT" justifyV="TOP" inherits="GameFontNormalSmall" hidden="true">
+					<Size>
+						<AbsDimension x="40" y="40" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="8" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="0.0" />
+				</FontString>
+				<FontString name="$parentLooter" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="280" y="12"/>
+					</Size>
+					<FontHeight>
+						<AbsValue x="8" />               
+					</FontHeight>					
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="50" y="6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>				
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentTextureButton">
+				<Size>
+					<AbsDimension x="34" y="34" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>		
+					<OnEnter>	
+						HeadCount:HeadCountFrameContentLootTemplateTextureButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentLootTemplateTextureButton_Leave()
+					</OnLeave>
+					<OnClick>
+						HeadCount:HeadCountFrameContentLootTemplateTextureButton_Click()
+					</OnClick>					
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Icons\INV_Misc_QuestionMark" />
+			</Button>		
+			<Button name="$parentNameButton">
+				<Size>
+					<AbsDimension x="270" y="28" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="50" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="CombatLogFont" justifyH="LEFT" justifyV="TOP">
+					<Size>
+						<AbsDimension x="270" y="28" />
+					</Size>	
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-1"/>
+							</Offset>
+						</Anchor>
+					</Anchors>			
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</ButtonText>	
+				<PushedTextOffset>
+					<AbsDimension x="0" y="0" />
+				</PushedTextOffset>
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentLootTemplateNameButton_Click()
+					</OnClick>					
+				</Scripts>
+			</Button>	
+			<Button name="$parentManagementButton">
+				<Size>
+					<AbsDimension x="13" y="13" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="324" y="-6" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<HitRectInsets>				
+					<AbsInset left="0" right="0" top="0" bottom="0" />
+				</HitRectInsets>				
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameContentLootTemplateManagementButton_Click()
+					</OnClick>				
+					<OnEnter>						
+						HeadCount:HeadCountFrameContentLootTemplateManagementButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentLootTemplateManagementButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-GuildButton-PublicNote-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>
+			<Button name="$parentDeleteButton">
+				<Size>
+					<AbsDimension x="24" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="334" y="-2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<HitRectInsets>				
+					<AbsInset left="4" right="4" top="4" bottom="4" />
+				</HitRectInsets>				
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameContentLootTemplateDeleteButton_Click()
+					</OnClick>
+					<OnEnter>	
+						HeadCount:HeadCountFrameContentLootTemplateDeleteButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentLootTemplateDeleteButton_Leave()
+					</OnLeave>
+				</Scripts>								
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\CancelButton-Up" />
+				<PushedTexture file="Interface\Buttons\CancelButton-Down" />
+				<HighlightTexture file="Interface\Buttons\CancelButton-Highlight" alphaMode="ADD" />
+			</Button>			
+		</Frames> 
+	</Frame>	
+
+	<!-- *****************
+	VIRTUAL LOOT MANAGEMENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameLootManagementTemplate" hidden="false" enableMouse="true" virtual="true">
+        <Size>
+            <AbsDimension x="400" y="260"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent"/>
+        </Anchors>	
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <TileSize>
+                <AbsValue val="300"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>			
+        <Layers>
+            <Layer level="ARTWORK"> 
+                <Texture name="$parentHeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+                    <Size>
+                        <AbsDimension x="256" y="64"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="12"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <FontString name="$parentHeaderTitleString" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parentHeaderTexture">
+                            <Offset>
+                                <AbsDimension x="0" y="-14"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+                </FontString>
+                <FontString name="$parentInfo" justifyV="top" inherits="GameFontNormal">
+                    <Size>
+                        <AbsDimension x="390" y="32"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-30"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" /> 
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>						
+                </FontString>
+				<FontString name="$parentRaidDescription" justifyV="top" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="350" y="23" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-60"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>				
+				<FontString name="$parentLootDescription" justifyV="top" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="350" y="23" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-90"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>	
+				<FontString name="$parentLooterLabel" justifyH="left" justifyV="top" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="30" y="-126"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>	
+				<FontString name="$parentSourceLabel" justifyH="left" justifyV="top" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="30" y="-152"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>				
+				<FontString name="$parentCostLabel" justifyH="left" justifyV="top" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="100" y="20" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="30" y="-178"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>	
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.0" g="0.0" b="0.0" a="0.7" />
+				</Texture>				
+			</Layer>
+        </Layers>
+        <Frames>		
+			<EditBox name="$parentLooterEditBox" autofocus="false" multiLine="false" letters="32">			
+				<Size>
+					<AbsDimension x="154" y="18"/>
+				</Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="126" y="-124" />
+						</Offset>
+					</Anchor>
+				</Anchors>				
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize val="10" />
+					<TileSize val="10" />
+					<BackgroundInsets left="8" right="8" top="8" bottom="8" />
+				</Backdrop>				
+				<FontString inherits="GameFontNormalSmall">
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<TextInsets>
+					<AbsInset left="4" right="0" top="0" bottom="0" />
+				</TextInsets>				
+			</EditBox>
+			<EditBox name="$parentSourceEditBox" autofocus="false" multiLine="false" letters="32">			
+				<Size>
+					<AbsDimension x="154" y="18"/>
+				</Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="126" y="-150" />
+						</Offset>
+					</Anchor>
+				</Anchors>				
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize val="10" />
+					<TileSize val="10" />
+					<BackgroundInsets left="8" right="8" top="8" bottom="8" />
+				</Backdrop>				
+				<FontString inherits="GameFontNormalSmall">
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<TextInsets>
+					<AbsInset left="4" right="0" top="0" bottom="0" />
+				</TextInsets>				
+			</EditBox>						
+			<EditBox name="$parentCostEditBox" autofocus="false" multiLine="false" letters="16">			
+				<Size>
+					<AbsDimension x="154" y="18"/>
+				</Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="126" y="-176" />
+						</Offset>
+					</Anchor>
+				</Anchors>				
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize val="10" />
+					<TileSize val="10" />
+					<BackgroundInsets left="8" right="8" top="8" bottom="8" />
+				</Backdrop>				
+				<FontString inherits="GameFontNormalSmall">
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+				</FontString>
+				<TextInsets>
+					<AbsInset left="4" right="0" top="0" bottom="0" />
+				</TextInsets>				
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameLootManagementTemplate_Load()
+			</OnLoad>		
+		</Scripts>
+	</Frame>	
+	
+	<!-- *****************
+	MAIN FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrame" virtual="false" hidden="true" parent="UIParent" toplevel="true" movable="true" frameStrata="DIALOG" enableMouse="true" enableKeyboard="true" clampedToScreen="true" frameLevel="2">
+		<Size>
+			<AbsDimension x="400" y="400" />
+		</Size> 
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+		<TitleRegion>
+			<Size>
+				<AbsDimension x="400" y="34" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOP" />
+			</Anchors>
+		</TitleRegion> 
+		<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <TileSize>
+                <AbsValue val="400"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>	
+		<Layers>	
+			<Layer level="ARTWORK">
+				<Texture name="HeadCountFrameBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.0" g="0.0" b="0.0" a="0.7" />
+				</Texture>				
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>	
+				tinsert(UISpecialFrames, this:GetName())
+				HeadCount:HeadCountFrame_Load()
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<!-- *****************
+	TITLE FRAME
+	 ***************** -->
+	<Frame name="HeadCountFrameTitle" hidden="false" parent="HeadCountFrame" enableKeyboard="true" frameLevel="3">
+		<Size>
+			<AbsDimension x="400" y="30" />
+		</Size> 	
+		<Anchors>
+			<Anchor point="TOPLEFT" />
+		</Anchors>
+		<Frames>
+			<Button name="HeadCountFrameTitleCloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-4" y="-4" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="26" y="26" />
+				</Size>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameTitleCloseButton_Click()
+					</OnClick>	
+				</Scripts>
+			</Button>		
+		</Frames>
+	</Frame>
+
+	<!-- *****************
+	TITLE HEADER FRAME
+	 ***************** -->
+	<Frame name="HeadCountFrameTitleHeader" hidden="false" parent="HeadCountFrameTitle" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="256" y="70" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>					
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\DialogFrame\UI-DialogBox-Header" setAllPoints="true" />	
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString name="HeadCountFrameTitleHeaderString" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset>
+								<AbsDimension x="0" y="14" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameTitleHeader_Load()
+			</OnLoad>		
+		</Scripts>		
+	</Frame>
+	
+	<!-- *****************
+	RAID HISTORY FRAME
+	 ***************** -->
+	<Frame name="HeadCountFrameRaidHistory" hidden="false" parent="HeadCountFrame" enableKeyboard="true" frameLevel="3">
+		<Size>
+			<AbsDimension x="400" y="100" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="8" y="-44" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="-8" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <TileSize>
+                <AbsValue val="400"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>
+		<Frames>	
+			<Button name="$parentEndRaidButton">
+				<Size>
+					<AbsDimension x="13" y="13" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="324" y="15" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameRaidHistoryEndRaidButton_Click()
+					</OnClick>				
+					<OnEnter>
+						HeadCount:HeadCountFrameRaidHistoryEndRaidButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameRaidHistoryEndRaidButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-GroupLoot-Pass-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-GroupLoot-Pass-Highlight" alphaMode="ADD"/>
+				<PushedTexture file="Interface\Buttons\UI-GroupLoot-Pass-Down" />
+			</Button>		
+			<Button name="$parentRemoveAllButton">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="336" y="19" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameRaidHistoryRemoveAllButton_Click()
+					</OnClick>				
+					<OnEnter>
+						HeadCount:HeadCountFrameRaidHistoryRemoveAllButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameRaidHistoryRemoveAllButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\CharacterFrame\Disconnect-Icon" />
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>					
+		</Frames>
+		<Layers>	
+			<Layer level="ARTWORK">
+				<Texture name="HeadCountFrameRaidHistoryBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.2" g="0.2" b="0.5" a="0.1" />
+				</Texture>
+				<FontString name="$parentTitleString" justifyH="LEFT" inherits="CombatLogFont">
+					<Size>
+						<AbsDimension x="280" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</FontString>	
+			</Layer>
+		</Layers>		
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameRaidHistory_Load()
+			</OnLoad>		
+		</Scripts>
+	</Frame>
+	
+	<!-- *****************
+	RAID HISTORY CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameRaidHistoryContent" hidden="false" parent="HeadCountFrameRaidHistory" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="100" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>			
+		<Frames>
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameRaidHistoryContent" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="100" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameRaidHistoryContent" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-6"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameRaidHistoryContent" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>						
+						HeadCount:HeadCountFrameRaidHistoryContentScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameRaidHistoryContentScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="HeadCountFrameRaidHistoryContentEntry1" inherits="HeadCountFrameRaidHistoryContentTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-5"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="HeadCountFrameRaidHistoryContentEntry2" inherits="HeadCountFrameRaidHistoryContentTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameRaidHistoryContentEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="HeadCountFrameRaidHistoryContentEntry3" inherits="HeadCountFrameRaidHistoryContentTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameRaidHistoryContentEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="HeadCountFrameRaidHistoryContentEntry4" inherits="HeadCountFrameRaidHistoryContentTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameRaidHistoryContentEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="HeadCountFrameRaidHistoryContentEntry5" inherits="HeadCountFrameRaidHistoryContentTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameRaidHistoryContentEntry4"/>
+				</Anchors>
+			</Frame>							
+		</Frames>		
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameRaidHistoryContent_Load()
+			</OnLoad>				
+		</Scripts>
+	</Frame>
+
+	<!-- *****************
+	CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContent" hidden="false" parent="HeadCountFrame" enableMouse="true" enableKeyboard="true" frameLevel="3">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="8" y="-170" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="-8" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <TileSize>
+                <AbsValue val="400"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>			
+		<Frames>	
+			<Button name="$parentMembersButton">
+				<Size>
+					<AbsDimension x="18" y="18" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="301" y="18" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick> 
+						HeadCount:HeadCountFrameContentMembersButton_Click()
+					</OnClick>				
+					<OnEnter>
+						HeadCount:HeadCountFrameContentMembersButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentMembersButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\CharacterFrame\UI-StateIcon"> 
+					<TexCoords left="0.5" right="1.0" top="0.0" bottom="0.5" />				
+				</NormalTexture>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>	
+			<Button name="$parentBossButton">
+				<Size>
+					<AbsDimension x="14" y="11" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="322" y="14" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick> 
+						HeadCount:HeadCountFrameContentBossButton_Click()
+					</OnClick>				
+					<OnEnter>
+						HeadCount:HeadCountFrameContentBossButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentBossButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\TargetingFrame\UI-TargetingFrame-Skull" /> 
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+			</Button>	
+			<Button name="$parentLootButton">
+				<Size>
+					<AbsDimension x="14" y="14" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="341" y="14" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameContentLootButton_Click()
+					</OnClick>				
+					<OnEnter>
+						HeadCount:HeadCountFrameContentLootButton_Enter()
+					</OnEnter>
+					<OnLeave>
+						HeadCount:HeadCountFrameContentLootButton_Leave()
+					</OnLeave>
+				</Scripts>
+				<NormalTexture name="$parentNormalTexture" file="Interface\Buttons\UI-GroupLoot-Coin-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-GroupLoot-Coin-Highlight" alphaMode="ADD"/>
+				<PushedTexture file="Interface\Buttons\UI-GroupLoot-Coin-Down" />
+			</Button>		
+		</Frames>				
+		<Layers>	
+			<Layer level="ARTWORK">
+				<Texture name="$parentBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.2" g="0.2" b="0.2" a="0.1" />
+				</Texture>
+				<FontString name="$parentTitleString" justifyH="LEFT" inherits="CombatLogFont">
+					<Size>
+						<AbsDimension x="280" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="10" y="16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</FontString>				
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContent_Load()
+			</OnLoad>				
+		</Scripts>
+	</Frame>
+	
+	<!-- *****************
+	MEMBERS CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentMembers" hidden="false" parent="HeadCountFrameContent" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Frames>		
+			<Button name="$parentNameButton" hidden="false">
+				<Size>
+					<AbsDimension x="94" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentMembersNameButton_Click()
+					</OnClick>					
+				</Scripts>			
+			</Button>			
+			<Button name="$parentStartTimeButton" hidden="false">
+				<Size>
+					<AbsDimension x="44" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="121" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentMembersStartTimeButton_Click()
+					</OnClick>					
+				</Scripts>				
+			</Button>	
+			<Button name="$parentEndTimeButton" hidden="false">
+				<Size>
+					<AbsDimension x="44" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="191" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentMembersEndTimeButton_Click()
+					</OnClick>					
+				</Scripts>				
+			</Button> 
+			<Button name="$parentTotalTimeButton" hidden="false">
+				<Size>
+					<AbsDimension x="54" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="260" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors> 
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentMembersTotalTimeButton_Click()
+					</OnClick>					
+				</Scripts>
+			</Button>
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameContentMembers" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="186" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameContentMembers" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameContentMembers" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						HeadCount:HeadCountFrameContentMembersScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameContentMembersScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="$parentEntry1" inherits="HeadCountFrameContentMembersTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="$parentEntry2" inherits="HeadCountFrameContentMembersTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry3" inherits="HeadCountFrameContentMembersTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry4" inherits="HeadCountFrameContentMembersTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry5" inherits="HeadCountFrameContentMembersTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry6" inherits="HeadCountFrameContentMembersTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry5"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry7" inherits="HeadCountFrameContentMembersTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry6"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry8" inherits="HeadCountFrameContentMembersTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry7"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry9" inherits="HeadCountFrameContentMembersTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry8"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry10" inherits="HeadCountFrameContentMembersTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentMembersEntry9"/>
+				</Anchors>
+			</Frame>										
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentMembers_Load()
+			</OnLoad>					
+		</Scripts>
+	</Frame>	
+
+	<!-- *****************
+	RAID BOSS CONTENT FRAME
+	 ***************** -->	 
+	<Frame name="HeadCountFrameContentBoss" hidden="false" parent="HeadCountFrameContent" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Frames>	
+			<Button name="$parentTimeButton" hidden="false">
+				<Size>
+					<AbsDimension x="94" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="10" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+			</Button>
+			<Button name="$parentMembersButton" hidden="false">
+				<Size>
+					<AbsDimension x="50" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="112" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+			</Button>			
+			<Button name="$parentNameButton" hidden="false">
+				<Size>
+					<AbsDimension x="94" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="176" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="128" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" />
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+			</Button>			
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameContentBoss" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="186" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameContentBoss" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameContentBoss" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						HeadCount:HeadCountFrameContentBossScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameContentBossScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="$parentEntry1" inherits="HeadCountFrameContentBossTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="$parentEntry2" inherits="HeadCountFrameContentBossTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry3" inherits="HeadCountFrameContentBossTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry4" inherits="HeadCountFrameContentBossTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry5" inherits="HeadCountFrameContentBossTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry6" inherits="HeadCountFrameContentBossTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry5"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry7" inherits="HeadCountFrameContentBossTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry6"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry8" inherits="HeadCountFrameContentBossTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry7"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry9" inherits="HeadCountFrameContentBossTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry8"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry10" inherits="HeadCountFrameContentBossTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentBossEntry9"/>
+				</Anchors>
+			</Frame>										
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentBoss_Load()
+			</OnLoad>					
+		</Scripts>		
+	</Frame>	
+	
+	<!-- *****************
+	LOOT CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentLoot" hidden="true" parent="HeadCountFrameContent" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Frames>		
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameContentLoot" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="186" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameContentLoot" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-6"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameContentLoot" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						HeadCount:HeadCountFrameContentLootScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameContentLootScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="$parentEntry1" inherits="HeadCountFrameContentLootTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-7"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="$parentEntry2" inherits="HeadCountFrameContentLootTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentLootEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry3" inherits="HeadCountFrameContentLootTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentLootEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry4" inherits="HeadCountFrameContentLootTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentLootEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry5" inherits="HeadCountFrameContentLootTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentLootEntry4"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+	</Frame>	
+	
+	
+	<!-- *****************
+	SNAPSHOT CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentSnapshot" hidden="true" parent="HeadCountFrameContent" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentNameString" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="240" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="9" y="-10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>		
+			<Button name="$parentBackButton" hidden="false">
+				<Size>
+					<AbsDimension x="44" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="44" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<AbsDimension x="-30" y="-10" />
+						</Anchor>
+					</Anchors> 
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentSnapshotBackButton_Click()
+					</OnClick>					
+				</Scripts>
+			</Button>		
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameContentSnapshot" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="186" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameContentSnapshot" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameContentSnapshot" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						HeadCount:HeadCountFrameContentSnapshotScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameContentSnapshotScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="$parentEntry1" inherits="HeadCountFrameContentSnapshotTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="$parentEntry2" inherits="HeadCountFrameContentSnapshotTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry3" inherits="HeadCountFrameContentSnapshotTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry4" inherits="HeadCountFrameContentSnapshotTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry5" inherits="HeadCountFrameContentSnapshotTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry6" inherits="HeadCountFrameContentSnapshotTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry5"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry7" inherits="HeadCountFrameContentSnapshotTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry6"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry8" inherits="HeadCountFrameContentSnapshotTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry7"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry9" inherits="HeadCountFrameContentSnapshotTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry8"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry10" inherits="HeadCountFrameContentSnapshotTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentSnapshotEntry9"/>
+				</Anchors>
+			</Frame>										
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentSnapshot_Load()
+			</OnLoad>
+		</Scripts>		
+	</Frame>	
+
+	<!-- *****************
+	PLAYER CONTENT FRAME
+	 ***************** -->	
+	<Frame name="HeadCountFrameContentPlayer" hidden="true" parent="HeadCountFrameContent" enableMouse="true" enableKeyboard="true" frameLevel="4">
+		<Size>
+			<AbsDimension x="400" y="222" />
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+			<Anchor point="RIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>			
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentNameString" justifyH="LEFT" inherits="GameFontNormalSmall">
+					<Size>
+						<AbsDimension x="200" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="9" y="-10"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>		
+			<Button name="$parentBackButton" hidden="false">
+				<Size>
+					<AbsDimension x="44" y="16" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ButtonText name="$parentText" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="44" y="16" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<AbsDimension x="-30" y="-10" />
+						</Anchor>
+					</Anchors> 
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" />
+				</ButtonText>	
+				<Scripts>
+					<OnClick>			
+						HeadCount:HeadCountFrameContentPlayerBackButton_Click()
+					</OnClick>					
+				</Scripts>
+			</Button>		
+			<ScrollFrame name="$parentScroll" parent="HeadCountFrameContentPlayer" inherits="FauxScrollFrameTemplate" hidden="false">
+				<Size>
+					<AbsDimension x="400" y="186" />
+				</Size>			
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="HeadCountFrameContentPlayer" relativePoint="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="HeadCountFrameContentPlayer" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-30" y="6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						HeadCount:HeadCountFrameContentPlayerScroll_VerticalScroll()						
+					</OnVerticalScroll>
+					<OnShow>
+						HeadCount:HeadCountFrameContentPlayerScroll_Update()
+					</OnShow>
+				</Scripts>
+			</ScrollFrame>
+			<Frame name="$parentEntry1" inherits="HeadCountFrameContentPlayerTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="0" y="-36"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>			
+		   <Frame name="$parentEntry2" inherits="HeadCountFrameContentPlayerTemplate" id="2">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry1"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry3" inherits="HeadCountFrameContentPlayerTemplate" id="3">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry2"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry4" inherits="HeadCountFrameContentPlayerTemplate" id="4">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry3"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry5" inherits="HeadCountFrameContentPlayerTemplate" id="5">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry4"/>
+				</Anchors>
+			</Frame>
+			<Frame name="$parentEntry6" inherits="HeadCountFrameContentPlayerTemplate" id="6">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry5"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry7" inherits="HeadCountFrameContentPlayerTemplate" id="7">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry6"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry8" inherits="HeadCountFrameContentPlayerTemplate" id="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry7"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry9" inherits="HeadCountFrameContentPlayerTemplate" id="9">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry8"/>
+				</Anchors>
+			</Frame>							
+			<Frame name="$parentEntry10" inherits="HeadCountFrameContentPlayerTemplate" id="10">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="HeadCountFrameContentPlayerEntry9"/>
+				</Anchors>
+			</Frame>										
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameContentPlayer_Load()
+			</OnLoad>
+		</Scripts>		
+	</Frame>	
+	
+	<!-- *****************
+	REMOVE FRAME
+	 ***************** -->		
+    <Frame name="HeadCountFrameConfirm" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" enableKeyboard="true" hidden="true" parent="HeadCountFrame"> 
+        <Size>
+            <AbsDimension x="300" y="140"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent"/>
+        </Anchors>	
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <TileSize>
+                <AbsValue val="300"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>			
+        <Layers>
+            <Layer level="ARTWORK"> 
+                <Texture name="$parentHeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+                    <Size>
+                        <AbsDimension x="256" y="64"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="12"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <FontString name="$parentHeaderTitleString" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parentHeaderTexture">
+                            <Offset>
+                                <AbsDimension x="0" y="-14"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+                </FontString>
+                <FontString name="$parentInfo" justifyV="top" inherits="GameFontNormal">
+                    <Size>
+                        <AbsDimension x="350" y="32"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-30"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" /> 
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>						
+                </FontString>
+				<FontString name="$parentDescription" justifyV="top" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="350" y="23" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-60"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.0" g="0.0" b="0.0" a="0.7" />
+				</Texture>				
+			</Layer>
+        </Layers>
+        <Frames>
+            <Button name="$parentConfirmButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER" relativePoint="CENTER">
+                        <Offset>
+                            <AbsDimension x="-45" y="-35"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+						HeadCount:HeadCountFrameConfirmConfirmButton_Click()
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parentCancelButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER" relativePoint="CENTER">
+						<Offset>
+							<AbsDimension x="45" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameConfirmCancelButton_Click()						
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameConfirm_Load()
+			</OnLoad>			
+		</Scripts>
+	</Frame>	
+	
+	
+	<!-- *****************
+	EXPORT FRAME
+	 ***************** -->		
+    <Frame name="HeadCountFrameExport" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" enableKeyboard="true" hidden="true" parent="HeadCountFrame"> 
+        <Size>
+            <AbsDimension x="400" y="300"/>
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent"/>
+        </Anchors>	
+		<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <TileSize>
+                <AbsValue val="300"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="2" right="2" top="2" bottom="2"/>
+            </BackgroundInsets>
+        </Backdrop>			
+        <Layers>
+            <Layer level="ARTWORK"> 
+                <Texture name="$parentHeaderTexture" file="Interface\DialogFrame\UI-DialogBox-Header">
+                    <Size>
+                        <AbsDimension x="256" y="64"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="12"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <FontString name="$parentHeaderTitleString" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parentHeaderTexture">
+                            <Offset>
+                                <AbsDimension x="0" y="-14"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+                </FontString>
+                <FontString name="$parentInfo" justifyV="top" inherits="GameFontNormal">
+                    <Size>
+                        <AbsDimension x="390" y="32"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-30"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+					<Color r="0.63" g="0.63" b="1.0" a="1.0" /> 
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>						
+                </FontString>
+				<FontString name="$parentDescription" justifyV="top" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="350" y="23" />
+					</Size>		
+                    <Anchors>
+                        <Anchor point="TOP">
+                            <Offset>
+                                <AbsDimension x="0" y="-60"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>	
+					<Color r="1.0" g="1.0" b="1.0" a="1.0" />	
+					<Shadow>
+						<Color r="0.0" g="0.0" b="0.0" a="1.0" />	
+						<Offset>
+							<AbsDimension x="1" y="1" />
+						</Offset>
+					</Shadow>					
+				</FontString>				
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" setAllPoints="false" hidden="false" alphaMode="BLEND">
+ 	                <Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="4" y="-4"/>
+							</Offset>
+						</Anchor>
+ 	                    <Anchor point="BOTTOMRIGHT">
+ 	                        <Offset>
+ 	                            <AbsDimension x="-4" y="4"/>
+ 	                        </Offset>
+ 	                    </Anchor>
+ 	                </Anchors>
+					<Color r="0.0" g="0.0" b="0.0" a="0.7" />
+				</Texture>				
+			</Layer>
+        </Layers>
+        <Frames>		
+			<ScrollFrame name="$parentScroll" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="350" y="152" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="14" y="-94"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<EditBox name="$parentContent" autofocus="true" multiLine="true" letters="0">
+						<Size>
+							<AbsDimension x="350" y="150"/>
+						</Size>
+						<FontString inherits="GameFontNormalSmall">
+							<Color r="1.0" g="1.0" b="1.0" a="1.0" />
+						</FontString>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>		
+            <Button name="$parentCloseButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="-120"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameExportCloseButton_Click()						
+					</OnClick>								
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameExport_Load()
+			</OnLoad>		
+		</Scripts>
+	</Frame>		
+	
+	<!-- *****************
+	LOOT MANAGEMENT FRAME
+	 ***************** -->		
+    <Frame name="HeadCountFrameLootManagement" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" enableKeyboard="true" hidden="true" parent="HeadCountFrame" inherits="HeadCountFrameLootManagementTemplate"> 
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent"/>
+        </Anchors>	
+		<Frames>
+			<Button name="$parentLooterButton">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="278" y="-121" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled" />
+				<Scripts>
+				    <OnClick>
+						HeadCount:HeadCountFrameLootManagementLooterButton_Click()
+				    </OnClick>
+				</Scripts>				
+			</Button>		
+			<Button name="$parentSourceButton">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="278" y="-147" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled" />
+				<Scripts>
+				    <OnClick>
+						HeadCount:HeadCountFrameLootManagementSourceButton_Click()
+				    </OnClick>
+				</Scripts>				
+			</Button>		
+		    <Button name="$parentSaveButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="-42" y="-94"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameLootManagementSaveButton_Click()						
+					</OnClick>								
+				</Scripts>
+			</Button>			
+            <Button name="$parentCancelButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="42" y="-94"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameLootManagementCancelButton_Click()						
+					</OnClick>								
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>			
+	
+	<!-- *****************
+	LOOT MANAGEMENT FRAME POPUP
+	 ***************** -->		
+    <Frame name="HeadCountFrameLootManagementPopup" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" enableKeyboard="true" hidden="true" clampedToScreen="true" parent="UIParent" inherits="HeadCountFrameLootManagementTemplate"> 
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent"/>
+        </Anchors>	
+		<TitleRegion>
+			<Size>
+				<AbsDimension x="400" y="34" />
+			</Size>
+			<Anchors>
+				<Anchor point="TOP" />
+			</Anchors>
+		</TitleRegion> 
+		<Frames>
+			<Button name="$parentLooterButton">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="278" y="-121" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled" />
+				<Scripts>
+				    <OnClick>
+						HeadCount:HeadCountFrameLootManagementPopupLooterButton_Click()
+				    </OnClick>
+				</Scripts>				
+			</Button>		
+			<Button name="$parentSourceButton">
+				<Size>
+					<AbsDimension x="24" y="24" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="278" y="-147" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Up" />
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" />
+				<PushedTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Down"/>
+				<DisabledTexture file="Interface\ChatFrame\UI-ChatIcon-ScrollDown-Disabled" />
+				<Scripts>
+				    <OnClick>
+						HeadCount:HeadCountFrameLootManagementPopupSourceButton_Click()
+				    </OnClick>
+				</Scripts>				
+			</Button>		
+		    <Button name="$parentSaveButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="-42" y="-94"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameLootManagementPopupSaveButton_Click()						
+					</OnClick>								
+				</Scripts>
+			</Button>			
+            <Button name="$parentCancelButton" hidden="false" inherits="GameMenuButtonTemplate">
+                <Size>
+                    <AbsDimension x="80" y="27"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="42" y="-94"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HeadCount:HeadCountFrameLootManagementPopupCancelButton_Click()						
+					</OnClick>								
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				HeadCount:HeadCountFrameLootManagementPopup_Load()
+			</OnLoad>
+		</Scripts>
+	</Frame>				
+</Ui>

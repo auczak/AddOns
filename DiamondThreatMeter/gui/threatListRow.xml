@@ -1,0 +1,134 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="threatListRow.lua" /> 
+
+	<!--
+		This XML file defines the standard threat list row. It is a controllable widget by the threat list, using special methods.
+	-->
+
+	<Frame name="DTM_ThreatListRow_WarningTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="128" y="16"/>
+		</Size>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Texture" file="Interface\AddOns\DiamondThreatMeter\gfx\Danger" setAllPoints="true"/>
+			</Layer>
+		</Layers>
+
+		<Scripts>
+			<OnLoad>
+				self.texture = getglobal( self:GetName().."_Texture" );
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<StatusBar name="DTM_ThreatListFrame_RowTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="256" y="16"/>
+		</Size>
+
+		<Frames>
+			<Frame name="$parent_BackgroundBar" setAllPoints="true">
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentTexture" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Frame name="$parent_ClassFrame">
+				<Layers>
+					<Layer level="OVERLAY">
+						<Texture name="$parentTexture" file="Interface\WorldStateFrame\Icons-Classes" hidden="true">
+							<Size>
+								<AbsDimension x="16" y="16"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset>
+										<AbsDimension x="8" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Frame name="$parent_Spark">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentTexture" file="Interface\CastingBar\UI-CastingBar-Spark" alphaMode="ADD" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<Frame name="$parent_Lighting" hidden="true">
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parentTexture" file="Interface\AddOns\DiamondThreatMeter\gfx\AggroLighting" alphaMode="ADD" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<StatusBar name="$parent_DangerYellowBar" setAllPoints="true">
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="1.0" g="1.0" b="0.3"/>
+			</StatusBar>
+
+			<StatusBar name="$parent_DangerRedBar" setAllPoints="true">
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="1.0" g="0.2" b="0.3"/>
+			</StatusBar>
+
+			<Button name="$parent_ClickFrame" enableMouse="true" setAllPoints="true">
+				<Scripts>
+					<OnClick>
+						DTM_ThreatListRow_OnClick(self:GetParent(), arg1);
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Frame name="$parent_DropDown" inherits="UIDropDownMenuTemplate"/>
+		</Frames>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<!-- Names length are highly volatile, we have to set a text size limit for them. -->
+				<FontString name="$parent_Name" inherits="GameFontNormal" text="Name">
+					<Size>
+						<AbsDimension x="80" y="16"/>
+					</Size>
+				</FontString>
+				<FontString name="$parent_NameSmall" inherits="GameFontNormalSmall" text="Name">
+					<Size>
+						<AbsDimension x="80" y="16"/>
+					</Size>
+				</FontString>
+				<FontString name="$parent_Threat" inherits="GameFontNormal" text="Threat"/>
+				<FontString name="$parent_TPS" inherits="GameFontNormal" text="TPS"/>
+				<FontString name="$parent_ThreatPercent" inherits="GameFontNormal" text="%"/>
+			</Layer>
+		</Layers>
+
+		<Scripts>	
+			<OnLoad>
+				DTM_ThreatListRow_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ThreatListRow_OnUpdate, "MAJOR", self, elapsed);
+			</OnUpdate>
+			<OnShow>
+				DTM_ProtectedCall(DTM_ThreatListRow_OnUpdate, "MAJOR", self, 0.00);
+			</OnShow>
+		</Scripts>
+
+		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+		<BarColor r="0.2" g="1.0" b="0.3"/>
+	</StatusBar>
+</UI>

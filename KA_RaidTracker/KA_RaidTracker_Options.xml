@@ -1,0 +1,1075 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+    
+    <Script file="KA_RaidTracker_Options.lua"/>
+    
+    <Frame name="KA_RaidTrackerOptionsFrame" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
+		<Size>
+			<AbsDimension x="510" y="515"/>
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />	
+				<Size>
+					<AbsDimension x="128" y="17" />
+				</Size>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Anchors>
+ 			<Anchor point="TOPLEFT">
+ 				<Offset>
+ 					<AbsDimension x="200" y="-104"/>
+ 				</Offset>
+ 			</Anchor>
+ 		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentTitle" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="400" y="64" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				
+				<!-- Frame header label -->
+				<FontString inherits="GameFontNormalSmall" text="KA_RaidTracker Options">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-3" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+            <Slider name="$parentMinQualitySlider" enableMouse="true" minValue="0" maxValue="7" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOP">
+                        <Offset>
+                            <AbsDimension x="-20" y="-30" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Min item quality to log:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffOff",
+                        "|c009d9d9dPoor",
+                        "|c00ffffffCommon",
+                        "|c001eff00Uncommon",
+                        "|c000070ddRare",
+                        "|c00a335eeEpic",
+                        "|c00ff8000Legendary",
+                        "|c00e6cc80Artifact",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <Slider name="$parentAskCostSlider" enableMouse="true" minValue="0" maxValue="7" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMinQualitySlider">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Min item quality to ask cost for:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffOff",
+                        "|c009d9d9dPoor",
+                        "|c00ffffffCommon",
+                        "|c001eff00Uncommon",
+                        "|c000070ddRare",
+                        "|c00a335eeEpic",
+                        "|c00ff8000Legendary",
+                        "|c00e6cc80Artifact",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <Slider name="$parentGetDKPValueSlider" enableMouse="true" minValue="0" maxValue="7" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAskCostSlider">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Min item quality to get cost for:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffOff",
+                        "|c009d9d9dPoor",
+                        "|c00ffffffCommon",
+                        "|c001eff00Uncommon",
+                        "|c000070ddRare",
+                        "|c00a335eeEpic",
+                        "|c00ff8000Legendary",
+                        "|c00e6cc80Artifact",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentAutoCreateRaidCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentGetDKPValueSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Auto create raid:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <CheckButton name="$parentLogGroupCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoCreateRaidCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Log Groups:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <CheckButton name="$parentAutoGroupCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentLogGroupCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Auto create Groups:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <CheckButton name="$parentLogBattlefieldCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoGroupCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Log Battlefields:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <CheckButton name="$parentAskWipeCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentLogBattlefieldCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Ask for wipe:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            
+            <Slider name="$parentAskWipeSlider" enableMouse="true" minValue="0" maxValue="1" defaultValue="0.8" valueStep=".01" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAskWipeCB">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Percent to ask for wipe:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        getglobal(this:GetName() .. "Value"):SetText(math.ceil(this:GetValue()*100));
+                    </OnUpdate>
+                </Scripts>
+            </Slider>            
+            
+            <CheckButton name="$parentAskNextBossCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAskWipeSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Ask for next boss:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>            
+            
+            <Slider name="$parentGroupItemsSlider" enableMouse="true" minValue="0" maxValue="7" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAskNextBossCB">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Max item quality to group:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffOff",
+                        "|c009d9d9dPoor",
+                        "|c00ffffffCommon",
+                        "|c001eff00Uncommon",
+                        "|c000070ddRare",
+                        "|c00a335eeEpic",
+                        "|c00ff8000Legendary",
+                        "|c00e6cc80Artifact",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentAutoZoneCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentGroupItemsSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Auto zone:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="$parentSaveExtendedPlayerInfoCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoZoneCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Save player extended info:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+           	<CheckButton name="$parentSaveTooltipsCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSaveExtendedPlayerInfoCB">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Save item tooltips:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <Slider name="$parentAutoBossSlider" enableMouse="true" minValue="0" maxValue="2" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSaveTooltipsCB">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Auto boss:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffOff",
+                        "|c00ffffffOn mouseover",
+                        "|c00ffffffOn boss kill",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <Slider name="$parentLogAttendeesSlider" enableMouse="true" minValue="0" maxValue="3" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoBossSlider">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Log attendees:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local text = {
+                        "|c00ffffffOff",
+                        "|c00ffffffOn boss kill",
+                        "|c00ffffffOn loot",
+                        "|c00ffffffOn boss kill (same Zone)",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(text[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentTimeSyncCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentLogAttendeesSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Use server time:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <Slider name="$parentTimeZoneSlider" enableMouse="true" minValue="-24" maxValue="24" defaultValue="0" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTimeSyncCB">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Time zone:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        getglobal(this:GetName() .. "Value"):SetText(this:GetValue());
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentUseTimeFormat" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTimeZoneSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Use 24h time format:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <Slider name="$parentMaxLevelSlider" enableMouse="true" minValue="0" maxValue="70" defaultValue="70" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentUseTimeFormat">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Max Level:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        getglobal(this:GetName() .. "Value"):SetText(this:GetValue());
+                    </OnUpdate>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentGuildSnapshotCB" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMaxLevelSlider">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Log Guild Attendees an Bosskill:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+<!-- ExportFormat Silder -->
+            <Slider name="$parentExportFormatSlider" enableMouse="true" minValue="0" maxValue="2" defaultValue="2" valueStep="1" orientation="HORIZONTAL">
+                <Size>
+                    <AbsDimension x="128" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentGuildSnapshotCB">
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6" />
+                    </BackgroundInsets>
+                    <TileSize>
+                        <AbsValue val="8" />
+                    </TileSize>
+                    <EdgeSize>
+                        <AbsValue val="8" />
+                    </EdgeSize>
+                </Backdrop>
+                <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32" />
+                    </Size>
+                </ThumbTexture>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Export Format:">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativePoint="LEFT">
+                                    <Offset>
+                                        <AbsDimension x="-10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                        <FontString name="$parentValue" inherits="GameFontNormalSmall" text="">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="10" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnUpdate>
+                        local colors = {
+                        "|c00ffffffMLdkp 1.1/EQdkp Plugin",
+                        "|c00ffffffEQdkp Unknown",
+                        "|c00ffffffMLdkp 1.5",
+                        };
+                        getglobal(this:GetName() .. "Value"):SetText(colors[this:GetValue()+1]);
+                    </OnUpdate>
+                </Scripts>                
+            </Slider>
+<!-- ExportFormat Slider end -->            
+            
+            
+            <Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="$parentCancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+				<Size>
+					<AbsDimension x="77" y="21"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentSaveButton" inherits="UIPanelButtonTemplate" text="Save">
+				<Size>
+					<AbsDimension x="77" y="21"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentCancelButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					    this:GetParent():Hide();
+					    KA_RaidTracker_OptionsFrame_Save();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+			    KA_RaidTracker_OptionsFrame_OnShow();
+			</OnShow>
+			<OnLoad>
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+			<OnMouseDown>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StartMoving();
+ 				end
+ 			</OnMouseDown>
+ 			<OnMouseUp>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StopMovingOrSizing();
+ 				end
+ 			</OnMouseUp>
+		</Scripts>
+	</Frame>
+	
+</Ui>

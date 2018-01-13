@@ -1,0 +1,17 @@
+*************
+DTM @ WotLK ?
+*************
+
+The mod will continue to grow and adjust itself for the Xpac 2, even though
+Blizzard stated they might implement a native ThreatMeter in the default interface.
+If that were the case, DTM would drop its Engine portion and provide an enhanced GUI
+for Blizzard's ThreatMeter, so DTM wouldn't be abandonned regardless whatever happens.
+
+Thanks to modding sites I believe I have a pretty good chance to enter the Beta
+and prepare the mod for the 3.0.1. If I were to enter it, I'd start to publish
+Beta versions of DTM as well on Curse and WoWInterface.
+
+EDIT: Native WoW threat meter is starting to get implemented.
+This means following beta versions will have a highly altered Engine.
+
+EDIT2: Got into Beta =)) Leveling up my chars while thinking about how to use the native threat value APIs the best way. :)

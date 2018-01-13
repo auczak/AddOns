@@ -1,0 +1,77 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="commonList.lua" /> 
+
+	<!--
+		This XML file defines the common list. It is a controllable widget, using special methods & attributes.
+            It's the base component of threat and overview lists. The regain lists use a slightly modified version.
+	-->
+
+	<!--
+		The following template is the minimum to any DTM visual and draggable element. It begins hidden.
+	-->
+
+	<Frame name="DTM_BaseFrameTemplate" parent="UIParent" movable="true" enableMouse="true" frameStrata="MEDIUM" hidden="true" virtual="true">
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+
+		<Scripts>
+			<OnDragStart>
+				if not ( self.ignoreDrag ) and not ( self.isLocked == 1 ) then
+				    self:StartMoving();
+				    self.isMoving = true;
+				end
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+				self.isMoving = false;
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+
+	<!--
+		The common list itself.
+	-->
+
+	<Button name="DTM_CommonListFrameTemplate" inherits="DTM_BaseFrameTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="272" y="48"/>
+		</Size>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_HeaderTexture" hidden="true">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+				</Texture>
+			</Layer>
+
+			<Layer level="OVERLAY">
+				<FontString name="$parent_HeaderText" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="224" y="16"/>
+					</Size>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<Frame name="$parent_DropDown" inherits="UIDropDownMenuTemplate"/>
+		</Frames>
+
+		<Scripts>
+			<OnClick>
+				DTM_CommonListFrame_OnClick(self, button);
+			</OnClick>
+		</Scripts>
+	</Button>
+</UI>

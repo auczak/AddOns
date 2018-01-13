@@ -1,0 +1,81 @@
+HeadCount change log
+--------------------
+Version 1.1.5
+* Fixed a defect where a nil zone reference occurs in XML export
+
+Version 1.1.4
+* Added XML export (credit: cactusjackatu)
+
+Version 1.1.3 (77806 | seppyk | 2008-07-04)
+* Added configurable loot management popup window.
+* Fixed defect relating to a nil reference when a player returns to a no list status.
+
+Version 1.1.2 (77567 | seppyk | 2008-06-28)
+* Added CSV export (credit: Piedtyper)
+* Revised remove loot button tooltip.
+
+Version 1.1.1 (77354 | seppyk | 2008-06-24)
+* Added configurable attendance delay so users can get increased performance at the cost of attendance accuracy
+* Initial run at cleaning up namespace issues.
+
+Version 1.1.0 (77247 | seppyk | 2008-06-22)
+* Added loot management feature to change looter.
+* Added loot management feature to change loot source.
+
+Version 1.0.9 (76636 | seppyk | 2008-06-13)
+* Fixed defect where boss kill remove button tooltip was mislabeled
+* Fixed defect where guild chat message was defaulting to Common causing problems for Horde players.
+
+Version 1.0.8 (76515 | seppyk | 2008-06-11)
+* Added menu item to help point users to loot exclusion management.
+* Revised phpBB export to list raid times on separate lines from player
+* Added phpBB with ItemStats export
+* Added boss kill broadcasting to guild chat feature
+* Added loot broadcasting to guild chat feature
+
+Version 1.0.7 (75636 | seppyk | 2008-05-31)
+* Revised exclusion list with defaults (Badge of Justice, Kael weapons, Nexus Crystal, Void Crystal).  Users will have to readd/remove to rebuild their exclusion list.
+* Fixed defect where aliased loot source was not being tracked correctly (Kalecgos / Sathrovarr the Corruptor, etc.)
+
+Version 1.0.6 (74542 | seppyk | 2008-05-20)
+* Added loot source tracking for EQdkp export
+* Removed size tag references from phpBB export
+* Fixed defect relating to loot version mismatch
+
+Version 1.0.5 (74461 | seppyk | 2008-05-19)
+* Added loot source tracking.
+* Added player times to phpBB export string.
+* Fixed defect for phpBB export zone nil reference
+
+Version 1.0.4 (74167 | seppyk | 2008-05-17)
+* Initial code cleanup/refactoring.
+* Fixed defect where UI frame was sometimes not refreshing after a loot query.
+* Added toggle for battleground tracking.
+* Added phpBB export (Credit: impish | nogudnik)
+
+Version 1.0.3 (r73143 | seppyk | 2008-05-08)
+* Added loot management (ability to set DKP cost per loot).
+* Revised boss kill tracking for better accuracy.
+* Made item icons slightly smaller in the raid loot UI frame.
+* Loot icons or loot links can now be shift-clicked to link items in text chat.
+* Added item level text to loot tooltip.
+* Fixed a defect where an extra parameter was being passed to the raid tracker loot update.
+* Fixed loot frame UI button hit coordinates.
+
+Version 1.0.2 (r72145 | seppyk | 2008-04-29)
+* Added boss kill tracking.
+* Added enhancement to automatically highlight the entire export edit box so users would not have to manually select the entire entry.
+* Updated license to Creative Commons license.
+* Added Dewdrop-2.0 library as dependency.
+* Revised to close on escape key.
+* Fixed defect where the most recent raid could not be exported, even if it was not active.
+* Fixed defect where unavailable items were causing errors on icon mouseover and raid exporting.
+* Fixed various UI position defects.
+* Updated TOC for OptionalDeps and X-Embeds
+
+Version 1.0.1 (r70404 | seppyk | 2008-04-19)
+* Initial version
+* Added time-based raid attendance tracking and management.
+* Added raid loot tracking and management.
+* Added loot exclusion management.
+* Added raid export for CTRT plugin for EQdkp

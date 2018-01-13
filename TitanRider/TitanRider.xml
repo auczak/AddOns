@@ -1,0 +1,31 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+     <Script file="TitanRider.lua"/>
+  <GameTooltip name="TitanRiderTooltip" inherits="GameTooltipTemplate" parent="UIParent" hidden="true"/>
+     <Frame parent="UIParent">
+          <Frames>
+               <Button name="TitanPanelRiderButton" inherits="TitanPanelComboTemplate" frameStrata="FULLSCREEN" toplevel="true">
+                    <Scripts>
+                         <OnLoad>
+                              TitanPanelRiderButton_OnLoad();
+                              TitanPanelButton_OnLoad();
+                         </OnLoad>
+                         <OnShow>
+                              TitanPanelRiderButton_OnShow();
+                              TitanPanelButton_OnShow();
+                         </OnShow>
+                         <OnHide>
+                              TitanPanelRiderButton_OnHide();
+                         </OnHide>
+                         <OnEvent>
+                              TitanPanelRiderButton_OnEvent();
+                         </OnEvent>
+                         <OnClick>
+                              TitanPanelRiderButton_OnClick(arg1);
+                              TitanPanelButton_OnClick(arg1);
+                         </OnClick>
+                    </Scripts>
+               </Button>
+          </Frames>
+     </Frame>          
+</Ui>

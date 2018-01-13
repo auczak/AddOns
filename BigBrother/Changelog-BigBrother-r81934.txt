@@ -1,0 +1,41 @@
+------------------------------------------------------------------------
+r81934 | whyv | 2008-09-21 12:21:51 -0400 (Sun, 21 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/BigBrother/localization_zhTW.lua
+
+BigBrother:
+- update zhTW
+------------------------------------------------------------------------
+r81421 | nevcairiel | 2008-09-05 16:19:02 -0400 (Fri, 05 Sep 2008) | 1 line
+Changed paths:
+   M /trunk/BigBrother/BigBrother.lua
+   M /trunk/BigBrother/BigBrother.toc
+
+BigBrother: add FuBar2Broker to the OptDeps in the .toc so it works with it, and additionally allow BigBrother to work without FBP-2.0 at all
+------------------------------------------------------------------------
+r81041 | 7destiny | 2008-08-27 10:50:22 -0400 (Wed, 27 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/BigBrother/localization_koKR.lua
+
+BigBrother:
+- koKR Update
+------------------------------------------------------------------------
+r80998 | 7destiny | 2008-08-26 12:33:07 -0400 (Tue, 26 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/BigBrother/localization_koKR.lua
+
+BigBrother:
+- koKR Update
+------------------------------------------------------------------------
+r80939 | gnarfoz | 2008-08-25 11:54:16 -0400 (Mon, 25 Aug 2008) | 1 line
+Changed paths:
+   M /trunk/BigBrother/BigBrother.lua
+   M /trunk/BigBrother/localization_deDE.lua
+   M /trunk/BigBrother/localization_enUS.lua
+   M /trunk/BigBrother/localization_frFR.lua
+   M /trunk/BigBrother/localization_koKR.lua
+   M /trunk/BigBrother/localization_zhCN.lua
+   M /trunk/BigBrother/localization_zhTW.lua
+
+BigBrother: add Fear, Blind, Repentance & Chastise to CC breaker part
+------------------------------------------------------------------------

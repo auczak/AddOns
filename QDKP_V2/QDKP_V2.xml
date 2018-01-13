@@ -1,0 +1,3502 @@
+<!--  Copyright 2008 Riccardo Belloli (belloli@email.it)
+     This file is a part of QDKP_V2 (see about.txt in the Addon's root folder)
+     
+           ## GRAPHICAL USER INTERFACE ##
+-->
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+  
+  <Script file="Options.ini"/>
+  
+  <Frame name="QDKP2">
+    <Scripts>
+      <OnLoad>
+        QDKP2_Init();
+        tinsert(UISpecialFrames,"QDKP2_Frame1");
+        tinsert(UISpecialFrames,"QDKP2_Frame2");
+        tinsert(UISpecialFrames,"QDKP2_Frame3");
+        tinsert(UISpecialFrames,"QDKP2_Frame4");
+        tinsert(UISpecialFrames,"QDKP2_Frame5");
+        tinsert(UISpecialFrames,"QDKP2_Frame6");
+      </OnLoad>
+      <OnEvent>
+        QDKP2_OnEvent();
+      </OnEvent>
+    </Scripts>
+  </Frame>
+
+  <!--
+  <GameTooltip name="QDKP2_ItemTooltip" hidden="true" inherits="GameTooltipTemplate">
+    <Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+      <EdgeSize>
+        <AbsValue val="16"/>
+      </EdgeSize>
+      <TileSize>
+        <AbsValue val="16"/>
+      </TileSize>
+      <BackgroundInsets>
+        <AbsInset left="4" right="4" top="4" bottom="4"/>
+      </BackgroundInsets>
+    </Backdrop>
+    <Scripts>
+      <OnLoad>
+
+      </OnLoad>
+    </Scripts>
+  </GameTooltip>
+  -->
+
+
+  <Button name="QDKP2frame0_open"  text="QDKP2" id="12">
+    <Size>
+      <AbsDimension x="60" y="25"/>
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="TOPRIGHT" relativeTo= "UIParent" point="TOPRIGHT" >
+        <Offset>
+          <AbsDimension x="-10" y="-200"/>
+        </Offset>
+      </Anchor>
+    </Anchors>
+    <Scripts>
+      <OnLoad>
+        this:EnableMouse(true);
+        this:SetMovable(true);
+        this:EnableKeyboard(false);
+        this:RegisterForDrag("LeftButton");
+        this:RegisterForClicks("LeftButtonUp");
+
+      <!--  this:SetScript("PreClick", Button_OnPreClick);
+          this:SetScript("PostClick", Button_OnPostClick); -->
+      </OnLoad>
+<!-- <OnClick>
+        QDKP2_ToggleOffAfter(1)
+      </OnClick>	-->
+      <OnDragStart>
+        if (arg1 == "LeftButton" and IsShiftKeyDown()) then
+        this:StartMoving();
+        end
+      </OnDragStart>
+      <OnDragStop>
+        this:StopMovingOrSizing();
+      </OnDragStop>
+    </Scripts>
+  </Button>
+
+    
+  <Frame name="QDKP2DialogTitled" hidden="true" toplevel="true" virtual="true" enableMouse="true" movable="true" frameStrata="DIALOG" parent="UIParent">
+ <!--   <Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <TileSize>
+        <AbsValue val="32"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32"/>
+      </EdgeSize>
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11"/>
+      </BackgroundInsets>
+    </Backdrop> -->
+    
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11"/>
+      </BackgroundInsets>
+      <TileSize><AbsValue val="32"/></TileSize>
+      <EdgeSize><AbsValue val="32"/></EdgeSize>
+    </Backdrop>
+     <Layers>
+     
+      <Layer level="BACKGROUND">
+        <Texture name="$parent_Background" setAllPoints="true">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="10" y="-10"/>
+              </Offset>
+            </Anchor>
+            <Anchor point="BOTTOMRIGHT">
+              <Offset>
+                <AbsDimension x="-10" y="10"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+
+          <Color r="0.0" g="0.0" b="0.0" a=".50" />
+          
+        </Texture>
+      </Layer>  
+
+      <Layer level="ARTWORK">
+        <Texture name="$parentHeaderRegion" file="Interface\DialogFrame\UI-DialogBox-Header">
+          <Size><AbsDimension x="300" y="64"/></Size>
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset><AbsDimension y="12"/></Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+        <FontString name="$parent_Header" inherits="GameFontHighlight" text="Title">
+	  <Size><AbsDimension x="140" y="13"/></Size>
+          <Anchors> 
+            <Anchor point="TOP" >
+              <Offset>
+                <AbsDimension x="0" y="-2"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+      </Layer>
+      
+     </Layers>
+
+    <Scripts>
+      <OnLoad>
+        this:RegisterForDrag("LeftButton");
+      </OnLoad>
+      <OnDragStart>
+        this:StartMoving();
+        this.isMoving = true;
+      </OnDragStart>
+      <OnDragStop>
+        this:StopMovingOrSizing();
+        this.isMoving = false;
+      </OnDragStop>
+    </Scripts>
+  </Frame>
+
+  <Frame name="QDKP2PopUp" hidden="true" virtual="true" toplevel="true" enableMouse="true" movable="false" frameStrata="TOOLTIP" parent="UIParent">
+    <Backdrop name="QDKP2Back" bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="4" right="4" top="4" bottom="4"/>
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="16"/>
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="16"/>
+      </EdgeSize>
+    </Backdrop>
+  </Frame>
+
+  <!-- Minimap Button-->
+  <Button name="QDKP2_MiniBtn" frameStrata="DIALOG" parent="UIParent" movable="true" hidden="false">
+    <Size><AbsDimension x="32" y="32"/></Size>
+    <Anchors>
+      <Anchor point="BOTTOMLEFT" relativeTo="Minimap">
+        <Offset><AbsDimension x="-15" y="13"/></Offset>
+      </Anchor>
+    </Anchors>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentTop" file="Interface\Addons\QDKP_V2\Arts\LogoSmall.tga">
+          <Size><AbsDimension x="20" y="21"/></Size>
+          <Anchors>
+            <Anchor point="CENTER">
+              <Offset><AbsDimension x="0" y="1"/></Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+      </Layer>
+      <Layer level="ARTWORK">
+        <Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+          <Size><AbsDimension x="52" y="52"/></Size>
+          <Anchors><Anchor point="TOPLEFT"/></Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+    <Scripts>
+      <OnLoad>
+        this:RegisterForClicks("LeftButtonUp");
+        this:RegisterForDrag("LeftButton");
+        this:SetFrameLevel(this:GetFrameLevel()+1);
+      </OnLoad>
+      <OnEnter>
+       QDKP2_MiniBtn_LabelOn()
+      </OnEnter>
+      <OnLeave>
+        QDKP2_MiniBtn_LabelOff()
+      </OnLeave>
+      <OnClick>
+        QDKP2_MiniBtn_Click();
+      </OnClick>
+      <OnDragStart>
+        QDKP2_MiniBtn_DragOn()
+      </OnDragStart>
+      <OnDragStop>
+        QDKP2_MiniBtn_DragOff()
+      </OnDragStop>
+      <OnUpdate>
+        QDKP2_MiniBtn_Update();
+      </OnUpdate>
+    </Scripts>
+  </Button>
+
+  <!--  quick button pane-->
+  <Frame name="QDKP2_Frame1"   hidden="true" toplevel="true" enableMouse="true" movable="true" frameStrata="DIALOG" parent="UIParent">
+    <Size> 
+      <AbsDimension x="290" y="445"/> 
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="BOTTOMRIGHT" point="BOTTOMRIGHT">
+        <offset>
+          <AbsDimension x="-5" y="5" />
+        </offset>
+      </Anchor>
+    </Anchors>
+    <Layers> 
+    
+     <Layer level="BACKGROUND">
+      <Texture name="LootLinkFramePortrait" file="Interface\Addons\QDKP_V2\Arts\Logo.tga">
+	<Size>
+	  <AbsDimension x="58" y="58"/>
+	</Size>
+	<Anchors>
+	  <Anchor point="TOPLEFT">
+	  <Offset>
+	    <AbsDimension x="8" y="-8"/>
+	  </Offset>
+	  </Anchor>
+	</Anchors>
+       </Texture>
+      </Layer>
+      
+			<Layer level="ARTWORK">
+				<Texture file="Interface\TaxiFrame\UI-TaxiFrame-TopRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="186" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\TaxiFrame\UI-TaxiFrame-TopLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\TaxiFrame\UI-TaxiFrame-BotLeft">
+					<Size>
+						<AbsDimension x="256" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-256"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture file="Interface\TaxiFrame\UI-TaxiFrame-BotRight">
+					<Size>
+						<AbsDimension x="128" y="256"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="186" y="-256"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+
+        <FontString name="QuickDKP_txt" inherits="GameFontHighlight" text="Quick DKP V2">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="18" y="-18"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+      </Layer> 
+    </Layers> 
+
+    <Frames>
+      <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+        <Anchors> 
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-5" y="-7"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_ToggleAfter(1);
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Button name="QDKP2frame1_list" inherits="UIPanelButtonTemplate" text="Roster" id="12">
+         <Size> 
+          <AbsDimension x="75" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="TOP" point="CENTER" >
+            <Offset>
+              <AbsDimension x="75" y="-55"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_Refresh_Roster("toggle")
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Button name="QDKP2frame1_log" inherits="UIPanelButtonTemplate" text="Raid Log" id="12">
+         <Size> 
+          <AbsDimension x="75" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="TOP" point="CENTER" >
+            <Offset>
+              <AbsDimension x="-25" y="-55"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_PopupLog("RAID");
+          </OnClick>
+        </Scripts>
+      </Button>
+    
+    
+      <!-- Raid buttons -->
+        
+      <Button name="QDKP2_Frame1_raid" virtual="true">
+         <Size><AbsDimension x="40" y="30"/></Size>
+          
+        <Anchors><Anchor relativePoint="TOP" point="TOP" >
+              <Offset><AbsDimension x="-90" y="-70"/></Offset></Anchor>
+        </Anchors> 
+        <Layers>
+          <Layer level="BORDER">
+            <FontString name="$parent_text" inherits="GameFontNormal" wraponspaces="false" justifyH="CENTER" text="Raid"/>
+          </Layer>
+        </Layers>
+      </Button>
+
+			<EditBox name="QDKP2_RaidDKPBox" inherits="InputBoxTemplate" justifyH="RIGHT" autofocus="false" id="15">
+				<Size>
+					<AbsDimension x="40" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor relativePoint="RIGHT" relativeTo="QDKP2_Frame1_raid" point="LEFT">
+						<Offset>
+							<AbsDimension x="-30" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						this:SetMaxBytes(5)
+					</OnLoad>
+					<OnClick>
+									   
+					</OnClick>
+					<OnEscapePressed>
+						this:ClearFocus()			 
+				<!--	QDKP2_MobEditorFrame:Hide();
+						QDKP2_ToggleAfter(6) -->
+					</OnEscapePressed>
+					<OnEnterPressed>
+						QDKP2_frame1_dkpAwardRaidSet(QDKP2_RaidDKPBox:GetText())
+						this:ClearFocus()
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+      
+			<!--
+      <Button name="QDKP2frame1_dkpBox" virtual="true">
+         <Size><AbsDimension x="40" y="25"/></Size> 
+        <Anchors>
+            <Anchor relativePoint="CENTER" relativeTO="QDKP2_Frame1_raid" point="CENTER" >
+              <Offset>
+                <AbsDimension x="10" y="-30"/>
+              </Offset>
+            </Anchor>
+        </Anchors> 
+        <Layers>
+          <Layer level="BORDER">
+            <FontString name="QDKP2frame1_dkpBox_text" inherits="GameFontNormal" wraponspaces="false" justifyH="LEFT" text="0"/>
+          </Layer>
+        </Layers>
+    <Scripts>
+      <OnMouseWheel>
+        if arg1==1 then
+          QDKP2_frame1_dkpAwardRaidSet("+");
+        else
+          QDKP2_frame1_dkpAwardRaidSet("-");
+        end
+      </OnMouseWheel>
+    </Scripts>
+      </Button>
+			-->
+      
+      <Button name="QDKP2frame1_upbutton" inherits="UIPanelScrollUpButtonTemplate" id="13">
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2_RaidDKPBox" point="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="2" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_frame1_dkpAwardRaidSet("+");
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Button name="QDKP2frame1_downbutton" inherits="UIPanelScrollDownButtonTemplate" id="14">
+        <Anchors> 
+          <Anchor relativePoint="BOTTOM" relativeTo="QDKP2frame1_upbutton" point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_frame1_dkpAwardRaidSet("-");
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Button name="QDKP2frame1_notify" inherits="UIPanelButtonTemplate" text="Notify All">
+         <Size> 
+          <AbsDimension x="75" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMRIGHT" relativeTo="QDKP2frame1_upbutton" point="BOTTOMLEFT" >
+            <Offset>
+              <AbsDimension x="60" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_NotifyAll();
+          </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Notify all guild members in the raid\n of their actual Net DKP amounts,\n along with the gained/spents stats\n of the last session");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+        </Scripts>
+      </Button>
+    
+    <Button name="QDKP2frame1_award" inherits="UIPanelButtonTemplate" text="Award" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2frame1_notify" point="TOP" >
+          <Offset>
+            <AbsDimension x="00" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_award()
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Gives to all guild members in raid\n the amount of DKP specified.");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+
+    
+    
+    <!-- timer -->
+    <Button name="QDKP2_frame1_timer_button" virtual="true">
+       <Size><AbsDimension x="40" y="25"/></Size> 
+      <Anchors>
+          <Anchor relativePoint="CENTER" relativeTO="QDKP2_Frame1_raid" point="CENTER" >
+            <Offset>
+              <AbsDimension x="5" y="-110"/>
+            </Offset>
+          </Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="QDKP2_frame1_timer" inherits="GameFontNormal" wraponspaces="false" justifyH="LEFT" text="Timer: OFF"/>
+        </Layer>
+      </Layers>
+    </Button>
+
+    <!-- -->
+
+    <Button name="QDKP2frame1_dkpBox_perhr" virtual="true">
+       <Size><AbsDimension x="40" y="25"/></Size> 
+      <Anchors>
+          <Anchor relativePoint="BOTTOM" relativeTO="QDKP2_RaidDKPBox" point="TOP" >
+            <Offset>
+              <AbsDimension x="0" y="-95"/>
+            </Offset>
+          </Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="QDKP2frame1_dkpBox_perhr_text" inherits="GameFontNormal" wraponspaces="false" justifyH="LEFT" text="0"/>
+        </Layer>
+      </Layers>
+    <Scripts>
+      <OnMouseWheel>
+        if arg1==1 then
+          QDKP2_frame1_dkpPerHourSet("+")
+        else
+          QDKP2_frame1_dkpPerHourSet("-")
+        end
+      </OnMouseWheel>
+    </Scripts>
+    </Button>
+
+
+    <Button name="QDKP2frame1_upbutton_perhr" inherits="UIPanelScrollUpButtonTemplate" id="13">
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame1_dkpBox_perhr" point="BOTTOMLEFT">
+          <Offset>
+            <AbsDimension x="2" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_dkpPerHourSet("+")
+        </OnClick>
+      </Scripts>
+    </Button>
+
+    <Button name="QDKP2frame1_downbutton_perhr" inherits="UIPanelScrollDownButtonTemplate" id="14">
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2frame1_upbutton_perhr" point="TOP">
+          <Offset>
+            <AbsDimension x="0" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_dkpPerHourSet("-")
+        </OnClick>
+      </Scripts>
+    </Button>
+
+
+    <!-- -->    
+    <Button name="QDKP2_frame1_onOff" inherits="UIPanelButtonTemplate" text="On" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame1_dkpBox_perhr" point="LEFT" >
+          <Offset>
+            <AbsDimension x="77" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_offOnToggle()
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Starts/Stop the raid timer that will\n give the specified amount of DKP\n every hour.");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+      
+      
+      
+    </Button>
+        <Button name="QDKP2frame1_ironman" inherits="UIPanelButtonTemplate" text="Start" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2frame1_award" point="TOP" >
+          <Offset>
+            <AbsDimension x="0" y="-12"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_ironman()
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Starts/Ends the ironman bonus, wich\n gives the Raid Award to the guild\n members who stays in the raid from the\n start to the end.");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame1_ironman_label" virtual="true">
+       <Size><AbsDimension x="100" y="25"/></Size> 
+      <Anchors>
+        <Anchor relativePoint="LEFT" relativeTo="QDKP2frame1_ironman" point="RIGHT" >
+            <Offset><AbsDimension x="-15" y="0"/></Offset></Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="$parent_text" inherits="GameFontNormal" wraponspaces="false" justifyH="RIGHT" text="IronMan Bonus"/>
+        </Layer>
+      </Layers>
+    </Button>
+    
+    <CheckButton name="QDKP2frame1_UseBossMod" inherits="UICheckButtonTemplate" id="16" text="Give DKP at Boss death">
+      <Size>
+        <AbsDimension x="20" y="20"/>
+      </Size>
+      <Anchors> 
+        <Anchor relativePoint="LEFT" relativeTo="QDKP2_Frame1_raid" point="CENTER" >
+          <Offset>
+            <AbsDimension x="25" y="-185"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnLoad>
+          getglobal(this:GetName().."Text"):SetText("   Give DKP at Bosses' death");
+        </OnLoad>
+        <OnClick>
+          QDKP2_AutoBossEarnSet("toggle")
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("If this is checked and the timer is on,\n when a mob wich name is in the table\n in QDKP option file dies, the\n raid get the specified amount\n of DKP");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </CheckButton>
+    
+    <CheckButton name="QDKP2frame1_DetectBids" inherits="UICheckButtonTemplate" id="16" text="Auto Detect Winners">
+      <Size>
+        <AbsDimension x="20" y="20"/>
+      </Size>
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2frame1_UseBossMod" point="TOP" >
+          <Offset>
+            <AbsDimension x="0" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnLoad>
+          getglobal(this:GetName().."Text"):SetText("   Auto Detect Winners");
+        </OnLoad>
+        <OnClick>
+          QDKP2_DetectBidSet("toggle")
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("If this is checked, when someone say\n in raid or raid warning a phrase like\n 'xyz won with 54' or similar, a dialog\n will ask if you want to charge him\n for that amount to pay the last object\n seen in chat.");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </CheckButton>
+    
+      <!-- Guild buttons -->
+    
+    <Button name="QDKP2_frame1_bottomspacer" virtual="true">
+       <Size><AbsDimension x="40" y="25"/></Size> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+            <Offset><AbsDimension x="0" y="120"/></Offset></Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="$parent_text" inherits="GameFontNormal" wraponspaces="false" justifyH="CENTER" text="-----------------Data-----------------"/>
+        </Layer>
+      </Layers>
+    </Button>
+  
+    <Button name="QDKP2frame1_upload" inherits="UIPanelButtonTemplate" text="Send changes" id="12">
+      <Size> 
+        <AbsDimension x="110" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="CENTER" relativeTo="QDKP2_frame1_bottomspacer" point="CENTER" >
+          <Offset>
+            <AbsDimension x="60" y="-25"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_UploadAll();
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Upload all the changes done to the Officer/Public notes");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+  
+    <Button name="QDKP2frame1_download" inherits="UIPanelButtonTemplate" text="New Session" id="12">
+       <Size> 
+        <AbsDimension x="100" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="CENTER" relativeTo="QDKP2_frame1_bottomspacer" point="CENTER" >
+          <Offset>
+            <AbsDimension x="-65" y="-25"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame1_DownloadData();
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Starts a new session, resetting\n all counters and erasing all unsent\n changes.");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+  
+    <Button name="QDKP2_frame1_bottomspacer2" virtual="true">
+       <Size><AbsDimension x="40" y="25"/></Size> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+            <Offset><AbsDimension x="0" y="70"/></Offset></Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="$parent_text" inherits="GameFontNormal" wraponspaces="false" justifyH="CENTER" text="---------------Backup----------------"/>
+        </Layer>
+      </Layers>
+    </Button>
+
+    <Button name="QDKP2_frame1_BackupDate_Parent" virtual="true">
+       <Size><AbsDimension x="40" y="25"/></Size> 
+      <Anchors><Anchor relativePoint="BOTTOM" relativeTo="QDKP2_frame1_bottomspacer2" point="BOTTOM" >
+            <Offset><AbsDimension x="0" y="-20"/></Offset></Anchor>
+      </Anchors> 
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="QDKP2_frame1_BackupDate" inherits="GameFontHighlightSmall" wraponspaces="false" justifyH="CENTER" text=" "/>
+        </Layer>
+      </Layers>
+    </Button>
+
+    <Button name="QDKP2frame1_backup" inherits="UIPanelButtonTemplate" text="Backup" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2_frame1_bottomspacer2" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="-60" y="-50"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_BackUp();
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Backup all the officernotes in a local file");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame1_restore" inherits="UIPanelButtonTemplate" text="Restore" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" relativeTo="QDKP2_frame1_bottomspacer2" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="60" y="-50"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_Restore();
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Restores the data from a previous backup");
+       </OnEnter>
+       <OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+
+  </Frames>
+  
+    <Scripts>
+      <OnLoad>
+        this:RegisterForDrag("LeftButton");
+      </OnLoad>
+      <OnDragStart>
+        this:StartMoving();
+        this.isMoving = true;
+      </OnDragStart>
+      <OnDragStop>
+        this:StopMovingOrSizing();
+        this.isMoving = false;
+      </OnDragStop>
+    </Scripts>
+  
+   </Frame>
+
+
+  <!--     ========FRAME 2===========the guild/raid pane================== -->
+    
+
+  
+ <Button name = "QDKP2_frame2_entry_template" virtual="true">
+      <Size>
+      <AbsDimension x="490" y="14" />
+    </Size>
+    <Layers>
+      <Layer level="ARTWORK">
+        
+        <FontString name="$parent_name" inherits="GameFontHighlight" wraponspaces="false" justifyH="LEFT" text="">
+          <Size><AbsDimension x="95" y="14"/></Size>
+          <Anchors><Anchor relativePoint="LEFT" point="LEFT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_rank" inherits="GameFontHighlightSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="80" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_name" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_class" inherits="GameFontHighlightSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="50" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_rank" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_total" inherits="GameFontNormalSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="40" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_class" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_spent" inherits="GameFontNormalSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="40" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_total" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+
+				<!-- Modified entry to account for EPGP Ratio -->
+
+				<FontString name="$parent_ratio" inherits="GameFontNormalSmall" justifyH="CENTER" text="">
+					<Size><AbsDimension x="55" y="14"/></Size>
+					<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_spent" relativePoint="TOPRIGHT"/></Anchors>
+				</FontString>
+
+				<FontString name="$parent_hours" inherits="GameFontNormalSmall" justifyH="RIGHT" text="">
+					<Size><AbsDimension x="40" y="14"/></Size>
+					<Anchors><Anchor point="TOPLEFT" relativeTo="$parent_ratio" relativePoint="TOPRIGHT"><Offset><AbsDimension x="10" y="0"/></Offset></Anchor></Anchors>
+				</FontString>
+        
+        <FontString name="$parent_deltatotal" inherits="GameFontHighlightSmall" justifyH="CENTER" text="EP">
+          <Size><AbsDimension x="50" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_hours" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_deltaspent" inherits="GameFontHighlightSmall" justifyH="CENTER" text="GP">
+          <Size><AbsDimension x="30" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_deltatotal" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_deltahours" inherits="GameFontHighlightSmall" justifyH="CENTER" text="H">
+          <Size><AbsDimension x="30" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_deltaspent" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+      </Layer>
+    </Layers>
+ </Button>
+
+    
+    
+    
+  
+   <Frame name="QDKP2_Frame2" inherits="QDKP2DialogTitled">
+  <Size> 
+    <AbsDimension x="570" y="430" /> 
+  </Size>
+  <Anchors>
+    <Anchor relativePoint="TOPLEFT" point="TOPLEFT">
+      <offset>  
+        <AbsDimension x="5" y="-5" />
+      </offset>
+    </Anchor>
+  </Anchors>
+  
+  <Layers> 
+     <Layer level="ARTWORK"> 
+
+        <FontString name="$parent_sesscount" inherits="GameFontHighlightSmall" justifyH="CENTER" text="Session Counters">
+          <Anchors>
+            <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-30" y="-47"/>
+            </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      
+      <FontString name="$parent_Externals" inherits="GameFontHighlightSmall" text="Externals">
+        <Anchors> 
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="-187" y="40"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+    
+      <FontString name="$parent_Standby" inherits="GameFontHighlightSmall" text="Standby">
+        <Anchors> 
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="-29" y="40"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+    
+      <FontString name="$parent_Alts" inherits="GameFontHighlightSmall" text="Alts">
+        <Anchors> 
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="100" y="40"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+    
+      <FontString name="$parent_totals" inherits="GameFontHighlightSmall" text="Raid 0/Guild 0">
+        <Anchors> 
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-10" y="40"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+    </Layer>
+
+  </Layers>
+
+  <Frames>
+       <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ToggleAfter(2);
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+
+    <!-- UICheckButtonTemplate -->
+    <CheckButton name="QDKP2frame2_guildCheckButton" inherits="UICheckButtonTemplate" id="16" text="Show All Guild">
+      <Size>
+        <AbsDimension x="20" y="20"/>
+      </Size>
+      <Anchors> 
+        <Anchor relativePoint="TOPRIGHT" point="TOPRIGHT" >
+          <Offset>
+            <AbsDimension x="-95" y="-25"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnLoad>
+          getglobal(this:GetName().."Text"):SetText("Show All Guild");
+        </OnLoad>
+        <OnClick>
+          QDKP2_AllGuildCheckButtonSet("toggle");
+        </OnClick>
+      </Scripts>
+    </CheckButton>
+    
+    <!-- Title buttons-->
+    <Button name="QDKP2frame2_title_name" inherits="UIPanelButtonTemplate" text="Name">
+       <Size><AbsDimension x="93" y="25"/></Size> 
+      <Anchors><Anchor relativePoint="LEFT" point="TOPLEFT" >
+          <Offset><AbsDimension x="20" y="150"/></Offset>
+      </Anchor></Anchors>
+      <Scripts><OnClick>QDKP2_frame2_sort_by_name()</OnClick></Scripts>
+    </Button>
+    <Button name="QDKP2frame2_title_rank" inherits="UIPanelButtonTemplate" text="Rank">
+       <Size><AbsDimension x="70" y="25"/></Size> 
+      <Anchors>
+        <Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_name" point="TOPLEFT">
+          <Offset><AbsDimension x="10" y="0"/></Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts><OnClick>QDKP2_frame2_sort_by_rank()</OnClick></Scripts>
+    </Button>
+    <Button name="QDKP2frame2_title_class" inherits="UIPanelButtonTemplate" text="Class">
+       <Size><AbsDimension x="45" y="25"/></Size> 
+      <Anchors>
+        <Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_rank" point="TOPLEFT">
+          <Offset><AbsDimension x="6" y="0"/></Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts><OnClick>
+          QDKP2_frame2_sort_by_class()
+      </OnClick></Scripts>
+    </Button>
+
+    QDKP2_OpenLog
+
+		<!-- Added Button for Sorting on EP -->
+
+			<Button name="QDKP2frame2_title_ep" inherits="UIPanelButtonTemplate" text="EP">
+				<Size>
+					<AbsDimension x="40" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_class" point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						QDKP2_frame2_sort_by_ep()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		<!-- Added Button for Sorting on EP -->
+
+			<Button name="QDKP2frame2_title_gp" inherits="UIPanelButtonTemplate" text="GP">
+				<Size>
+					<AbsDimension x="40" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_ep" point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						QDKP2_frame2_sort_by_gp()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		<!-- Added Button for Sorting on Priority -->
+
+			<Button name="QDKP2frame2_title_priority" inherits="UIPanelButtonTemplate" text="PR">
+				<Size>
+					<AbsDimension x="40" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_gp" point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						QDKP2_frame2_sort_by_priority()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Added Button for Sorting on Hours -->
+			
+			<Button name="QDKP2frame2_title_hours" inherits="UIPanelButtonTemplate" text="Hours">
+				<Size>
+					<AbsDimension x="50" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2frame2_title_priority" point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="6" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						QDKP2_frame2_sort_by_hours()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+    <!--  first five elements in the list -->
+     <Button name="QDKP2_frame2_entry1" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2frame2_title_name" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame2_entry2" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry1" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame2_entry3" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry2" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry4" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry3" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry5" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry4" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+     <!-- Frames 6-10 on list-->
+    <Button name="QDKP2_frame2_entry6" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry5" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry7" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry6" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry8" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry7" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry9" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry8" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry10" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry9" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <!--   Frame 2 entries 11-15-->
+    <Button name="QDKP2_frame2_entry11" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry10" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry12" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry11" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame2_entry13" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry12" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry14" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry13" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry15" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry14" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+     <!-- Frames 16-20 on list-->
+    <Button name="QDKP2_frame2_entry16" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry15" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry17" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry16" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry18" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry17" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry19" inherits="QDKP2_frame2_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry18" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame2_entry20" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame2_entry19" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2_Frame2_OnClick()
+          else
+            QDKP2_OpenLog()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    <Button name="QDKP2_frame2_title" inherits="QDKP2_frame2_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="LEFT" relativeTo="QDKP2frame2_title_name" point="LEFT" />
+      </Anchors> 
+    </Button>
+    
+    
+    <Button name="QDKP2_frame2_upButton" inherits="UIPanelScrollUpButtonTemplate" >
+      <Size>
+        <AbsDimension x="15" y="80"/>
+      </Size>
+      <Anchors><Anchor relativePoint="RIGHT" point="BOTTOMRIGHT"><Offset>
+        <AbsDimension x="-15" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList("-")</OnClick></Scripts>
+    </Button>
+
+    <Button name="QDKP2_frame2_downButton" inherits="UIPanelScrollDownButtonTemplate">
+      <Size>
+        <AbsDimension x="15" y="80"/>
+      </Size>
+      <Anchors><Anchor relativePoint="RIGHT" point="TOPRIGHT"><Offset>
+        <AbsDimension x="-15" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList("+")</OnClick></Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame2_refresh" inherits="UIPanelButtonTemplate" text="Refresh" id="12">
+       <Size> 
+        <AbsDimension x="80" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOMRIGHT" point="BOTTOMRIGHT">
+          <Offset>
+            <AbsDimension x="-10" y="10"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          GuildRoster()
+          QDKP2_DownloadGuild(nil,false)
+          QDKP2_UpdateRaid()
+          QDKP2_RefreshAll()
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame2_newExternal" inherits="UIPanelButtonTemplate" text="New" id="12">
+       <Size> 
+        <AbsDimension x="50" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" >
+          <Offset>
+            <AbsDimension x="10" y="10"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_AddExternal()
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Adds an external (not in guild) player to the Guild Roster.\nPlease read the mod's manual before using this feature.");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+    
+    
+    <Button name="QDKP2frame2_remExternal" inherits="UIPanelButtonTemplate" text="Del." id="12">
+       <Size> 
+        <AbsDimension x="50" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame2_newExternal" point="LEFT" >
+          <Offset>
+            <AbsDimension x="2" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_RemExternal()
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Removes the selected External. Beware, ther is no UnDo!");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame2_postExternal" inherits="UIPanelButtonTemplate" text="Post" id="12">
+       <Size> 
+        <AbsDimension x="50" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame2_remExternal" point="LEFT" >
+          <Offset>
+            <AbsDimension x="2" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_PostExternals("GUILD")
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Post External's DKP amounts to the Guild Chat.");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+
+    <Button name="QDKP2frame2_newStandby" inherits="UIPanelButtonTemplate" text="Add" id="12">
+       <Size> 
+        <AbsDimension x="50" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame2_postExternal" point="LEFT" >
+          <Offset>
+            <AbsDimension x="30" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_AddRaid(QDKP2_SelectedPlayer)
+	  QDKP2_RefreshAll()
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Adds the selected Guld member to the Raid roster,\njust as he would be in the Raid. He will take the\nsame awards as a normal Raid member.");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame2_remStandby" inherits="UIPanelButtonTemplate" text="Rem." id="12">
+       <Size> 
+        <AbsDimension x="50" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame2_newStandby" point="LEFT" >
+          <Offset>
+            <AbsDimension x="2" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_RemRaid(QDKP2_SelectedPlayer)
+	  QDKP2_RefreshAll()
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Removes the selected Standby player from the Raid Roster.");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame2_SetClearAlt" inherits="UIPanelButtonTemplate" text="Set/clear Alt." id="12">
+       <Size> 
+        <AbsDimension x="100" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame2_remStandby" point="LEFT" >
+          <Offset>
+            <AbsDimension x="30" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_SetClearAlt()
+        </OnClick>
+	<OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Sets the selected member as an alt.\nYou'll have to define the Main character.");
+	</OnEnter>
+	<OnLeave>
+	GameTooltip:Hide();
+	</OnLeave>
+      </Scripts>
+    </Button>
+    
+    </Frames>
+    <Scripts>
+      <OnMouseWheel>
+        if arg1==1 then
+          QDKP2_ScrollList(-arg1*QDKP2_ROSTER_SCROLL_WHEEL)
+        else
+          QDKP2_ScrollList(-arg1*QDKP2_ROSTER_SCROLL_WHEEL)
+        end
+      </OnMouseWheel>
+    </Scripts>
+  </Frame>
+
+  <!-- ==============FRAME 3 ================ the player info pane============== -->
+   <Frame name="QDKP2_Frame3" inherits="QDKP2DialogTitled">
+  
+  <Size> 
+    <AbsDimension x="205" y="235" /> 
+  </Size>
+  <Anchors>
+    <Anchor relativePoint="TOPRIGHT" point="TOPRIGHT">
+      <offset>  
+        <AbsDimension x="-5" y="-5" />
+      </offset>
+    </Anchor>
+  </Anchors>
+  
+  <Layers> 
+     <Layer level="ARTWORK"> 
+      
+      <FontString name="QDKP2frame3_dkp" inherits="GameFontNormal" text="">
+        <Anchors> 
+          <Anchor relativePoint="CENTER" point="LEFT" >
+            <Offset>
+              <AbsDimension x="-85" y="74"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame3_For" inherits="GameFontNormal" text="For:">
+        <Anchors> 
+          <Anchor relativePoint="CENTER" point="LEFT" >
+            <Offset>
+              <AbsDimension x="-85" y="25"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+      
+      
+      <FontString name="QDKP2frame3_spacer1" inherits="GameFontNormal" text="_______________________">
+        <Anchors> 
+          <Anchor relativePoint="TOP" point="TOP" >
+            <Offset>
+              <AbsDimension x="0" y="-97"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame3_Timer" inherits="GameFontNormal" text="Timer:">
+        <Anchors> 
+          <Anchor relativePoint="CENTER" point="LEFT" >
+            <Offset>
+              <AbsDimension x="-85" y="-10"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame3_spacer2" inherits="GameFontNormal" text="_______________________">
+        <Anchors> 
+          <Anchor relativePoint="CENTER" point="CENTER" >
+            <Offset>
+              <AbsDimension x="0" y="-21"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+      </FontString>
+    </Layer> 
+  </Layers>
+
+  <Frames>
+    
+    <EditBox name="QDKP2frame3_dkpBox" inherits="InputBoxTemplate" id="15">
+      <Size> 
+        <AbsDimension x="35" y="30"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="RIGHT" >
+          <Offset>
+            <AbsDimension x="-15" y="75"/>
+          </Offset>
+        </Anchor>
+      </Anchors>     
+      <Scripts>
+        <OnLoad>
+          this:SetMaxBytes(6)
+        </OnLoad>
+        <OnEnterPressed>
+	  QDKP2_Frame3_OnEnter()
+	</OnEnterPressed>
+        <OnEscapePressed>
+          QDKP2_Frame3:Hide()
+          QDKP2_SetLootCharge()
+        </OnEscapePressed>
+        <OnTabPressed>
+          QDKP2frame3_reasonBox:SetFocus()
+        </OnTabPressed>
+      </Scripts>
+    </EditBox>
+    
+    <!--  First line -->
+    
+      <!--<FontString name="QDKP2frame3_loot" inherits="GameFontNormal" text="">
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2frame3_player" point="TOPLEFT">
+          </Anchor>
+        </Anchors> 
+      </FontString>-->
+      
+
+    
+    <Button name="QDKP2frame3_award" inherits="UIPanelButtonTemplate" text="+ EP" id="12">
+       <Size> 
+        <AbsDimension x="80" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="LEFT" >
+          <Offset>
+            <AbsDimension x="5" y="75"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame3_awardspend("+")
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame3_spend" inherits="UIPanelButtonTemplate" text="+ GP" id="12">
+       <Size> 
+        <AbsDimension x="80" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="LEFT" >
+          <Offset>
+            <AbsDimension x="5" y="50"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame3_awardspend("-")
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+		<Button name="QDKP2frame3_notify" inherits="UIPanelButtonTemplate" text="Notify" id="12">
+			<Size>
+				<AbsDimension x="80" y="25"/>
+			</Size>
+			<Anchors>
+				<Anchor relativePoint="CENTER" point="RIGHT" >
+					<Offset>
+						<AbsDimension x="-5" y="46"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>
+					QDKP2_frame3_notifyTarget()
+				</OnClick>
+			</Scripts>
+		</Button>
+    
+    <EditBox name="QDKP2frame3_reasonBox" inherits="InputBoxTemplate" id="15">
+      <Size> 
+        <AbsDimension x="137" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor point="TOP">
+          <Offset>
+            <AbsDimension x="16" y="-80"/>
+          </Offset>
+        </Anchor>
+      </Anchors>     
+      <Scripts>
+        <OnLoad>
+          QDKP2frame3_reasonBox:SetHistoryLines(10)
+        </OnLoad>
+        <OnEnterPressed>
+          QDKP2_Frame3_OnEnter()
+        </OnEnterPressed>
+        <OnEscapePressed>
+          QDKP2_Frame3:Hide()
+          QDKP2_SetLootCharge()
+        </OnEscapePressed>
+        <OnTabPressed>
+          QDKP2frame3_dkpBox:SetFocus()
+        </OnTabPressed>
+        <OnTextChanged>
+          if QDKP2_CancelFirstOnChange then
+            QDKP2_CancelFirstOnChange=false
+          else
+            QDKP2_LootToPay = nil
+          end
+        </OnTextChanged>
+      </Scripts>
+    </EditBox>
+    
+    <!-- Third Line -->
+    <Button name="QDKP2frame3_1hour" inherits="UIPanelButtonTemplate" text="+1 Hour" id="12">
+       <Size> 
+         <AbsDimension x="80" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame3_Timer" point="LEFT" >
+          <Offset>
+            <AbsDimension x="10" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame4_give1hour()
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+		<Button name="QDKP2frame3_Reset" inherits="UIPanelButtonTemplate" text="Reset changes" id="12">
+			<Size>
+				<AbsDimension x="130" y="25"/>
+			</Size>
+			<Anchors>
+				<Anchor relativePoint="BOTTOM" point="CENTER" >
+					<Offset>
+						<AbsDimension x="0" y="75"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>
+					QDKP2_frame3_ResetChanges()
+				</OnClick>
+			</Scripts>
+		</Button>
+    
+    <Button name="QDKP2frame3_PopupLog" inherits="UIPanelButtonTemplate" text="Show Log" id="12">
+       <Size> 
+        <AbsDimension x="120" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="CENTER" >
+          <Offset>
+            <AbsDimension x="0" y="50"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_PopupLog()
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <!-- Last Line -->
+    <Button name="QDKP2frame3_changePlayerInfo" inherits="UIPanelButtonTemplate" text="Change data" id="12">
+       <Size> 
+        <AbsDimension x="120" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="CENTER" >
+          <Offset>
+            <AbsDimension x="0" y="25"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_Toggle(4)
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+       <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ToggleAfter(3);
+        </OnClick>
+      </Scripts>
+    </Button>
+  </Frames>
+</Frame>
+
+
+
+
+
+
+  <!-- FRAME 4the player change pane -->
+   <Frame name="QDKP2_Frame4" inherits="QDKP2DialogTitled">
+  
+  <Size> 
+    <AbsDimension x="215" y="130" /> 
+  </Size>
+  <Anchors>
+    <Anchor relativePoint="BOTTOM" relativeTo="QDKP2_Frame3" point="TOP">
+      <offset>  
+        <AbsDimension x="0" y="-5" />
+      </offset>
+    </Anchor>
+  </Anchors>
+
+  <Layers> 
+     <Layer level="ARTWORK"> 
+      
+      <FontString name="QDKP2frame4_net" inherits="GameFontNormal" text="Net:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="CENTER" >
+          <Offset>
+            <AbsDimension x="-75" y="20"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame4_total" inherits="GameFontNormal" text="Total:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="CENTER" >
+          <Offset>
+            <AbsDimension x="18" y="20"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame4_hours" inherits="GameFontNormal" text="Hours:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="RIGHT" >
+          <Offset>
+            <AbsDimension x="3" y="-7"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+    </Layer> 
+  </Layers>
+
+  <Frames>
+         <EditBox name="QDKP2frame4_NetBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="50" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame4_net" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>     
+        <Scripts>
+          <OnLoad>
+            this:SetMaxBytes(6)
+          </OnLoad>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(4)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame4_setinfo()
+            QDKP2_ToggleAfter(4)
+          </OnEnterPressed>
+        </Scripts>
+      </EditBox>
+      <EditBox name="QDKP2frame4_TotalBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="50" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame4_total" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>     
+        <Scripts>
+          <OnLoad>
+            this:SetMaxBytes(6)
+          </OnLoad>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(4)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame4_setinfo()
+            QDKP2_ToggleAfter(4)
+          </OnEnterPressed>
+        </Scripts>
+      </EditBox>
+      <EditBox name="QDKP2frame4_HoursBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="40" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame4_hours" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            this:SetMaxBytes(6)
+          </OnLoad>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(4)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame4_setinfo()
+            QDKP2_ToggleAfter(4)
+          </OnEnterPressed>
+        </Scripts>        
+      </EditBox>
+      
+      <Button name="QDKP2Frame4_Set" inherits="UIPanelButtonTemplate" text="Set Player Info" id="12">
+       <Size> 
+        <AbsDimension x="120" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="0" y="14"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame4_setinfo()
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ToggleAfter(4)
+        </OnClick>
+      </Scripts>
+    </Button>
+    </Frames>
+    <Scripts>
+      <OnEscapePressed>
+        QDKP2_ToggleAfter(4)
+      </OnEscapePressed>
+    </Scripts>
+  </Frame>
+   
+<!--LOG Template!-->
+  
+   <Button name = "QDKP2_frame5_entry_template" virtual="true">
+      <Size>
+      <AbsDimension x="500" y="14" />
+    </Size>
+    <Layers>
+      <Layer level="ARTWORK">
+        
+        <FontString name="$parent_date" inherits="GameFontHighlightSmall" wraponspaces="false" justifyH="CENTER" text="">
+          <Size><AbsDimension x="90" y="14"/></Size>
+          <Anchors><Anchor relativePoint="LEFT" point="LEFT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_net" inherits="GameFontHighlightSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="30" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_date" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_mod" inherits="GameFontHighlightSmall" justifyH="CENTER" text="">
+          <Size><AbsDimension x="30" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_net" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+        <FontString name="$parent_action" inherits="GameFontHighlightSmall" justifyH="LEFT" text="">
+          <Size><AbsDimension x="360" y="14"/></Size>
+          <Anchors><Anchor point="TOPLEFT" relativeTo="$parent_mod" relativePoint="TOPRIGHT"/></Anchors>
+        </FontString>
+        
+      </Layer>
+    </Layers>
+ </Button>
+
+  
+<!--=============================== FRAME 5 (Log) =======================================!-->
+
+   <Frame name="QDKP2_Frame5" inherits="QDKP2DialogTitled">
+  <Size> 
+    <AbsDimension x="550" y="420" /> 
+  </Size>
+  <Anchors>
+    <Anchor relativePoint="BOTTOMLEFT" point="BOTTOMLEFT">
+      <offset>  
+        <AbsDimension x="5" y="5" />
+      </offset>
+    </Anchor>
+  </Anchors>
+
+  <Frames>
+       <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ToggleAfter(5);
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+    
+    <!-- Title buttons-->
+
+    <Button name="QDKP2frame5_purgeAll" inherits="UIPanelButtonTemplate" text="All">
+       <Size><AbsDimension x="75" y="25"/></Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOPRIGHT" point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-20" y="-25"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnClick>QDKP2_LOG_PurgeWipe()</OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame5_purgeByDays" inherits="UIPanelButtonTemplate">
+       <Size><AbsDimension x="75" y="25"/></Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOPLEFT" point="TOPRIGHT" relativeTo="QDKP2frame5_purgeAll">
+          <Offset>
+            <AbsDimension x="-5" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnLoad>this:SetText("-"..QDKP2_WipeLog_Days.." Days")</OnLoad>
+        <OnClick>QDKP2_LOG_PurgeDays(QDKP2_WipeLog_Days)</OnClick>
+        <OnMouseWheel>
+          QDKP2_WipeLog_Days = QDKP2_WipeLog_Days + arg1
+          this:SetText("-"..QDKP2_WipeLog_Days.." Days")
+        </OnMouseWheel>
+      </Scripts>
+    </Button>
+
+    <Button name="QDKP2frame5_purgeBySessions" inherits="UIPanelButtonTemplate">
+       <Size><AbsDimension x="90" y="25"/></Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOPLEFT" point="TOPRIGHT" relativeTo="QDKP2frame5_purgeByDays">
+          <Offset>
+            <AbsDimension x="-5" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts>
+        <OnLoad>this:SetText("-"..QDKP2_WipeLog_Sessions.." Sessions")</OnLoad>
+        <OnClick>QDKP2_LOG_PurgeSessions(QDKP2_WipeLog_Sessions)</OnClick>
+        <OnMouseWheel>
+          QDKP2_WipeLog_Sessions = QDKP2_WipeLog_Sessions + arg1
+          this:SetText("-"..QDKP2_WipeLog_Sessions.." Sessions")
+        </OnMouseWheel>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2frame5_purgeDeleted" inherits="UIPanelButtonTemplate" text="Deactiv.">
+       <Size><AbsDimension x="75" y="25"/></Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOPLEFT" point="TOPRIGHT" relativeTo="QDKP2frame5_purgeBySessions">
+          <Offset>
+            <AbsDimension x="-5" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Scripts><OnClick>QDKP2_LOG_PurgeDeleted()</OnClick></Scripts>
+    </Button>
+
+    <Button name="QDKP2_frame5_PurgeText" virtual="true">
+       <Size><AbsDimension x="60" y="25"/></Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOPLEFT" point="TOPRIGHT" relativeTo="QDKP2frame5_purgeDeleted">
+          <Offset>
+            <AbsDimension x="-8" y="0"/>
+          </Offset>
+        </Anchor>
+      </Anchors>   
+      <Layers>
+        <Layer level="BORDER">
+          <FontString name="$parent_text" inherits="GameFontNormal" wraponspaces="false" justifyH="CENTER" text="Purge Data:"/>
+        </Layer>
+      </Layers>
+    </Button>
+    
+    <!--  first five elements in the list -->
+    <Button name="QDKP2_frame5_entry1" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="TOPLEFT" point="TOPLEFT" >
+          <Offset>
+            <AbsDimension x="10" y="-60"/>
+          </Offset>
+        </Anchor>
+      </Anchors>  
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame5_entry2" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry1" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame5_entry3" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry2" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry4" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry3" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry5" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry4" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+     <!-- Frames 6-10 on list-->
+    <Button name="QDKP2_frame5_entry6" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry5" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry7" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry6" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry8" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry7" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry9" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry8" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry10" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry9" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <!--   Frame 2 entries 11-15-->
+    <Button name="QDKP2_frame5_entry11" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry10" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry12" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry11" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button> 
+    
+    <Button name="QDKP2_frame5_entry13" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry12" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+         <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry14" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry13" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry15" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry14" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+     <!-- Frames 16-20 on list-->
+    <Button name="QDKP2_frame5_entry16" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry15" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry17" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry16" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry18" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry17" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry19" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry18" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry20" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry19" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+<!-- Frames 21-25 on list-->
+    <Button name="QDKP2_frame5_entry21" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry20" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry22" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry21" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry23" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry22" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry24" inherits="QDKP2_frame5_entry_template" id="12"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry23" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_entry25" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="BOTTOMLEFT" relativeTo="QDKP2_frame5_entry24" point="TOPLEFT" />
+      </Anchors> 
+      <Scripts>
+        <OnLoad>this:RegisterForClicks("LeftButtonDown", "RightButtonDown")</OnLoad>
+        <OnClick> 
+          if arg1=="LeftButton" then 
+            QDKP2Log_OnClick()
+          else
+            QDKP2_OpenReport()
+          end
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+    
+    <Button name="QDKP2_frame5_title" inherits="QDKP2_frame5_entry_template"> 
+      <Anchors>
+        <Anchor relativePoint="LEFT" relativeTo="QDKP2frame5_title_name" point="LEFT" />
+      </Anchors> 
+      <Scripts><OnClick>QDKP2Log_OnClick(arg1)</OnClick></Scripts>
+    </Button>
+
+    
+    
+    <Button name="QDKP2_frame5_upButton" inherits="UIPanelScrollUpButtonTemplate" >
+      <Size>
+        <AbsDimension x="15" y="80"/>
+      </Size>
+      <Anchors><Anchor relativePoint="RIGHT" point="BOTTOMRIGHT"><Offset>
+        <AbsDimension x="-15" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList_Log("-")</OnClick></Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_topButton" inherits="UIPanelScrollUpButtonTemplate" >
+      <Size>
+        <AbsDimension x="15" y="20"/>
+      </Size>
+      <Anchors><Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2_frame5_upButton" point="BOTTOMRIGHT"><Offset>
+        <AbsDimension x="0" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList_Log("top")</OnClick></Scripts>
+    </Button>    
+    
+    <Button name="QDKP2_frame5_downButton" inherits="UIPanelScrollDownButtonTemplate">
+      <Size>
+        <AbsDimension x="15" y="80"/>
+      </Size>
+      <Anchors><Anchor relativePoint="RIGHT" point="TOPRIGHT"><Offset>
+        <AbsDimension x="-15" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList_Log("+")</OnClick></Scripts>
+    </Button>
+    
+    <Button name="QDKP2_frame5_bottomButton" inherits="UIPanelScrollDownButtonTemplate">
+      <Size>
+        <AbsDimension x="15" y="20"/>
+      </Size>
+      <Anchors><Anchor relativePoint="BOTTOMRIGHT" relativeTo="QDKP2_frame5_downButton" point="TOPRIGHT"><Offset>
+        <AbsDimension x="0" y="0"/>
+      </Offset></Anchor></Anchors> 
+      <Scripts><OnClick>QDKP2_ScrollList_Log("bottom")</OnClick></Scripts>
+    </Button>
+
+    
+    </Frames>
+    <Scripts>
+      <OnMouseWheel>
+        if arg1==1 then
+          QDKP2_ScrollList_Log(- arg1*QDKP2_LOG_SCROLL_WHEEL)
+        else
+          QDKP2_ScrollList_Log(- arg1*QDKP2_LOG_SCROLL_WHEEL)
+        end
+      </OnMouseWheel>
+    </Scripts>
+  </Frame>
+
+  <Frame name="QDKP2_ReportBox" inherits="QDKP2PopUp">
+    <Size> 
+      <AbsDimension x="230" y="220"/> 
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" >
+        <offset>
+          <AbsDimension x="30" y="30" />
+        </offset>
+      </Anchor>
+    </Anchors>
+    <Layers> 
+      <Layer level="ARTWORK"> 
+        <FontString name="QDKP2_InputBox_Title" inherits="GameFontNormal" text="Report Dialog">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="0" y="-9"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+        <FontString name="QDKP2_InputBox_Left" inherits="GameFontNormal" text="Selection">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="-70" y="-29"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+        <FontString name="QDKP2_InputBox_Right" inherits="GameFontNormal" text="Channel">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="70" y="-29"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+      </Layer> 
+    </Layers> 
+    
+    <Frames>
+      <CheckButton name="QDKP2frame2_ReportType1" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="TOPLEFT" point="TOPLEFT" >
+            <Offset>
+              <AbsDimension x="10" y="-45"/>
+            </Offset>
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("All Log");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("All");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      
+      <CheckButton name="QDKP2frame2_ReportType2" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType1">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("All Log after this");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("All after index");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+
+      <CheckButton name="QDKP2frame2_ReportType3" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType2">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("All Log before this");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("All untill index");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+
+      <CheckButton name="QDKP2frame2_ReportType4" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType3">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Session");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("Session");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      
+      <CheckButton name="QDKP2frame2_ReportType5" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType4">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Session after this");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("Session after index");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      
+      <CheckButton name="QDKP2frame2_ReportType6" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType5">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Session before this");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("Session untill index");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      
+      <CheckButton name="QDKP2frame2_ReportType7" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportType6">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("This one");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportType("index");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+
+      <CheckButton name="QDKP2frame2_ReportChannel1" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="TOPRIGHT" point="TOPLEFT" >
+            <Offset>
+              <AbsDimension x="-80" y="-45"/>
+            </Offset>
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Raid");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("RAID");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel2" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel1">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Say");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("SAY");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel3" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel2">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Yell");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("YELL");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel4" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel3">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Guild");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("GUILD");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel5" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel4">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Officer");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("OFFICER");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel6" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel5">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Whisper");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("WHISPER");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="QDKP2frame2_ReportChannel7" inherits="UICheckButtonTemplate" id="16">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors> 
+          <Anchor relativePoint="BOTTOMLEFT" point="TOPLEFT" relativeTo="QDKP2frame2_ReportChannel6">
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            getglobal(this:GetName().."Text"):SetText("Channel");
+          </OnLoad>
+          <OnClick>
+            QDKP2_ChangeReportChannel("CHANNEL");
+          </OnClick>
+        </Scripts>
+      </CheckButton>
+      <Button name="QDKP2_ReportSendBtn" inherits="UIPanelButtonTemplate" text="Send" id="12">
+       <Size> 
+        <AbsDimension x="75" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="0" y="10"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ReportGo()
+        </OnClick>
+      </Scripts>
+    </Button>
+    <Button name="$parent_Button1" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_ReportBox:Hide();
+        </OnClick>
+      </Scripts>
+    </Button>
+    </Frames>
+  </Frame>
+
+
+  <!-- FRAME 6the log entry change pane -->
+   <Frame name="QDKP2_Frame6" inherits="QDKP2DialogTitled">
+  
+  <Size> 
+    <AbsDimension x="215" y="165" /> 
+  </Size>
+  <Anchors>
+    <Anchor relativePoint="TOPRIGHT" relativeTo="QDKP2_Frame5" point="TOPLEFT">
+      <offset>  
+        <AbsDimension x="5" y="0" />
+      </offset>
+    </Anchor>
+  </Anchors>
+
+  <Layers> 
+     <Layer level="ARTWORK"> 
+      
+      <FontString name="QDKP2frame6_gained" inherits="GameFontNormal" text="Gain:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="CENTER" >
+          <Offset>
+            <AbsDimension x="-75" y="15"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame6_spent" inherits="GameFontNormal" text="Spend:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="CENTER" >
+          <Offset>
+            <AbsDimension x="18" y="15"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+      
+      <FontString name="QDKP2frame6_hours" inherits="GameFontNormal" text="Hours:">
+      <Anchors> 
+        <Anchor relativePoint="CENTER" point="RIGHT" >
+          <Offset>
+            <AbsDimension x="3" y="-10"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      </FontString>
+    </Layer> 
+  </Layers>
+
+  <Frames>
+         <EditBox name="QDKP2frame6_ReasonBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="175" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="TOP" point="TOP">
+            <Offset>
+              <AbsDimension x="0" y="-30"/>
+            </Offset>
+          </Anchor>
+        </Anchors>     
+        <Scripts>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(6)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame6_setEntry()
+            QDKP2_ToggleAfter(6)
+          </OnEnterPressed>
+        </Scripts>
+        </EditBox>
+      
+         <EditBox name="QDKP2frame6_GainedBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="50" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame6_gained" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnLoad>
+            this:SetMaxBytes(6)
+          </OnLoad>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(6)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame6_setEntry()
+            QDKP2_ToggleAfter(6)
+          </OnEnterPressed>
+        </Scripts>        
+      </EditBox>
+      <EditBox name="QDKP2frame6_SpentBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="50" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame6_spent" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>     
+        <Scripts>
+          <OnLoad>
+            this:SetMaxBytes(6)
+          </OnLoad>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(6)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame6_setEntry()
+            QDKP2_ToggleAfter(6)
+          </OnEnterPressed>
+        </Scripts>
+      </EditBox>
+      <EditBox name="QDKP2frame6_HoursBox" inherits="InputBoxTemplate" id="15">
+         <Size> 
+          <AbsDimension x="40" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="RIGHT" relativeTo="QDKP2frame6_hours" point="LEFT">
+            <Offset>
+              <AbsDimension x="1" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>   
+        <Scripts>
+          <OnEscapePressed>
+            QDKP2_ToggleAfter(6)
+          </OnEscapePressed>
+          <OnEnterPressed>
+            QDKP2_frame6_setEntry()
+            QDKP2_ToggleAfter(6)
+          </OnEnterPressed>
+        </Scripts>        
+      </EditBox>
+
+      <Button name="QDKP2Frame6_Delete" inherits="UIPanelButtonTemplate" text="Deactivate Entry" id="12">
+       <Size> 
+        <AbsDimension x="120" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="-40" y="15"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame6_UnDo()
+        </OnClick>
+      </Scripts>
+    </Button>
+
+      <Button name="QDKP2Frame6_Set" inherits="UIPanelButtonTemplate" text="Set Entry" id="12">
+       <Size> 
+        <AbsDimension x="80" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="BOTTOM" point="BOTTOM" >
+          <Offset>
+            <AbsDimension x="60" y="15"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame6_setEntry()
+        </OnClick>
+      </Scripts>
+    </Button>
+    
+      <Button name="QDKP2Frame6_Activate" inherits="UIPanelButtonTemplate" text="Activate" id="12">
+       <Size> 
+        <AbsDimension x="100" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOP" point="TOP" >
+          <Offset>
+            <AbsDimension x="0" y="-70"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame6_ActivateDeactivate()
+        </OnClick>
+       <OnEnter>
+          GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Include and Exlude the selected player\nfrom the list of players elegible for the award.");
+       </OnEnter>
+	<OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+      <Button name="QDKP2Frame6_OpenMain" inherits="UIPanelButtonTemplate" text="Edit Main Entry" id="12">
+       <Size> 
+        <AbsDimension x="140" y="25"/> 
+      </Size> 
+      <Anchors> 
+        <Anchor relativePoint="TOP" point="TOP" >
+          <Offset>
+            <AbsDimension x="0" y="-110"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_frame6_OpenMain()
+        </OnClick>
+	<OnEnter>
+	 GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+         GameTooltip:SetText("Opens the main entry where\nthis one is linked to.");
+       </OnEnter>
+	<OnLeave>
+         GameTooltip:Hide();
+       </OnLeave>
+      </Scripts>
+    </Button>
+    
+    <Button name="$parent_Button6" inherits="UIPanelCloseButton">
+      <Anchors> 
+        <Anchor point="TOPRIGHT">
+          <Offset>
+            <AbsDimension x="-4" y="-4"/>
+          </Offset>
+        </Anchor>
+      </Anchors> 
+      <Scripts>
+        <OnClick>
+          QDKP2_SelectedLogIndex=0
+          QDKP2_ToggleAfter(6)
+          QDKP2_Refresh_Log("refresh")
+        </OnClick>
+      </Scripts>
+    </Button>
+    </Frames>
+    <Scripts>
+      <OnEscapePressed>
+        QDKP2_ToggleAfter(6)
+      </OnEscapePressed>
+    </Scripts>
+   </Frame>
+
+
+
+
+  <Frame name="QDKP2_InputBox" inherits="QDKP2PopUp">
+    <Size> 
+      <AbsDimension x="280" y="80"/> 
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="CENTER" point="CENTER" >
+        <offset>
+          <AbsDimension x="0" y="30" />
+        </offset>
+      </Anchor>
+    </Anchors>
+    <Layers> 
+      <Layer level="ARTWORK"> 
+        <FontString name="QDKP2_InputBox_text" inherits="GameFontNormal" text="Input Box">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="0" y="-10"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+      </Layer> 
+    </Layers> 
+    
+    <Frames>
+      <EditBox name="QDKP2_InputBox_Data" inherits="InputBoxTemplate" id="15">
+        <Size> 
+          <AbsDimension x="190" y="25"/> 
+        </Size> 
+        <Anchors> 
+          <Anchor relativePoint="BOTTOM" point="BOTTOM">
+            <Offset>
+              <AbsDimension x="0" y="10"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnEnterPressed>
+            QDKP2_InputBox_OnEnter()
+          </OnEnterPressed>
+          <OnEscapePressed>
+            QDKP2_InputBox:Hide()
+          </OnEscapePressed>
+        </Scripts>
+      </EditBox>
+    </Frames>
+  </Frame>
+  
+  <Frame name="QDKP2_WarningBox" inherits="QDKP2PopUp">
+    <Size> 
+      <AbsDimension x="280" y="100"/> 
+    </Size>
+    <Anchors>
+      <Anchor relativePoint="CENTER" point="CENTER" >
+        <offset>
+          <AbsDimension x="0" y="30" />
+        </offset>
+      </Anchor>
+    </Anchors>
+    <Layers> 
+      <Layer level="ARTWORK"> 
+        <FontString name="QDKP2_WarningBox_text" inherits="GameFontNormal" text="Warning">
+          <Anchors> 
+            <Anchor relativePoint="TOP" point="TOP" >
+              <Offset>
+                <AbsDimension x="0" y="-10"/>
+              </Offset>
+            </Anchor>
+          </Anchors> 
+        </FontString>
+      </Layer> 
+    </Layers> 
+    <Frames>
+      <Button name="$parent_Cancel" inherits="UIPanelButtonTemplate" text="No" id="12">
+        <Size> 
+          <AbsDimension x="75" y="25"/> 
+        </Size>
+        <Anchors>
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="-50" y="10"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_AskUserConf_OnEnter()
+          </OnClick>
+        </Scripts>
+      </Button>
+      
+      <Button name="$parent_OK" inherits="UIPanelButtonTemplate" text="Yes" id="12">
+        <Size> 
+          <AbsDimension x="75" y="25"/> 
+        </Size>
+        <Anchors> 
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="50" y="10"/>
+            </Offset>
+          </Anchor>
+        </Anchors> 
+        <Scripts>
+          <OnClick>
+            QDKP2_AskUserConf_OnEnter(true)
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Scripts>
+      <OnEnterPressed>
+        QDKP2_AskUserConf_OnEnter(true)
+      </OnEnterPressed>
+      <OnEscapePressed>
+        QDKP2_AskUserConf_OnEnter()
+      </OnEscapePressed>
+    </Scripts>
+  </Frame>
+</Ui>

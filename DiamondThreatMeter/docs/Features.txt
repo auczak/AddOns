@@ -1,0 +1,49 @@
+************
+DTM Features
+************
+
+- INTRO -
+DTM is separated in 2 distincts modules: the Engine and the GUI (graphical interface that uses what the Engine calculates).
+The GUI needs the Engine in order to work, but the Engine doesn't need the GUI.
+
+- ENGINE -
+Its purpose is to determinate your threat and nearby allies/enemies' threat relative to nearby mobs.
+DTM engine does it by maintaining threat list of mobs in your vicinity.
+DTM parses the combat events in order to determinate most of the threat stuff.
+If you are in a party/raid, DTM uses Blizzard AddOn network communication feature to get additionnal data about what's going on
+from other party members that have also DTM installed on their client.
+Most PC abilities are handled accurately by DTM, though some require you are in a party/raid whose members have DTM installed in order to be detected.
+NPC (and most generally Bosses) abilities are also defined in DTM.
+
+Features :
+    - Multi-target threat meter, which makes difference between 2 mobs sharing the same name.
+    - Determinates and maintain threat list of all entities around you.
+    - Computes a fairly accurate threat value for each entity listed in a threat list.
+    - Takes in account most player character abilities of every class.
+    - Takes in account some NPC and Bosses abilities. New ones will be added each version.
+    - Communicates with other DTM AddOns of the party/raid members to make sure no threat event is missed.
+    - Independant threat computation. You have a fairly good idea of what one's threat is even if one hasn't DTM installed on one's client.
+    - This mod is designed for English and French languages. German will work too, though the elements of DTM will be left in English for this locale.
+    - Determinates who has aggro. Uses previous target in case the entity you are watching drops temporarily its current target.
+    - Provides a simple to use API useable by other AddOns. The API is used itself in the GUI part of DTM.
+    - DTM can detect special NPC yells/emotes in order to trigger threat events.
+    - DTM takes your buffs/auras/talents/gear in account. It also computes them for your party/raid members.
+    - The way the engine is designed make it easy to add new abilities, items, sets, talents etc. as new content is added in World of Warcraft!
+    - Some others I've forgotten... :p
+
+- GUI -
+Its purpose is to provide a reasonable - nothing too fancy mind you - graphical interface with which you can configure most aspects of the engine and the
+GUI itself and visualize a given entity's threat list. It uses a display similar to other threat meter AddOns, such as KTM or Omen:
+a table with a header row and then bars of people on the threat list, moving, disapparearing etc. as threat data changes.
+Currently the GUI allows you to watch 4 lists at once: your target's threat list, your focus' threat list, your overview list and your regain list.
+
+Features :
+    - Colored (damn that was so much work ! :)) animated (this one was also hot to code ^_^) bars dancing around in several types of list.
+    - Filter entities on the fly: everybody / party-raid members only / party-raid non-pet members only.
+    - Modifiable number of threat bars displayed simultaneously. Also allows you to be always visible in threat lists.
+    - Two independant threat lists: target and focus ones. The way the GUI is designed allows to easily add more threat lists in the future.
+    - An overview list, which shows all enemies that have you on their threat list.
+    - A regain list, which shows when someone is going to pull aggro from you, or when you are going to pull aggro from the tank.
+    - A little and as clear as I could do configuration panel, accessible from Blizzard's Interface options as a separate tab.
+    - Customizable display through a skin system.
+    - Some others I've forgotten... :p

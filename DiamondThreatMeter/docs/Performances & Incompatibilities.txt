@@ -1,0 +1,27 @@
+**************************************
+DTM Performances and Incompatibilities
+**************************************
+
+1. Incompatibilities
+
+- DTM scans through your party members' talents and store them in memory.
+It is hard for AddOns to scan talents without getting in one another way.
+DTM has been programmed to avoid getting in the way of other mods which could use the talent inspection feature.
+But, basically, there's a slight risk of incompability between DTM and any AddOn which uses the inspect feature.
+
+Beside that, DTM should run fine with any other AddOn. :)
+
+2. Good stuff
+
+- Alleviate WoW game servers AddOn communications, as DTM does not need to send threat update packets to the whole raid.
+
+- DTM is able to work out threat values without the other players having the AddOn running,
+  though it won't be able in some cases to compute some abilities accurately etc.
+
+3. Stuff that isn't as good
+
+- Probably quite expensive in processor usage, compared to other threat mods, though 2.4 combat log improvements have made
+  the treatment MUCH faster, by removing the need of loooong strings parsing.
+  Whatever I do to optimize the engine, keep in mind that estimating threat of 25 people is kinda longer than estimating your own threat only. ;)
+
+- Do not support Spanish, Chinese, etc. languages. Perhaps *YOU* can help !

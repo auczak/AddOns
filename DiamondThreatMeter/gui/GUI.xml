@@ -1,0 +1,76 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="GUI.lua" /> 
+
+	<!--
+		This XML file defines the standard GUI. It is an invisible frame that triggers
+		the display of target and focus threat list frames.
+	-->
+
+	<Frame name="DTM_GUI_Frame" hidden="true">
+		<Frames>
+			<Button name="DTM_GUI_TargetThreatList" inherits="DTM_ThreatListFrameTemplate">
+				<Attributes>
+					<Attribute name="configId" type="string" value="TTL"/>
+				</Attributes>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-96" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<Button name="DTM_GUI_FocusThreatList" inherits="DTM_ThreatListFrameTemplate">
+				<Attributes>
+					<Attribute name="configId" type="string" value="FTL"/>
+				</Attributes>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-376" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<Button name="DTM_GUI_PlayerOverviewList" inherits="DTM_OverviewListFrameTemplate">
+				<Attributes>
+					<Attribute name="configId" type="string" value="POL"/>
+				</Attributes>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-656" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+
+			<Button name="DTM_GUI_PlayerRegainList" inherits="DTM_RegainListFrameTemplate">
+				<Attributes>
+					<Attribute name="configId" type="string" value="PRL"/>
+				</Attributes>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="UIParent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-936" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_GUI_OnLoad(self);
+			</OnLoad>
+			<OnEvent>
+				DTM_ProtectedCall(DTM_GUI_OnEvent, "CRITICAL", self, event, ...);
+			</OnEvent>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_GUI_OnUpdate, "CRITICAL", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

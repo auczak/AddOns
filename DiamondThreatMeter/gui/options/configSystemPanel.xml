@@ -1,0 +1,211 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configSystemPanel.lua" /> 
+
+	<!--    *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<Frame name="DTM_ConfigurationFrame_SystemPanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configSystemTitle"/>
+			<Attribute name="subTitleKey" type="string" value="configSystemSubTitle"/>
+		</Attributes>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="DTM_ConfigurationFrame_SystemPanel_ConfigManagementTitle" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="256" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-232"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<!-- Toggle emergency stop button -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_ToggleButton" inherits="DTM_ConfigurationFrame_ToggleButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="8" y="-64"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+
+				<Scripts>
+					<OnClick>
+ 						-- Toggle the emergency stop state.
+						DTM_SetEmergencyStop("TOGGLE", 1);
+					</OnClick>
+				</Scripts>
+       		</Button>
+
+			<!-- Always enabled checkbox -->
+
+			<CheckButton name="DTM_ConfigurationFrame_SystemPanel_AlwaysEnabledCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonNormalTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-96"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<!-- Quick config button -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_QuickConfigButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-128"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_DisplayRolePopup();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Bindings access -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_BindingsButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-160"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						-- Old position: (-8; -208)
+ 						-- Access bindings menu.
+						if not ( KeyBindingFrame ) then KeyBindingFrame_LoadUI(); end
+						if ( KeyBindingFrame ) then
+						    ShowUIPanel(KeyBindingFrame);
+						end
+					</OnClick>
+				</Scripts>
+       		</Button>
+
+			<!-- Error log -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_ErrorLogButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-192"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ErrorConsole:Open(1);
+					</OnClick>
+				</Scripts>
+       		</Button>
+
+			<!-- Profile selecter -->
+
+			<Frame name="DTM_ConfigurationFrame_SystemPanel_ProfileDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-264"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<!-- Reset saved vars -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_ResetSavedVarsButton" inherits="DTM_ConfigurationFrame_GreyButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-304"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("DTM_RESET_SAVEDVARS");
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Reset NPC data -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_ResetNPCDataButton" inherits="DTM_ConfigurationFrame_GreyButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-336"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("DTM_RESET_NPCDATABASE");
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Reset All -->
+
+			<Button name="DTM_ConfigurationFrame_SystemPanel_ResetAllButton" inherits="DTM_ConfigurationFrame_GreyButtonTemplate">
+				<Size>
+					<AbsDimension x="256" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-368"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						StaticPopup_Show("DTM_RESET_ALL");
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_SystemPanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_SystemPanel_OnUpdate, "CRITICAL", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

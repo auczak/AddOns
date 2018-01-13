@@ -1,0 +1,8 @@
+2013-04-28  Aenora  <aenoram@gmail.com>
+
+[3670f9c8c6fd] [v5.2]
+* RaidInviteBroadcaster.lua, RaidInviteBroadcaster.toc:
+
+Updated toc for patch 5.2
+
+

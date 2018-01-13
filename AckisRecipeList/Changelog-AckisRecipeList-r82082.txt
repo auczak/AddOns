@@ -1,0 +1,458 @@
+------------------------------------------------------------------------
+r82082 | ackis | 2008-09-26 12:33:21 -0400 (Fri, 26 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+
+AckisRecipeList:
+- Another attempt at a fix
+------------------------------------------------------------------------
+r82043 | ackis | 2008-09-25 18:27:35 -0400 (Thu, 25 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Fix for profile stuff not being saved.
+------------------------------------------------------------------------
+r82036 | ackis | 2008-09-25 12:01:27 -0400 (Thu, 25 Sep 2008) | 5 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+
+AckisRecipeList:
+- Renamed saved vars files
+- Renamed sorting -> sortmethod
+- Redid sort options function
+- Added a piece of debug code in
+------------------------------------------------------------------------
+r82011 | ackis | 2008-09-24 15:08:51 -0400 (Wed, 24 Sep 2008) | 1 line
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList: Change default option for sorting to follow the new format
+------------------------------------------------------------------------
+r81984 | ackis | 2008-09-23 18:14:36 -0400 (Tue, 23 Sep 2008) | 1 line
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+
+AckisRecipeList: Update version and switch saved var files to reset all saved vars
+------------------------------------------------------------------------
+r81948 | ackis | 2008-09-21 22:23:00 -0400 (Sun, 21 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- I think this bug is really fixed now.
+- esMX didn't work so I just changed the values, should work now.
+
+------------------------------------------------------------------------
+r81852 | ackis | 2008-09-18 15:52:22 -0400 (Thu, 18 Sep 2008) | 1 line
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList: Add some debug text to help non-english clients with bug squashing. Also removed some comments that have been dealt with.
+------------------------------------------------------------------------
+r81825 | ackis | 2008-09-18 00:30:26 -0400 (Thu, 18 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Attempt at a fix for the error cropping up
+
+------------------------------------------------------------------------
+r81746 | ackis | 2008-09-15 13:22:49 -0400 (Mon, 15 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/RecipeDB/ARL-Vendor.lua
+
+AckisRecipeList:
+- Fix ticket 54
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81745 | ackis | 2008-09-15 12:38:21 -0400 (Mon, 15 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/RecipeDB/ARL-Jewelcraft.lua
+
+AckisRecipeList:
+- Fix ticket 56
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81686 | ackis | 2008-09-13 12:28:21 -0400 (Sat, 13 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+
+AckisRecipeList:
+- Fixed for other locals
+
+------------------------------------------------------------------------
+r81332 | ackis | 2008-09-03 23:32:22 -0400 (Wed, 03 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- What was once broke is now unbroke.
+~botsnack
+------------------------------------------------------------------------
+r81329 | ackis | 2008-09-03 19:58:36 -0400 (Wed, 03 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- What was once broke is now unbroke.
+~botsnack
+------------------------------------------------------------------------
+r81320 | ackis | 2008-09-03 12:53:50 -0400 (Wed, 03 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Doc updates for new DB structure, should be finalized... so much info to track
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81318 | ackis | 2008-09-03 12:09:19 -0400 (Wed, 03 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- DM updates
+- Doc updates for new DB structure
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81304 | ackis | 2008-09-02 23:47:35 -0400 (Tue, 02 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/RecipeDB/ARL-Vendor.lua
+
+AckisRecipeList:
+- Vendor loc update for Hula'mah
+------------------------------------------------------------------------
+r81303 | ackis | 2008-09-02 23:45:49 -0400 (Tue, 02 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+
+AckisRecipeList:
+- DMupdate
+------------------------------------------------------------------------
+r81297 | ackis | 2008-09-02 19:33:13 -0400 (Tue, 02 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Updated a few comments
+- Zhinjio, you're going to have to check if addon.RecipeListing[RecipeName]["Display"] == true to display with the changes
+- Standard gui works it seems
+------------------------------------------------------------------------
+r81289 | ackis | 2008-09-02 16:53:15 -0400 (Tue, 02 Sep 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+
+AckisRecipeList:
+- More dataminer updates.  It will now parse as much as it can and identify the recipes as vendor or trainer.
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81287 | ackis | 2008-09-02 16:18:09 -0400 (Tue, 02 Sep 2008) | 5 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- More dataminer updates
+- Fixed a possible bug in the scanning from earlier changes today
+- Added debugging code.  Sorry, this will spam you until I remove it later tonight.
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81283 | ackis | 2008-09-02 13:41:16 -0400 (Tue, 02 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Make the toggling based on filter a seperate distinct step addon:UpdateFilters(Recipes, CurrentProfessionLevel, CurrentProfession, CurrentSpeciality)
+- Started documenting functions a bit more detailed
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81278 | ackis | 2008-09-02 13:23:53 -0400 (Tue, 02 Sep 2008) | 7 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+   M /trunk/AckisRecipeList/RecipeDB/ARL-Jewelcraft.lua
+   M /trunk/AckisRecipeList/RecipeDB/ARL-LeatherWork.lua
+
+AckisRecipeList:
+- Dataminer update (it now will actually scan and print out all the info for alchemy recipes zomg!!)
+- LWDB Update (Murloc Scale Belt -> 90)
+- JCDB: L["Chaotic Skyfire Diamond Obt"] = "Coilskar Siren"
+- JCDB: Chaotic Skyfire Diamond Location updated to Shadowmoon Valley
+- Remove references to MissingRecipeListing
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81255 | zhinjio | 2008-09-01 22:22:07 -0400 (Mon, 01 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- fixed more typos
+- newgui: fixes for expandall/contractall
+- reasonably sure I haven't broken anything
+------------------------------------------------------------------------
+r81250 | kurax | 2008-09-01 19:19:09 -0400 (Mon, 01 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-zhCN.lua
+
+AckisRecipeList:
+- zhCN locale update
+------------------------------------------------------------------------
+r81212 | ackis | 2008-09-01 02:51:17 -0400 (Mon, 01 Sep 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Default sort value is localized version
+- If you have any bugs with the mod, delete your saved vars OR reselect the sorting option please
+~love Zhinjio
+------------------------------------------------------------------------
+r81211 | ackis | 2008-09-01 01:23:07 -0400 (Mon, 01 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLDataminer.lua
+
+AckisRecipeList:
+- Dataminer update
+------------------------------------------------------------------------
+r81210 | zhinjio | 2008-09-01 01:21:33 -0400 (Mon, 01 Sep 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- newgui: omg new scrollframe works
+------------------------------------------------------------------------
+r81209 | next96 | 2008-08-31 22:44:57 -0400 (Sun, 31 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-koKR.lua
+
+AckisRecipeList:
+- Update locale koKR
+------------------------------------------------------------------------
+r81141 | ackis | 2008-08-30 14:30:28 -0400 (Sat, 30 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList
+   A /trunk/AckisRecipeList/ARLDataminer.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+   M /trunk/AckisRecipeList/externals.txt
+
+AckisRecipeList:
+- Updated externals
+- Started work on data miner, it's called ARLDataminer.lua but it's actually a ruby file since ace svn won't let me use .rb extensions
+------------------------------------------------------------------------
+r81113 | ackis | 2008-08-29 17:01:38 -0400 (Fri, 29 Aug 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+   A /trunk/AckisRecipeList/database.xml
+   A /trunk/AckisRecipeList/local.xml
+
+AckisRecipeList:
+- Comment updates, updated filter flags
+- Move local/db stuff from toc -> xml files
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81112 | ackis | 2008-08-29 16:50:56 -0400 (Fri, 29 Aug 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Comment updates
+- Update text dump to make it look a bit better (removed new lines)
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81111 | pettigrow | 2008-08-29 16:43:38 -0400 (Fri, 29 Aug 2008) | 1 line
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-frFR.lua
+
+AckisRecipeList: frFR Update
+------------------------------------------------------------------------
+r81110 | trasher | 2008-08-29 16:13:12 -0400 (Fri, 29 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-frFR.lua
+
+AckisRecipeList:
+- update frFr
+------------------------------------------------------------------------
+r81108 | ackis | 2008-08-29 14:54:11 -0400 (Fri, 29 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- Update OnInit stuff
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81104 | ackis | 2008-08-29 14:40:44 -0400 (Fri, 29 Aug 2008) | 3 lines
+Changed paths:
+   D /trunk/AckisRecipeList/DownloadCount.lua
+
+AckisRecipeList:
+- Remove DownloadCount.lua, I made it a project at http://wow.curseforge.com/projects/dlcount/ with more extensionability
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81103 | ackis | 2008-08-29 14:14:08 -0400 (Fri, 29 Aug 2008) | 4 lines
+Changed paths:
+   D /trunk/AckisRecipeList/ARLText.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.toc
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- Removed text based GUI
+- Localizations L["Use GUI"] and L["GUI_TOGGLE"] removed
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81100 | next96 | 2008-08-29 10:59:10 -0400 (Fri, 29 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-koKR.lua
+
+AckisRecipeList:
+- Update locale koKR
+------------------------------------------------------------------------
+r81091 | zhinjio | 2008-08-29 02:19:09 -0400 (Fri, 29 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- newgui : reset button now works
+- newgui : frame title now works
+------------------------------------------------------------------------
+r81089 | zhinjio | 2008-08-28 22:33:52 -0400 (Thu, 28 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+
+AckisRecipeList:
+- all checkbox handlers in new gui are working now
+------------------------------------------------------------------------
+r81084 | zhinjio | 2008-08-28 16:38:38 -0400 (Thu, 28 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- fixed three tooltips
+- hooked newgui "get" functions for all checkboxen
+------------------------------------------------------------------------
+r81083 | zhinjio | 2008-08-28 15:21:27 -0400 (Thu, 28 Aug 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+
+AckisRecipeList:
+- PLEASE NOTE:
+- The latest changes will modify your Saved Variables file format
+- and some settings may have been reset to default values
+------------------------------------------------------------------------
+r81082 | zhinjio | 2008-08-28 15:19:06 -0400 (Thu, 28 Aug 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- finished adding in new item types, categories, etc
+- Ackis, please finish config table cleanup at your liesure
+- fixed another typo (expidition)
+------------------------------------------------------------------------
+r81081 | zhinjio | 2008-08-28 13:36:12 -0400 (Thu, 28 Aug 2008) | 4 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- added wands, cloaks, rings, trinkets, necklace to item types
+- minor (new)GUI changes to make room
+- docs for SV structure
+------------------------------------------------------------------------
+r81053 | zhinjio | 2008-08-27 19:03:17 -0400 (Wed, 27 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   A /trunk/AckisRecipeList/img/fly_repcol.blp
+
+AckisRecipeList:
+- new gui images done
+- just need to hook everything in
+------------------------------------------------------------------------
+r81040 | next96 | 2008-08-27 10:42:16 -0400 (Wed, 27 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/Locals/ARLLocals-koKR.lua
+
+AckisRecipeList:
+- Update locale koKR
+
+------------------------------------------------------------------------
+r81025 | zhinjio | 2008-08-26 22:20:51 -0400 (Tue, 26 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+
+AckisRecipeList:
+- progress on rep panel. logo buttons look awesome
+- not dry-coded
+------------------------------------------------------------------------
+r81024 | zhinjio | 2008-08-26 21:10:25 -0400 (Tue, 26 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   A /trunk/AckisRecipeList/img/fly_1col.blp
+   A /trunk/AckisRecipeList/img/fly_2col.blp
+
+AckisRecipeList:
+- switched flyaway to two textures (1col and 2col)
+------------------------------------------------------------------------
+r81017 | zhinjio | 2008-08-26 18:24:38 -0400 (Tue, 26 Aug 2008) | 2 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+
+AckisRecipeList:
+- more newgui progress
+------------------------------------------------------------------------
+r81011 | ackis | 2008-08-26 17:13:17 -0400 (Tue, 26 Aug 2008) | 3 lines
+Changed paths:
+   M /trunk/AckisRecipeList
+   D /trunk/AckisRecipeList/RecipeMiner.lua
+   M /trunk/AckisRecipeList/externals.txt
+
+AckisRecipeList:
+- Update externals to get the dataminer
+- Dry-coded (compiles with luac -p)
+------------------------------------------------------------------------
+r81004 | ackis | 2008-08-26 15:24:55 -0400 (Tue, 26 Aug 2008) | 5 lines
+Changed paths:
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/RecipeDB/ARL-Alchemy.lua
+
+AckisRecipeList:
+- Add "type" flags to the alchemy trinkets so they can be filtered that way
+- Modified a few comments in main file
+- Dry-coded (compiles with luac -p)
+Ackis shivers brrrrr!
+------------------------------------------------------------------------
+r81003 | zhinjio | 2008-08-26 15:20:22 -0400 (Tue, 26 Aug 2008) | 5 lines
+Changed paths:
+   M /trunk/AckisRecipeList/ARLFrame.lua
+   M /trunk/AckisRecipeList/AckisRecipeList.lua
+   M /trunk/AckisRecipeList/Locals/ARLLocals-enUS.lua
+   M /trunk/AckisRecipeList/img/expanded.blp
+   M /trunk/AckisRecipeList/img/main.blp
+
+AckisRecipeList:
+- major new gui update
+- exp pane is done (new buttons)
+- flyaway pane needs checkboxen
+- ackis needs to chill
+------------------------------------------------------------------------

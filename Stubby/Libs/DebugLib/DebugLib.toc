@@ -1,0 +1,12 @@
+## Title: DebugLib
+## Notes: A embeddable debugging library that transparently supports the nLog logging system, if present.
+##
+## Interface: 30000
+## LoadOnDemand: 0
+## OptionalDependencies: !nLog
+##
+## Version: 5.0.0 (BillyGoat)
+## Revision: $Id: DebugLib.toc 131 2008-10-11 16:50:56Z Norganna $
+## URL: http://auctioneeraddon.com/dl/
+##
+Load.xml

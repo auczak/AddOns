@@ -1,0 +1,22 @@
+**************
+Special Thanks
+**************
+
+- First of all, I'd like to thank * CHUCK NORRIS * (alias "God") for giving me the strength and the knowledge needed to make such a mod.
+
+- Mikk for making ChatThrottleLib. :)
+
+- The guys of Nalonwe guild that downloaded DTM.
+- Meteotrix for being useful and trying experiments with me =D .
+- Ibëris for paladin's threat determination and some testing.
+- Megart for explaining me the details of feign death resist mechanic.
+
+- Guys at curse-gaming that posted comments to help me point out bugs and submitted suggestions. ^.^
+   - Especially shadow :)
+
+- WowInterface & Curse, for both giving me an opportunity to get a WotLK beta key to develop DTM ahead the live release of WotLK.
+
+- You, for reading this doc and using this mod !
+
+***
+Eof

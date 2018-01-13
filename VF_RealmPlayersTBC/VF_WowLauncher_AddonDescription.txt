@@ -1,0 +1,5 @@
+
+#Version=1.1.2
+#Description=*Added support for recording talents
+#UpdateSubmitter=Dilatazu
+#UpdateImportance=|DefaultImportance=Good|

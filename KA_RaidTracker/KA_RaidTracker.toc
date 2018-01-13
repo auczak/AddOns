@@ -1,0 +1,29 @@
+## Interface: 20400
+## Title: KA_RaidTracker
+## Version: 1.5.3
+## Notes: Keeps account of attendance and loot for parties and raids.
+## Author: Celess
+## Version: 2.0
+## DefaultState: enabled
+## LoadOnDemand: 0
+## X-Credits: Eris
+## X-eMail: celess22 AT gmail DOT com
+## X-Website: http://www.wowace.com/
+## X-License: GPL v2 or later
+## X-Category: Raid
+## X-Embeds: Ace2, FuBarPlugin-2.0, TabletLib, DewdropLib
+## OptionalDeps: CT_MasterMod, CT_RaidTracker, HoB_DKP, AdvancedItemTooltip, dkpposter, Ace2, FuBar, FuBarPlugin-2.0, TabletLib, DewdropLib
+## SavedVariables: KARaidTrackerDB, KARaidTrackerAceDB
+
+Core\KARaidTrackerCore_Utility.lua
+Core\KARaidTrackerCore_Data.lua
+
+KA_RaidTrackerLocale-enUS.lua
+
+KA_RaidTracker_Data.lua
+KA_RaidTracker_Options.xml
+KA_RaidTracker_OptionsAce.lua
+KA_RaidTracker_ItemOptions.xml
+KA_RaidTracker_Buttons.xml
+KA_RaidTracker.xml
+

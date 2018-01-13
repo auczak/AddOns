@@ -1,0 +1,199 @@
+<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="configWarningPanel.lua" /> 
+
+	<!--    *******************************************************************************************
+		This XML file defines the configuration frame. It is embedded in the new interface options.
+		*******************************************************************************************	-->
+
+	<Frame name="DTM_ConfigurationFrame_WarningPanel" inherits="DTM_ConfigurationFrame_PanelTemplate">
+		<Attributes>
+			<Attribute name="titleKey" type="string" value="configWarningTitle"/>
+			<Attribute name="subTitleKey" type="string" value="configWarningSubTitle"/>
+		</Attributes>
+
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\AddOns\DiamondThreatMeter\gfx\AggroExplain">
+					<Size>
+						<AbsDimension x="256" y="64"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-108"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+
+				<FontString name="DTM_ConfigurationFrame_WarningPanel_Explain110" justifyH="LEFT" inherits="GameFontHighlightSmall">
+					<Size>
+						<AbsDimension x="344" y="24"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="16" y="-176"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="DTM_ConfigurationFrame_WarningPanel_Explain130" justifyH="LEFT" inherits="GameFontHighlightSmall">
+					<Size>
+						<AbsDimension x="344" y="24"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="16" y="-208"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+
+				<FontString name="DTM_ConfigurationFrame_WarningPanel_PositionTitle" inherits="GameFontNormal">
+					<Size>
+						<AbsDimension x="256" y="16"/>
+					</Size>
+
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-240"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<!-- Use warning & play sound checkbuttons -->
+
+			<CheckButton name="DTM_ConfigurationFrame_WarningPanel_UseWarningCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonNormalTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+
+			<Frame name="DTM_ConfigurationFrame_WarningPanel_WarningSoundDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="176" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<!--
+			<CheckButton name="DTM_ConfigurationFrame_WarningPanel_PlaySoundCheckButton" inherits="DTM_ConfigurationFrame_CheckButtonNormalTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="208" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			-->
+
+			<!-- X & Y position sliders -->
+
+			<Slider name="DTM_ConfigurationFrame_WarningPanel_XSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-264"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       			</Slider>
+
+			<Slider name="DTM_ConfigurationFrame_WarningPanel_YSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="200" y="-264"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       			</Slider>
+
+			<!-- Limit & cancel limit sliders -->
+
+			<Slider name="DTM_ConfigurationFrame_WarningPanel_LimitSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-296"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       			</Slider>
+
+			<Slider name="DTM_ConfigurationFrame_WarningPanel_CancelLimitSlider" inherits="DTM_ConfigurationFrame_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="24" y="-328"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+       			</Slider>
+
+			<!-- Preview button -->
+
+			<Button name="DTM_ConfigurationFrame_WarningPanel_PreviewWarningButton" inherits="DTM_ConfigurationFrame_NormalButtonTemplate">
+				<Size>
+					<AbsDimension x="128" y="24"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="16" y="-368"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DTM_ConfigurationFrame_WarningPanel_ToggleWarningPreview(self);
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- Warning threshold -->
+
+			<Frame name="DTM_ConfigurationFrame_WarningPanel_WarningThresholdDropDown" inherits="DTM_ConfigurationFrame_DropDownTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="160" y="-368"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+
+			<!-- Ghost row helping the user with the positionning of warning rows -->
+
+			<Frame name="DTM_ConfigurationFrame_GhostRow" inherits="DTM_GhostRowTemplate"/>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				DTM_ConfigurationFrame_WarningPanel_OnLoad(self);
+			</OnLoad>
+			<OnUpdate>
+				DTM_ProtectedCall(DTM_ConfigurationFrame_WarningPanel_OnUpdate, "MINOR", self, elapsed);
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</UI>

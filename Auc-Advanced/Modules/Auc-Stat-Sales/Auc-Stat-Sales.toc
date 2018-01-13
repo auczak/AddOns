@@ -1,0 +1,9 @@
+## Title: Auc:Stat:Sales Prices
+## Interface: 20400
+## Dependancies: Auc-Advanced BeanCounter
+##
+## Version: 5.0.0 (BillyGoat)
+## Revision: $Id: Auc-Stat-Sales.toc 2952 2008-03-25 03:29:55Z MentalPower $
+## URL: http://auctioneeraddon.com/
+##
+Embed.xml

@@ -1,0 +1,11 @@
+## Interface: 50200
+## Title: Raid Invite Broadcaster
+## Notes: A lightweight addon for automating raid invites, formerly Amnith's Invite Broadcaster (amnib) by Amnith
+## Author: Aenora @ Thorium Brotherhood
+## SavedVariables: RaidInviteBroadcasterDB
+## Version: 5.2
+## X-Curse-Packaged-Version: v5.2
+## X-Curse-Project-Name: Raid Invite Broadcaster
+## X-Curse-Project-ID: raidinvitebroadcaster
+## X-Curse-Repository-ID: wow/raidinvitebroadcaster/mainline
+raidinvitebroadcaster.lua

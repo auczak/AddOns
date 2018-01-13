@@ -1,0 +1,7 @@
+## Interface: 20300
+## Title: SolarianAlarm
+## Author: Lenja of Frostmourne EU
+## Notes: Turns your screen blue if you get "Wrath of the Astromancer".
+## Notes-deDE: Faerbt den Bildschirm blau ein, wenn Du Solarians Debuff erhaelst.
+## Notes-frFR: Fait passer l'apparence de votre ecran en bleu quand vous avez le debuff Courroux de Solarian entrainant une AOE Bombe.
+SolarianAlarm.xml

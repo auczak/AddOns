@@ -1,0 +1,6 @@
+The GUI is the part of DTM which presents menus, buttons etc. to the user to allow him to see visually data determined by the engine and
+modify the addOn configuration, including how the engine is to work.
+
+- The GUI uses graphics, buttons etc.
+- The interaction of the user with it can be also done by command slashes, in addition to menu.
+- The GUI needs the engine to display threat data. The engine doesn't need the GUI (but its options wouldn't be in that case modifiable).

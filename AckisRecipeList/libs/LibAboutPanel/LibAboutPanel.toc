@@ -1,0 +1,31 @@
+﻿## Title: Lib: AboutPanel
+
+## Notes: Adds an about panel to interface options.
+
+
+## Author: Tekkub, Ackis
+
+## Interface: 20400
+## Version: 1.0
+## X-Revision: $Rev: 12 $
+## X-Date: $Date: 2008-08-13 13:26:43 -0400 (Wed, 13 Aug 2008) $
+
+## X-credits: 
+
+## X-Category: Libraries
+## X-Localizations: enUS
+## X-Website: http://www.wowwiki.com/LibAboutPanel
+## X-Feedback: http://wow.curseforge.com/projects/libaboutpanel/
+## X-RelSite-Curse: 13459
+## X-RelSite-WoWI: 
+## X-RelSite-WoWUI: 
+
+## Dependencies:
+## X-Embeds: LibStub, CallbackHandler-1.0
+## OptionalDeps: LibStub, CallbackHandler-1.0
+## DefaultState: Enabled
+## LoadOnDemand: 0
+
+embeds.xml
+
+LibAboutPanel.lua

@@ -1,0 +1,36 @@
+## Interface: 20300
+## Version: 1.0.2
+## Title: Quick DKP V2 For EPGP
+## Notes: Complete tool for in-game DKP managment.  Modified for EPGP by Repent
+## Author: belloli@email.it; repent@kc.rr.com
+## OptionalDeps: Chronos
+## SavedVariables: QDKP2_BackupDate, QDKP2_Backup
+## SavedVariablesPerCharacter: QDKP2raid, QDKP2log, QDKP2note, QDKP2session, QDKP2stored, QDKP2ironMan, QDKP2ironMan_time, QDKP2_dkpPerHour, QDKP2_dkpAwardRaid, QDKP2raidOffline, QDKP2_TimerBase, QDKP2_Alts, QDKP2_AltsRestore, QDKP2_StoreVers, QDKP2externals, QDKP2standby
+
+Local\Chronos\localization.en.lua
+Local\Chronos\localization.de.lua
+Local\Chronos\localization.fr.lua
+Local\Chronos\localization.es.lua
+Local\Chronos\localization.cn.lua
+Local\Chronos\localization.kr.lua
+Local\Chronos\localization.ru.lua
+Local\Chronos\localization.tw.lua
+
+Code\Chronos.lua
+Code\ChatThrottleLib.lua
+Code\QDKP_V2.lua
+
+Code\GUI.lua
+Code\Logging.lua
+
+Code\Commands.lua
+Code\Bindings.lua
+Code\OnDemand.lua
+
+Local\enGB.lua
+
+QDKP_V2.xml
+
+
+
+

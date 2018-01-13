@@ -1,0 +1,9 @@
+## Title: Auc:Util:Search UI
+## Interface: 20400
+## Dependancies: EnhTooltip, Auc-Advanced
+##
+## Version: 5.0.0 (BillyGoat)
+## Revision: $Id: Auc-Util-SearchUI.toc 3203 2008-07-04 17:17:58Z RockSlice $
+## URL: http://auctioneeraddon.com/
+##
+Embed.xml

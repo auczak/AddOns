@@ -1,0 +1,47 @@
+Changes in 1.13
+- ADDED: Counter of "Marks of Honor" from each battlegorund (You can disable it from right-click menu)
+- CHANGED: Honor diminution for multiple kills has been removed to make addon more accurate (Even though it still exists in game mechanics).
+
+
+Changes in 1.122
+- ADDED: Spanish Localization (thanks to NeKRoMaNT)
+- CHANGED: Honor Ganied text's color has been changed to differ from system messages.
+
+
+Changes in 1.121
+- FIXED: Bug with BG statistics showing way to high Average Honor
+
+
+Changes in 1.12
+- ADDED: Slash command for reseting honor estimation. Type /thonor or /titanhonor
+- ADDED: Alternate Display (like the one from TitanHonor+) to switch displays between estimated honor and BG statistics.
+- ADDED: German (thanks to Mordras of Der abyssische Rat) and French (thanks to Kakashisense) translations
+- CHANGED: Current Battleground info has more details now.
+- CHANGED: TitanHonor is now enabled on Titan Panel by default.
+- CHANGED: TitanHonor directory structure.
+- CHANGED: Eastern Kingdoms should no longer be listed as a battleground.
+- FIXED: Attempt to perform arithmetic on field honor (a string value) error should no longer occur.
+- FIXED: All bugs caused by incomplete variables (including so called "line 213 bug") shouldn't show up anymore. However, it may sometimes cause a data reset. (Only when updating addon and probably only for people that already had some problems).
+- FIXED: HKs should be now counter properly.
+- FIXED: Honor from Kills and Bonus honor will now properly reset
+
+
+Changes in 1.11
+- FIXED: reverse-compatabily bugs causing numerous errors for people installing addon for first time or deleting SavedVariables
+- CHANGED: now you can see both, honor/hour and honor/min in BG stats.
+
+
+Changes in 1.1
+- NEW: Auto-join and Auto-release options (You can turn them on/off by right-clicking on TitanHonor when it's active).
+- NEW: Now player can see how much honor he gained from HKs and how much from BGs.
+- NEW: You can now turn off notifications about honor gained.
+- NEW: Localization. So far translated only for English.
+- CHANGED: Now BG stats shows honor/hour instead of honor/min.
+
+
+Changes in 1.01
+- FIXED: Bug causing error when honor gained in battleground was less then 0 (ie. if daily reset occured when player was in BG)
+
+
+Version 1.00
+- First release.

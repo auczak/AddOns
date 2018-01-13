@@ -1,0 +1,6 @@
+The engine is the part of DTM whose purpose is to make UnitThreat and other APIs defined by it work.
+
+- The engine uses no graphics, buttons etc.
+- The interaction of the user with it is just at most with command slashes and saved variables modifiable
+with the configuration menu accessable through the GUI part of the mod. (but the GUI is NOT the engine, let's make it clear !)
+- The engine has just a very basic non-visual frame with OnUpdate and OnEvent handlers on it.

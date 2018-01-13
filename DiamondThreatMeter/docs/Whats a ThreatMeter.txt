@@ -1,0 +1,46 @@
+****************
+What is threat ?
+****************
+
+Threat is a scalar value stored in what are called threat lists.
+Each "normal" NPC (or server-controlled character) uses a threat list (though some behaves oddly).
+
+Whenever you do something hostile toward a NPC, or if you get too close from an out-of-combat NPC,
+or if you help someone the NPC doesn't like, you'll get added to this NPC's threat list.
+Threat list contains all the possible PCs/NPCs a NPC finds nasty and could attack.
+
+The NPC however, will not choose its target randomly (except a few exceptions);
+it will instead choose the one which looks the most threatening.
+
+That's where threat rolls in: it's a scalar value which is associated to any entity that is on a threat list.
+Each time you deal damage, heal someone who is in a threat list etc., your threat value will increase
+on one or several threat lists.
+
+Threat management is important because it determinates where the damage will end up.
+So you'll probably want the damage to end up to the tank: that's why there are all sorts of abilities/talents/effects etc.
+that modify your threat level on one or several threat lists.
+
+When you get the attention of a NPC, it's the act of getting "aggro". Aggro is also used as a verb.
+The general rules of "aggro" are:
+- You "aggro" an out-of-combat NPC by getting too close of it or debuffing/doing damage to it.
+- You "aggro" a NPC already engaged in combat if you manage to enter on its threat list
+and raise your threat value 30% above the guy who has currently aggro's threat value. % is diminished to 10% if you are at close range.
+
+Also, as a side note, be aware that you'll stay locked in combat mode as long as you are in at least 1 threat list.
+You'll only get out of it once you get out of every threat list that has you on it.
+
+Hope this little speech made you understand better the mechanics of threat. :)
+
+********************************
+What's generally a ThreatMeter ?
+********************************
+
+A threat meter is an AddOn whose purpose is to determinate your threat level and compare it with your groupmates' one.
+
+Such AddOns can use various ways to achieve this goal; until 2.4 most threat meters worked the following way:
+each player running the AddOn calculates its own threat toward a given mob, and publish it through AddOn network to other party members, which
+then receives the threat data and displays it into an organized table, which displays name, class and of course threat value of each player involved.
+
+Now 2.4 has been released, let's see how this little world will evolve, as it is theorically now possible to avoid almost all data exchange
+through network, and make each player independant threat-wise from the rest of the party :).
+That's at least how I tried to build DTM, and I'm pretty satisfied of it. ;)

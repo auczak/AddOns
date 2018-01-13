@@ -1,0 +1,6 @@
+
+#Version=1.2.4
+#Description=*Added support for Sunwell Plateau
+*Added support for XLoot
+#UpdateSubmitter=Dilatazu
+#UpdateImportance=|DefaultImportance=Good|

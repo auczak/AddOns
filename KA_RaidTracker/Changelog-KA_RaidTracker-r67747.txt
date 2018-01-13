@@ -1,0 +1,93 @@
+------------------------------------------------------------------------
+r67747 | celess | 2008-04-02 18:01:13 -0400 (Wed, 02 Apr 2008) | 4 lines
+Changed paths:
+   A /trunk/KA_RaidTracker/Core
+   A /trunk/KA_RaidTracker/Core/KARaidTrackerCore_Data.lua
+   A /trunk/KA_RaidTracker/Core/KARaidTrackerCore_Utility.lua
+   A /trunk/KA_RaidTracker/Core/KarmaCore-1.0.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker.toc
+   M /trunk/KA_RaidTracker/KA_RaidTracker.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Buttons.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Data.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Options.lua
+   D /trunk/KA_RaidTracker/KA_RaidTracker_Utility.lua
+
+KA_RaidTracker: initial update
+- <updated the ct raid import>
+- <overhaul of the db code, db stays the same itself>
+
+------------------------------------------------------------------------
+r67360 | celess | 2008-03-31 16:31:53 -0400 (Mon, 31 Mar 2008) | 3 lines
+Changed paths:
+   M /trunk/KA_RaidTracker/KA_RaidTracker.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_OptionsAce.lua
+
+KA_RaidTracker: initial update
+- <fixed bug with mouse over loot detail>
+
+------------------------------------------------------------------------
+r67353 | celess | 2008-03-31 16:11:06 -0400 (Mon, 31 Mar 2008) | 3 lines
+Changed paths:
+   M /trunk/KA_RaidTracker/KA_RaidTracker.lua
+   D /trunk/KA_RaidTracker/ziplist.wau
+
+KA_RaidTracker: initial update
+- <fixed bug with mouse over loot detail>
+
+------------------------------------------------------------------------
+r67348 | celess | 2008-03-31 15:37:33 -0400 (Mon, 31 Mar 2008) | 6 lines
+Changed paths:
+   M /trunk/KA_RaidTracker/KA_RaidTracker.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker.toc
+   M /trunk/KA_RaidTracker/KA_RaidTracker.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Buttons.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Data.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Options.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Options.xml
+   M /trunk/KA_RaidTracker/KA_RaidTracker_OptionsAce.lua
+   M /trunk/KA_RaidTracker/KA_RaidTracker_Utility.lua
+   M /trunk/KA_RaidTracker/ziplist.wau
+
+KA_RaidTracker: initial update
+- <first pass modernization>
+- <added support for CT db copy
+    should be automatic as long as ct raidtracker is
+    still running, once db copied ct can be disabled>
+- <CT Raidtracker should work fine along side this reguardless>
+------------------------------------------------------------------------
+r66827 | celess | 2008-03-28 22:13:10 -0400 (Fri, 28 Mar 2008) | 2 lines
+Changed paths:
+   M /trunk/KA_RaidTracker/readme.txt
+
+KA_RaidTracker: initial update
+- <adding some files for aceupdater>
+------------------------------------------------------------------------
+r66822 | celess | 2008-03-28 21:52:19 -0400 (Fri, 28 Mar 2008) | 2 lines
+Changed paths:
+   A /trunk/KA_RaidTracker
+   A /trunk/KA_RaidTracker/Icon.tga
+   A /trunk/KA_RaidTracker/KA_RaidTracker.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker.toc
+   A /trunk/KA_RaidTracker/KA_RaidTracker.xml
+   A /trunk/KA_RaidTracker/KA_RaidTrackerLocale-enUS.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Buttons.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Buttons.xml
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Data.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_ItemOptions.xml
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Options.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Options.xml
+   A /trunk/KA_RaidTracker/KA_RaidTracker_OptionsAce.lua
+   A /trunk/KA_RaidTracker/KA_RaidTracker_Utility.lua
+   A /trunk/KA_RaidTracker/localization.lua
+   A /trunk/KA_RaidTracker/readme.txt
+   A /trunk/KA_RaidTracker/ziplist.wau
+
+KA_RaidTracker: initial commit
+- <Tracks members and items for raids and parties>
+------------------------------------------------------------------------

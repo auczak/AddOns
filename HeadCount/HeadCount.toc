@@ -1,0 +1,39 @@
+## Interface: 20400
+## Title: HeadCount
+## Notes: Manages tracking of raid attendance, loot, and more.
+## Author: seppyk
+## Version: 1.1.5
+## DefaultState: enabled
+## OptionalDeps: Ace2, FuBarPlugin-2.0
+## X-Embeds: Ace2, FuBarPlugin-2.0
+## SavedVariables: HeadCountDB
+## SavedVariablesPerCharacter: HeadCountDBPC
+## X-Category: Raid
+## X-Date: 2008-07-12
+## X-Website: http://www.wowace.com/wiki/HeadCount
+## X-License: Creative Common Attribution-NonCommercial-ShareAlike 3.0 Unported
+## X-Localizations: enUS
+## X-Curse-Packaged-Version: r53
+
+embeds.xml
+
+locale\en_US.lua
+
+HeadCount.lua
+HeadCountOptions.lua
+HeadCountConstants.lua
+HeadCountUtil.lua
+HeadCountFrames.lua
+
+Time.lua
+TimePair.lua
+Loot.lua
+Player.lua
+Raid.lua 
+Boss.lua
+RaidListWrapper.lua 
+BossEvent.lua
+Exporter.lua
+RaidTracker.lua
+
+HeadCountFrames.xml

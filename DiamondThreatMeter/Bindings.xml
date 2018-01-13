@@ -1,0 +1,31 @@
+<Bindings>
+	<Binding name="DTM_EMERGENCYSTOP" header="DTM_BINDINGS">
+		if not ( DTM_SetEmergencyStop ) then return; end
+		DTM_SetEmergencyStop("TOGGLE");
+	</Binding>
+
+	<Binding name="DTM_RESETTHREAT" header="DTM_BINDINGS">
+		if not ( DTM_EntityData_Reset ) then return; end
+		DTM_EntityData_Reset();
+	</Binding>
+
+	<Binding name="DTM_TOGGLETARGET" header="DTM_BINDINGS">
+		if not ( DTM_ToggleThreatList ) then return; end
+		DTM_ToggleThreatList("target");
+	</Binding>
+
+	<Binding name="DTM_TOGGLEFOCUS" header="DTM_BINDINGS">
+		if not ( DTM_ToggleThreatList ) then return; end
+		DTM_ToggleThreatList("focus");
+	</Binding>
+
+	<Binding name="DTM_TOGGLEOVERVIEW" header="DTM_BINDINGS">
+		if not ( DTM_TogglePresenceList ) then return; end
+		DTM_TogglePresenceList("player");
+	</Binding>
+
+	<Binding name="DTM_TOGGLEREGAIN" header="DTM_BINDINGS">
+		if not ( DTM_ToggleRegainList ) then return; end
+		DTM_ToggleRegainList("player");
+	</Binding>
+</Bindings>

@@ -1,0 +1,25 @@
+## Interface: 20400
+## Title: Titan Panel |cff00aa003.2.6.20400|r
+## Notes: Adds a control panel/info bar on the top and/or bottom of the screen. Allows users to control time/volume/panel scale/transparency, also displays important information such as money/bag/latency/FPS/Location/XP in real time. 
+## Author: devteam@titanpanel.org / Adsertor, Titan Dev Team (HonorGoG, jaketodd422, joejanko, Lothayer, Tristanian, oXidFoX)
+## SavedVariables: TitanSettings, ServerTimeOffsets, ServerHourFormat
+## OptionalDeps: LibRock-1.0, myAddOns, ImprovedErrorFrame, TipBuddy, Opium
+## Dependencies:
+## Version: 3.2.6.20400
+## X-Embeds: LibRock-1.0, LibRockTimer-1.0
+
+embeds.xml
+
+Localization.xml
+TitanUtils.xml
+TitanVariables.xml
+TitanMenu.xml
+TitanPanelTemplate.xml
+TitanMovable.xml
+TitanTooltip.xml
+TitanPanel.xml
+TitanAutoHide.xml
+TitanAuxAutoHide.xml
+TitanTrans.xml
+TitanUIScale.xml
+TitanVolume.xml
